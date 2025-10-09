@@ -14,24 +14,24 @@ const CHAR_DATA = {
   ],
   comic: [
     {
-      id: 'c-noir',
-      name: 'Noir',
-      role: 'Antihéroe',
-      bg: '/assets/img/chars/comic/noir_bg.jpg',
+      id: 'c-Victor',
+      name: 'Victor',
+      role: 'Creador de los verdugos',
+      bg: '/assets/img/chars/comic/victor_bg.jpg',
       png: '/assets/img/chars/comic/noir.png',
       thumb: '/assets/img/chars/comic/noir_thumb.jpg',
-      desc: 'Cazador sin bando, se mueve entre facciones con su propia agenda.',
-      back: 'Fue testigo del despertar de NOUS y aprendió a oír sus ecos. Su pasado es una herida que el imperio no logra cerrar.'
+      desc: 'asdasdasdasdasdasdasd',
+      back: 'asdasdasdasdasdasdasd'
     },
     {
-      id: 'c-lyra',
-      name: 'Lyra',
-      role: 'Mensajera',
+      id: 'c-Artiom',
+      name: 'Artiom',
+      role: 'Militar que abandono su antiguo nombre',
       bg: '/assets/img/chars/comic/lyra_bg.jpg',
       png: '/assets/img/chars/comic/lyra.png',
       thumb: '/assets/img/chars/comic/lyra_thumb.jpg',
-      desc: 'Corredora de azoteas y canalizadora de secretos.',
-      back: 'Entregó un paquete que incendió una guerra. Desde entonces corre para enmendar (o terminar) lo que empezó.'
+      desc: 'asdasdasdasdasdasdasdasd',
+      back: 'asdasdasdasdasdasdasdasdasdasdasd'
     }
     // … agrega más
   ]
@@ -176,4 +176,4 @@ scopeBtns.forEach(b=>{
 // Init
 switchScope('game');
 updateArrows();
-document.getElementById('y')?.textContent = new Date().getFullYear();
+
