@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>BloodSteel — Universo Transmedia</title>
+  <meta name="description" content="Sitio oficial del universo transmedia BloodSteel: cómic con parallax, videojuego, museo virtual y lore.">
+  <link href="https://fonts.googleapis.com/css2?family=Quantico:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/main.css">
+</head>
+<body>
+
+  <a class="visually-hidden" href="#inicio">Saltar al contenido</a>
+
+  <!-- HEADER -->
+  <header role="banner">
+    <div class="bar container">
+      <a class="brand" href="/" aria-label="Inicio BloodSteel">BLOODSTEEL <span class="omega">Ω</span></a>
+
+      <button class="menu-btn" aria-expanded="false" aria-controls="nav">Menú</button>
+
+      <!-- Navegación principal (anclas internas + páginas internas) -->
+      <nav id="nav" class="primary" aria-label="Navegación principal">
+        <ul role="list">
+          <!-- Secciones de esta página -->
+          <li><a href="#inicio">Inicio</a></li>
+          <li><a href="#sinopsis">Sinopsis</a></li>
+          <li><a href="#trailer">Trailer</a></li>
+          <li><a href="#mundo">Mundo expandido</a></li>
+          <li><a href="#productos">Productos</a></li>
+          <li><a href="#empresa">Empresa</a></li>
+        </ul>
+        <!-- Páginas internas del sitio -->
+        <nav class="ext-links" aria-label="Páginas internas">
+          <ul role="list">
+            <li><a href="/historia/">Historia</a></li>
+            <li><a href="/personajes/">Personajes</a></li>
+            <li><a href="/comic/">Cómic</a></li>
+          </ul>
+        </nav>
+      </nav>
+    </div>
+  </header>
+
+  <main id="contenido" role="main">
+
+    <!-- HERO con parallax -->
+    <section id="inicio" class="hero" aria-labelledby="h-hero">
+      <div class="bg" data-parallax aria-hidden="true"></div>
+      <div class="veil" aria-hidden="true"></div>
+      <div class="content container">
+        <h1 id="h-hero">Universo BloodSteel</h1>
+        <p>Steampunk, NOUS y un imperio al borde de la guerra.</p>
+        <p><a class="cta" href="/comic/">Leer el cómic (parallax)</a></p>
+      </div>
+    </section>
+
+    <!-- SINOPSIS -->
+    <section id="sinopsis" class="section" aria-labelledby="h-sinopsis">
+      <div class="container">
+        <h2 id="h-sinopsis">Sinopsis</h2>
+        <p>
+          Breve descripción del universo transmedia: conflicto entre Verdugos y la
+          tecnología NOUS; ciudades automatizadas, resistencia humana y el
+          destino del Imperio. (Sustituir por texto final).
+        </p>
+      </div>
+    </section>
+
+    <!-- TRAILER -->
+    <section id="trailer" class="section" aria-labelledby="h-trailer">
+      <div class="container">
+        <h2 id="h-trailer">Trailer</h2>
+        <div class="video-wrap">
+          <!-- TODO: Reemplazar VIDEO_ID -->
+          <iframe
+            src="https://www.youtube.com/embed/VIDEO_ID?rel=0&modestbranding=1"
+            title="Trailer de BloodSteel"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- MUNDO EXPANDIDO -->
+    <section id="mundo" class="section" aria-labelledby="h-mundo">
+      <div class="container">
+        <h2 id="h-mundo">Mundo expandido</h2>
+        <div class="grid2">
+          <article class="card">
+            <h3>Historia</h3>
+            <p>Relato completo del universo y línea de tiempo.</p>
+            <p><a class="btn" href="/historia/">Ir a Historia</a></p>
+          </article>
+          <article class="card">
+            <h3>Personajes</h3>
+            <p>Fichas de protagonistas y secundarios, con galería.</p>
+            <p><a class="btn" href="/personajes/">Ir a Personajes</a></p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRODUCTOS (CARRUSEL) -->
+    <section id="productos" class="section" aria-labelledby="h-productos">
+      <div class="container carousel">
+        <h2 id="h-productos">Productos</h2>
+
+        <button class="arrow left" aria-label="Anterior" disabled>&larr;</button>
+
+        <ul class="track" role="list" tabindex="0" aria-label="Carrusel de productos">
+          <li class="slide">
+            <article class="card">
+              <h3>Cómic (parallax)</h3>
+              <p>Lectura inmersiva por capas y desplazamiento.</p>
+              <p><a class="btn" href="/comic/">Abrir Cómic</a></p>
+            </article>
+          </li>
+          <li class="slide">
+            <article class="card">
+              <h3>Trailer</h3>
+              <p>Ver en YouTube o dentro del sitio.</p>
+              <!-- TODO: reemplazar ID -->
+              <p><a class="btn" href="https://www.youtube.com/watch?v=VIDEO_ID" target="_blank" rel="noopener">Ver en YouTube</a></p>
+            </article>
+          </li>
+          <li class="slide">
+            <article class="card">
+              <h3>Videojuego (Unreal)</h3>
+              <p>Descarga para Windows / Mac.</p>
+              <!-- TODO: enlazar a Release o almacenamiento externo -->
+              <p><a class="btn" href="https://github.com/TU-USUARIO/bloodsteel-site/releases/download/v1.0/BloodSteel_Unreal.zip" download>Descargar</a></p>
+            </article>
+          </li>
+          <li class="slide">
+            <article class="card">
+              <h3>Museo Virtual (móvil)</h3>
+              <p>Experiencia pensada para smartphone.</p>
+              <!-- TODO: enlazar a la app o página explicativa -->
+              <p><a class="btn" href="#" id="open-museum">Abrir en móvil</a></p>
+              <p class="badge" aria-label="Recomendado para Android o iOS">Recomendado: Android/iOS</p>
+            </article>
+          </li>
+        </ul>
+
+        <button class="arrow right" aria-label="Siguiente">&rarr;</button>
+      </div>
+    </section>
+
+    <!-- EMPRESA -->
+    <section id="empresa" class="section" aria-labelledby="h-empresa">
+      <div class="container">
+        <h2 id="h-empresa">Empresa</h2>
+
+        <article class="card" style="margin-bottom:18px">
+          <div class="flex-logo">
+            <img src="assets/img/logo-empresa.png" alt="Logo de la empresa"><!-- TODO -->
+            <div>
+              <p><strong>Studio Niceleep</strong></p>
+              <p>Colectivo multimedia enfocado en contenido interactivo y animación. Creamos experiencias transmedia: cómic, videojuego y museo virtual de BloodSteel.</p>
+            </div>
+          </div>
+        </article>
+
+        <section aria-labelledby="h-equipo">
+          <h3 id="h-equipo" class="visually-hidden">Equipo</h3>
+          <div class="team">
+            <article class="member">
+              <img src="assets/img/team1.jpg" alt="Miembro 1, rol principal"><!-- TODO -->
+              <div class="txt">
+                <h4>Nombre 1 — Rol</h4>
+                <p>Breve descripción de funciones y foco creativo/técnico.</p>
+                <ul class="socials" role="list">
+                  <li><a href="#" aria-label="Instagram de Miembro 1">IG</a></li>
+                  <li><a href="#" aria-label="LinkedIn de Miembro 1">IN</a></li>
+                  <li><a href="#" aria-label="Behance de Miembro 1">BE</a></li>
+                </ul>
+              </div>
+            </article>
+
+            <article class="member">
+              <img src="assets/img/team2.jpg" alt="Miembro 2, rol principal"><!-- TODO -->
+              <div class="txt">
+                <h4>Nombre 2 — Rol</h4>
+                <p>Breve descripción de funciones y foco creativo/técnico.</p>
+                <ul class="socials" role="list">
+                  <li><a href="#">IG</a></li><li><a href="#">IN</a></li><li><a href="#">BE</a></li>
+                </ul>
+              </div>
+            </article>
+
+            <article class="member">
+              <img src="assets/img/team3.jpg" alt="Miembro 3, rol principal"><!-- TODO -->
+              <div class="txt">
+                <h4>Nombre 3 — Rol</h4>
+                <p>Breve descripción de funciones y foco creativo/técnico.</p>
+                <ul class="socials" role="list">
+                  <li><a href="#">IG</a></li><li><a href="#">IN</a></li><li><a href="#">BE</a></li>
+                </ul>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section aria-labelledby="h-skills">
+          <h3 id="h-skills" class="visually-hidden">Conocimientos y habilidades</h3>
+          <p class="skills" role="list">
+            <span class="badge" role="listitem">Unity / Unreal</span>
+            <span class="badge" role="listitem">Blender</span>
+            <span class="badge" role="listitem">WebAR / VR</span>
+            <span class="badge" role="listitem">Guion / Narrativa</span>
+            <span class="badge" role="listitem">Diseño de UI</span>
+            <span class="badge" role="listitem">Optimización 3D</span>
+            <span class="badge" role="listitem">Audio / SFX</span>
+          </p>
+        </section>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER (logo arriba → menú → redes) -->
+  <footer role="contentinfo">
+    <div class="container foot-grid">
+      <div class="logo-foot">
+        <img src="assets/img/logo-empresa.png" alt="Logo empresa"><!-- TODO -->
+        <small>© <span id="y"></span> Studio Niceleep / BloodSteel</small>
+      </div>
+
+      <nav class="foot-nav" aria-label="Menú del sitio (footer)">
+        <ul role="list">
+          <li><a href="#inicio">Inicio</a></li>
+          <li><a href="#sinopsis">Sinopsis</a></li>
+          <li><a href="#trailer">Trailer</a></li>
+          <li><a href="#mundo">Mundo expandido</a></li>
+          <li><a href="#productos">Productos</a></li>
+          <li><a href="#empresa">Empresa</a></li>
+          <li><a href="/historia/">Historia</a></li>
+          <li><a href="/personajes/">Personajes</a></li>
+          <li><a href="/comic/">Cómic</a></li>
+        </ul>
+      </nav>
+
+      <nav class="foot-socials" aria-label="Redes de la empresa">
+        <ul role="list">
+          <li><a href="#" aria-label="Instagram">IG</a></li>
+          <li><a href="#" aria-label="YouTube">YT</a></li>
+          <li><a href="#" aria-label="LinkedIn">IN</a></li>
+        </ul>
+      </nav>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
