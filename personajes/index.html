@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>BloodSteel — Personajes</title>
+  <meta name="description" content="Personajes del universo BloodSteel: fichas del videojuego y del cómic con backstories.">
+  <link href="https://fonts.googleapis.com/css2?family=Quantico:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <link rel="stylesheet" href="/assets/css/characters.css">
+</head>
+<body>
+
+  <a class="visually-hidden" href="#contenido">Saltar al contenido</a>
+
+  <!-- HEADER (overlay full-screen) -->
+  <header class="main-header" role="banner">
+    <a class="main-logo" href="/" aria-label="Inicio BloodSteel">
+      BLOODSTEEL <span class="omega">Ω</span>
+    </a>
+
+    <button id="button-menu" class="button-menu" aria-expanded="false" aria-controls="nav" aria-label="Abrir menú">
+      <span></span><span></span><span></span>
+    </button>
+
+    <nav id="nav" class="main-nav" aria-label="Navegación principal">
+      <div class="nav-links">
+        <!-- Secciones de esta página -->
+        <ul role="list" class="nav-list">
+          <li><a class="link-item" href="#videojuego">Videojuego</a></li>
+          <li><a class="link-item" href="#comic">Cómic</a></li>
+        </ul>
+        <!-- Otras páginas -->
+        <nav class="ext-links" aria-label="Páginas internas">
+          <ul role="list" class="nav-sublist">
+            <li><a class="link-item" href="/">Inicio</a></li>
+            <li><a class="link-item" href="/historia/">Historia</a></li>
+            <li><a class="link-item" href="/comic/">Cómic (parallax)</a></li>
+          </ul>
+        </nav>
+      </div>
+    </nav>
+  </header>
+
+  <main id="contenido" class="container char-wrap">
+    <!-- Tabs / Toggle -->
+    <section class="char-toggle" aria-label="Filtrar por medio">
+      <button class="chip active" data-scope="game" aria-pressed="true">Videojuego</button>
+      <button class="chip" data-scope="comic" aria-pressed="false">Cómic</button>
+    </section>
+
+    <!-- Hero dinámico del personaje -->
+    <section class="character-hero" aria-live="polite">
+      <div class="hero-bg" id="char-bg" aria-hidden="true"></div>
+      <div class="hero-veil" aria-hidden="true"></div>
+
+      <div class="hero-grid">
+        <!-- Izquierda: PNG recortado -->
+        <figure class="char-portrait">
+          <img id="char-png" src="" alt="Retrato del personaje">
+        </figure>
+
+        <!-- Derecha: texto -->
+        <article class="char-info">
+          <header>
+            <h1 id="char-name">Personaje</h1>
+            <p id="char-role" class="role badge">Rol</p>
+          </header>
+          <p id="char-desc" class="desc">Descripción breve del personaje…</p>
+          <div class="backstory">
+            <h2>Backstory</h2>
+            <p id="char-back">Trasfondo y motivaciones…</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Carrusel de selección -->
+    <section class="char-carousel" aria-labelledby="h-carrusel">
+      <h2 id="h-carrusel" class="visually-hidden">Seleccionar personaje</h2>
+
+      <button class="arrow left" aria-label="Anterior" disabled>&larr;</button>
+      <ul class="track" role="list" tabindex="0" aria-label="Carrusel de personajes">
+        <!-- Thumbs generadas por JS -->
+      </ul>
+      <button class="arrow right" aria-label="Siguiente">&rarr;</button>
+    </section>
+  </main>
+
+  <!-- FOOTER (igual al sitio) -->
+  <footer role="contentinfo">
+    <div class="container foot-grid">
+      <div class="logo-foot">
+        <img src="/assets/img/logo-empresa.png" alt="Logo empresa">
+        <small>© <span id="y"></span> Studio Niceleep / BloodSteel</small>
+      </div>
+
+      <nav class="foot-nav" aria-label="Menú del sitio (footer)">
+        <ul role="list">
+          <li><a href="/">Inicio</a></li>
+          <li><a href="/#sinopsis">Sinopsis</a></li>
+          <li><a href="/#trailer">Trailer</a></li>
+          <li><a href="/#mundo">Mundo expandido</a></li>
+          <li><a href="/#productos">Productos</a></li>
+          <li><a href="/#empresa">Empresa</a></li>
+          <li><a href="/historia/">Historia</a></li>
+          <li><a href="/personajes/">Personajes</a></li>
+          <li><a href="/comic/">Cómic</a></li>
+        </ul>
+      </nav>
+
+      <nav class="foot-socials" aria-label="Redes de la empresa">
+        <ul role="list">
+          <li><a href="#" aria-label="Instagram">IG</a></li>
+          <li><a href="#" aria-label="YouTube">YT</a></li>
+          <li><a href="#" aria-label="LinkedIn">IN</a></li>
+        </ul>
+      </nav>
+    </div>
+  </footer>
+
+  <script src="/assets/js/main.js"></script>
+  <script src="/assets/js/characters.js"></script>
+</body>
+</html>

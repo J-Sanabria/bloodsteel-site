@@ -1,0 +1,103 @@
+/* Toggle de ámbito (game/comic) */
+.char-toggle{
+  display:flex; gap:12px; align-items:center;
+  padding-block: 18px;
+}
+.chip{
+  background: transparent;
+  border: 1px solid #3a3a42;
+  color: var(--white-100);
+  border-radius: 999px;
+  padding: 8px 14px;
+  cursor: pointer;
+}
+.chip:hover{ border-color: var(--gold); color: var(--gold); }
+.chip.active{
+  border-color: var(--gold);
+  box-shadow: 0 0 0 2px rgba(160,129,0,.18) inset;
+}
+
+/* Hero del personaje */
+.character-hero{
+  position:relative; overflow:hidden;
+  border: 1px solid #2c2c31; border-radius: var(--radius);
+  margin-bottom: 20px;
+}
+.hero-bg{
+  position:absolute; inset:0;
+  background-size: cover; background-position: center;
+  filter: saturate(1.05) brightness(.9);
+  transform: scale(1.02);
+}
+.hero-veil{
+  position:absolute; inset:0;
+  background: linear-gradient(180deg, rgba(0,0,0,.55) 0%, rgba(0,0,0,.35) 50%, rgba(0,0,0,.2) 100%);
+}
+.hero-grid{
+  position:relative; z-index:1;
+  display:grid; gap: 18px;
+  padding: clamp(18px, 4vw, 28px);
+  align-items:center;
+}
+@media (min-width:900px){
+  .hero-grid{
+    grid-template-columns: minmax(260px, 38%) 1fr;
+    gap: 24px;
+  }
+}
+
+.char-portrait{
+  aspect-ratio: 3/4;       /* contenedor estable */
+  display:flex; align-items:end; justify-content:center;
+}
+.char-portrait img{
+  max-height: min(68vh, 720px);
+  width: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 12px 28px rgba(0,0,0,.55));
+}
+
+.char-info h1{
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  margin-bottom: 4px;
+}
+.role{ margin-bottom: 10px; }
+.desc{ color: var(--white-200); max-width: 70ch; }
+.backstory{ margin-top: 12px; }
+.backstory h2{ color: var(--gold); margin: 0 0 6px; }
+
+/* Carrusel de personajes (reutiliza estilos base del sitio) */
+.char-carousel{ position:relative; margin-top: 8px; }
+.char-carousel .track{
+  display:flex; gap: 12px; overflow-x:auto; scroll-snap-type:x mandatory;
+  padding: 8px 0 12px; cursor: grab;
+}
+.char-carousel .track.dragging{ cursor: grabbing; user-select:none; }
+.char-carousel .arrow{
+  position:absolute; top:50%; transform: translateY(-50%);
+  background: rgba(18,18,20,.78); color: var(--white-100);
+  border:1px solid #2f2f33; border-radius:12px; padding:10px 12px; cursor:pointer;
+  z-index: 2;
+}
+.char-carousel .arrow.left{ left: 6px; }
+.char-carousel .arrow.right{ right: 6px; }
+.char-carousel .arrow:disabled{ opacity:.45; cursor: default; }
+
+/* Mini-card de thumb */
+.thumb{
+  flex: 0 0 160px; scroll-snap-align: center;
+  border:1px solid #2f2f33; border-radius: 12px; overflow:hidden;
+  background: linear-gradient(180deg, var(--black-800) 0, var(--black-900) 100%);
+  display:flex; flex-direction:column; align-items:center; text-align:center;
+}
+.thumb button{
+  all:unset; cursor:pointer; width:100%; height:100%;
+  display:flex; flex-direction:column; align-items:center; justify-content:space-between;
+}
+.thumb img{
+  width:100%; height: 120px; object-fit: cover;
+}
+.thumb .t-name{
+  padding: 10px; font-weight:700; color: var(--white-100);
+}
+.thumb.is-active{ outline: 2px solid var(--gold); }

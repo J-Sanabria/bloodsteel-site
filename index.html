@@ -13,34 +13,48 @@
   <a class="visually-hidden" href="#inicio">Saltar al contenido</a>
 
   <!-- HEADER -->
-  <header role="banner">
-    <div class="bar container">
-      <a class="brand" href="/" aria-label="Inicio BloodSteel">BLOODSTEEL <span class="omega">Ω</span></a>
+<!-- HEADER -->
+<header class="main-header" role="banner">
+  <a class="main-logo" href="/" aria-label="Inicio BloodSteel">
+    BLOODSTEEL <span class="omega">Ω</span>
+  </a>
 
-      <button class="menu-btn" aria-expanded="false" aria-controls="nav">Menú</button>
+  <!-- Botón hamburguesa siempre visible -->
+  <button
+    id="button-menu"
+    class="button-menu"
+    aria-expanded="false"
+    aria-controls="nav"
+    aria-label="Abrir menú">
+    <span></span><span></span><span></span>
+  </button>
 
-      <!-- Navegación principal (anclas internas + páginas internas) -->
-      <nav id="nav" class="primary" aria-label="Navegación principal">
-        <ul role="list">
-          <!-- Secciones de esta página -->
-          <li><a href="#inicio">Inicio</a></li>
-          <li><a href="#sinopsis">Sinopsis</a></li>
-          <li><a href="#trailer">Trailer</a></li>
-          <li><a href="#mundo">Mundo expandido</a></li>
-          <li><a href="#productos">Productos</a></li>
-          <li><a href="#empresa">Empresa</a></li>
+  <!-- Menú overlay a pantalla completa -->
+  <nav id="nav" class="main-nav" aria-label="Navegación principal">
+    <div class="nav-links">
+      <!-- Secciones de esta página -->
+      <ul role="list" class="nav-list">
+        <li><a class="link-item" href="#inicio">Inicio</a></li>
+        <li><a class="link-item" href="#sinopsis">Sinopsis</a></li>
+        <li><a class="link-item" href="#trailer">Trailer</a></li>
+        <li><a class="link-item" href="#mundo">Mundo expandido</a></li>
+        <li><a class="link-item" href="#productos">Productos</a></li>
+        <li><a class="link-item" href="#empresa">Empresa</a></li>
+      </ul>
+
+      <!-- Páginas internas -->
+      <nav class="ext-links" aria-label="Páginas internas">
+        <ul role="list" class="nav-sublist">
+          <li><a class="link-item" href="/historia/">Historia</a></li>
+          <li><a class="link-item" href="/personajes/">Personajes</a></li>
+          <li><a class="link-item" href="/comic/">Cómic</a></li>
         </ul>
-        <!-- Páginas internas del sitio -->
-        <nav class="ext-links" aria-label="Páginas internas">
-          <ul role="list">
-            <li><a href="/historia/">Historia</a></li>
-            <li><a href="/personajes/">Personajes</a></li>
-            <li><a href="/comic/">Cómic</a></li>
-          </ul>
-        </nav>
       </nav>
     </div>
-  </header>
+  </nav>
+</header>
+
+
 
   <main id="contenido" role="main">
 

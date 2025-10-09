@@ -1,22 +1,40 @@
-// ===== Utilidades generales =====
-document.getElementById('y')?.textContent = new Date().getFullYear();
 
-// Menú hamburguesa (mobile)
-const btn = document.querySelector('.menu-btn');
-const nav = document.getElementById('nav');
-if (btn && nav){
-  btn.addEventListener('click', ()=>{
-    const open = nav.style.display === 'flex';
-    nav.style.display = open ? 'none':'flex';
-    btn.setAttribute('aria-expanded', String(!open));
+
+// ===== Menú hamburguesa overlay (siempre) =====
+(() => {
+  const toggleButton = document.getElementById('button-menu');
+  const navWrapper   = document.getElementById('nav');
+  if (!toggleButton || !navWrapper) return;
+
+  const open = () => {
+    toggleButton.classList.add('close');
+    navWrapper.classList.add('show');
+    toggleButton.setAttribute('aria-expanded','true');
+    document.body.style.overflow = 'hidden'; // bloquea scroll del fondo
+  };
+  const close = () => {
+    toggleButton.classList.remove('close');
+    navWrapper.classList.remove('show');
+    toggleButton.setAttribute('aria-expanded','false');
+    document.body.style.overflow = '';
+  };
+
+  toggleButton.addEventListener('click', () => {
+    const willOpen = !toggleButton.classList.contains('close');
+    willOpen ? open() : close();
   });
-  // Cerrar menú al elegir sección en móvil
-  nav.querySelectorAll('a[href^="#"]').forEach(a=>{
-    a.addEventListener('click', ()=>{
-      if (window.innerWidth < 900) nav.style.display='none';
-    });
+
+  // Clic en el backdrop (fuera del panel) → cierra
+  navWrapper.addEventListener('click', (e) => {
+    if (e.target === navWrapper) close();
   });
-}
+
+  // Clic en cualquier enlace → cierra
+  navWrapper.querySelectorAll('a').forEach(a=>{
+    a.addEventListener('click', close);
+  });
+})();
+
 
 // Scroll suave para anclas internas
 document.querySelectorAll('a[href^="#"]').forEach(a=>{

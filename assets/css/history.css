@@ -1,0 +1,92 @@
+/* Layout general de Historia (TOC + contenido) */
+.history-wrap{
+  display:grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+  padding-block: clamp(24px, 5vw, 48px);
+}
+
+/* Cabecera de página */
+.history-hero{
+  grid-column: 1 / -1;
+  margin-bottom: 8px;
+}
+.history-hero h1{
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+}
+.history-hero .lead{
+  color: var(--white-200);
+  max-width: 70ch;
+}
+
+/* TOC lateral (sube a la derecha en desktop) */
+.toc{
+  position: sticky;
+  top: 76px; /* header 56 + margen */
+  align-self: start;
+  border: 1px solid #2a2a2f;
+  border-radius: var(--radius);
+  padding: 14px;
+  background: linear-gradient(180deg, var(--black-800) 0, var(--black-900) 100%);
+}
+.toc-title{ margin: 0 0 8px; color: var(--gold); }
+.toc ul{ display:flex; gap: 10px; flex-wrap: wrap; }
+.toc a{
+  color: var(--white-100);
+  border: 1px solid #3a3a42;
+  border-radius: 10px;
+  padding: 6px 10px;
+  text-decoration: none;
+}
+.toc a:hover{ border-color: var(--gold); color: var(--gold); }
+
+/* Contenido principal */
+.history-content{
+  display:grid;
+  gap: 28px;
+}
+
+/* Secciones por producto */
+.hs-section{
+  border: 1px solid #2a2a2f;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: linear-gradient(180deg, var(--black-800) 0, var(--black-900) 100%);
+}
+.hs-header{
+  padding: 18px 16px;
+  border-bottom: 1px solid #2c2c31;
+  background: rgba(10,10,11,.6);
+}
+.hs-header h2{ margin: 0; color: var(--gold); }
+.hs-kicker{ margin-top: 6px; }
+
+/* Artículos tipo blog */
+.post{
+  padding: 16px;
+  border-top: 1px solid #242428;
+}
+.post:first-of-type{ border-top: 0; }
+.post header h3{ margin: 0 0 6px; }
+.post .meta{
+  margin: 0 0 10px;
+  font-size: .9rem; color: var(--white-200);
+}
+.post-body p{ max-width: 72ch; color: var(--white-200); }
+
+/* Grid responsivo: TOC a un lado en pantallas anchas */
+@media (min-width: 980px){
+  .history-wrap{
+    grid-template-columns: 280px 1fr;
+    gap: 28px;
+  }
+  .history-hero{
+    grid-column: 1 / -1;
+  }
+  .toc{
+    grid-column: 1 / 2;
+  }
+  .history-content{
+    grid-column: 2 / 3;
+  }
+}
