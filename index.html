@@ -59,15 +59,13 @@
   <main id="contenido" role="main">
 
     <!-- HERO con parallax -->
-    <section id="inicio" class="hero" aria-labelledby="h-hero">
-      <div class="bg" data-parallax aria-hidden="true"></div>
-      <div class="veil" aria-hidden="true"></div>
-      <div class="content container">
-        <h1 id="h-hero">Universo BloodSteel</h1>
-        <p>Steampunk, NOUS y un imperio al borde de la guerra.</p>
-        <p><a class="cta" href="./pages/comic.html">Leer el cómic (parallax)</a></p>
-      </div>
-    </section>
+<!-- HERO con parallax (3 capas tipo cómic) -->
+<section id="hero-parallax" class="hero-parallax" aria-hidden="true">
+  <div class="layer bg"   style="background-image:url('./assets/img/hero/DoomFondo.jpg')"></div>
+  <div class="layer mid"  style="background-image:url('./assets/img/hero/DoomPrueba.png')"></div>
+  <div class="layer front"style="background-image:url('./assets/img/hero/texto.png')"></div>
+</section>
+
 
     <!-- SINOPSIS -->
     <section id="sinopsis" class="section" aria-labelledby="h-sinopsis">
@@ -245,9 +243,9 @@
           <li><a href="#mundo">Mundo expandido</a></li>
           <li><a href="#productos">Productos</a></li>
           <li><a href="#empresa">Empresa</a></li>
-          <li><a href="/pages/historia.html">Historia</a></li>
-          <li><a href="/pages/personajes.html">Personajes</a></li>
-          <li><a href="/pages/">Cómic</a></li>
+          <li><a href="./pages/historia.html">Historia</a></li>
+          <li><a href="./pages/personajes.html">Personajes</a></li>
+          <li><a href="./pages/">Cómic</a></li>
         </ul>
       </nav>
 

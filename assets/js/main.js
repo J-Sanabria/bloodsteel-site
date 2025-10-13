@@ -48,18 +48,37 @@ document.querySelectorAll('a[href^="#"]').forEach(a=>{
   });
 });
 
-// Parallax del hero
+// ===== Hero Parallax tipo cómic (más intenso) =====
 (function(){
-  const bg = document.querySelector('[data-parallax]');
-  if (!bg) return;
-  function raf(){
-    const y = window.scrollY;
-    const offset = y * 0.35;
-    bg.style.transform = `translate3d(0, ${offset * -0.2}px, 0) scale(1.05)`;
-    requestAnimationFrame(raf);
+  const hero = document.querySelector('.hero-parallax');
+  if (!hero) return;
+
+  const layers = hero.querySelectorAll('.layer');
+  // Aumentamos el rango de desplazamiento (más notorio)
+  const speeds = { bg: 0.1, mid: 1, front: 2 };
+
+  function applyParallax(){
+    const scrollY = window.scrollY;
+    const vh = window.innerHeight;
+    const rect = hero.getBoundingClientRect();
+    const progress = Math.min(1, Math.max(0, (vh - rect.top) / (vh + rect.height)));
+
+    layers.forEach(layer => {
+      let speed = speeds.bg;
+      if(layer.classList.contains('mid')) speed = speeds.mid;
+      if(layer.classList.contains('front')) speed = speeds.front;
+
+      // Movimiento más acentuado
+      const ty = (progress - 0.5) * 2 * 100 * speed;
+      layer.style.transform = `translate3d(0, ${ty}px, 0) scale(${1 + speed * 0.1})`;
+    });
+
+    requestAnimationFrame(applyParallax);
   }
-  raf();
+
+  applyParallax();
 })();
+
 
 // ===== Carrusel Productos: flechas + drag + rueda =====
 (function(){

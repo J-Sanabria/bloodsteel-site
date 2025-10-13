@@ -5,9 +5,9 @@ const CHAR_DATA = {
       id: 'g-fornax',
       name: 'Fornax',
       role: 'Verdugo — Tanque',
-      bg: '/assets/img/chars/game/Mortem_BG.png',
-      png: '/assets/img/chars/game/Mortem_BG.png',
-      thumb: '/assets/img/chars/game/Mortem_BG.png',
+      bg: '../assets/img/chars/game/Mortem_BG.png',
+      png: '../assets/img/chars/game/Mortem_BG.png',
+      thumb: '../assets/img/chars/game/Mortem_BG.png',
       desc: 'Guardián blindado del imperio; su armadura está alimentada por NOUS.',
       back: 'Criado en los astilleros de acero, su lealtad fue forjada por la guerra. Protege el núcleo de la ciudad a cualquier costo.'
     },
