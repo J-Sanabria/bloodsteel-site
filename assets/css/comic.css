@@ -13,29 +13,30 @@ body{
   min-height:100vh;
 }
 
-/* Texturas de fondo (colocadas DETRÁS de todo) */
+/* Texturas: por ENCIMA del color de body y por DEBAJO del contenido */
 #comic-bg{
   position:fixed; inset:0;
   pointer-events:none;
-  z-index:-1; /* << importante: detrás de todo */
+  z-index:0; /* << clave: ya no detrás del body */
   background-image:
     url('../img/comic/textures/scratched_steel.jpg'),
     url('../img/comic/noise_texture.png');
   background-position:center,center;
   background-size:cover,600px 600px;
   background-repeat:no-repeat,repeat;
-  /* blend suave (o quítalo) */
-  mix-blend-mode:soft-light;
-  opacity:.35; /* antes .55: bajamos para que no “apague” */
+  mix-blend-mode:darken;
+  opacity: 0.2; /* subimos un poco para que se note sin oscurecer */
 }
 
-/* Halo muy sutil (antes estaba muy oscuro el conjunto) */
+/* Halo muy sutil y aún más al fondo (no apaga la textura) */
 body::before{
-  content:""; position:fixed; inset:0; z-index:-1; pointer-events:none;
-  background:radial-gradient(ellipse at center, rgba(255,255,255,.03) 0%, transparent 70%);
+  content:""; position:fixed; inset:0;
+  z-index:-2; /* << más atrás que el #comic-bg */
+  pointer-events:none;
+  background:radial-gradient(ellipse at center, rgba(255,255,255,.02) 0%, transparent 70%);
 }
 
-/* ---------- Header sin fondo ni blur ---------- */
+/* ---------- Header sin fondo ni blur (transparente) ---------- */
 .main-header{
   position:fixed; top:0; left:0; right:0;
   height:var(--headerH);
@@ -43,25 +44,15 @@ body::before{
   padding-inline:clamp(14px,5vw,32px);
   padding-left:max(env(safe-area-inset-left),clamp(14px,5vw,32px));
   padding-right:max(env(safe-area-inset-right),clamp(14px,5vw,32px));
-  background:none !important;
-  border-bottom:none !important;
-  backdrop-filter:none !important;
+  background:none !important; border-bottom:none !important; backdrop-filter:none !important;
   z-index:120;
 }
-
-.main-logo{
-  color:var(--white-100);
-  font-size:clamp(1rem,2.2vw,1.25rem);
-  text-decoration:none; letter-spacing:.04em;
-}
+.main-logo{ color:var(--white-100); font-size:clamp(1rem,2.2vw,1.25rem); text-decoration:none; letter-spacing:.04em; }
 .main-logo .omega{ color:var(--red); }
-
-/* Botón hamburguesa */
 .button-menu{ z-index:200; }
 .button-menu span{
-  width:34px; height:3px; margin-bottom:6px;
-  background:var(--white-100); border-radius:3px;
-  transform-origin:4px 0; transition:all .2s linear;
+  width:34px; height:3px; margin-bottom:6px; background:var(--white-100);
+  border-radius:3px; transform-origin:4px 0; transition:all .2s linear;
 }
 .button-menu span:last-child{ margin-bottom:0; }
 .button-menu.close span{ opacity:1; transform:rotate(45deg) translate(0,0); }
@@ -91,8 +82,8 @@ body::before{
   letter-spacing:.02em; padding:.4rem .6rem; border-radius:10px; position:relative;
 }
 .link-item::after{
-  content:""; position:absolute; left:0; bottom:-6px;
-  width:0%; height:2px; background:var(--gold); transition:width .25s ease;
+  content:""; position:absolute; left:0; bottom:-6px; width:0%; height:2px;
+  background:var(--gold); transition:width .25s ease;
 }
 .link-item:hover{ color:var(--gold); }
 .link-item:hover::after{ width:100%; }
@@ -103,7 +94,8 @@ body::before{
   overflow-x:hidden; overflow-y:auto;
   height:100vh;
   scroll-behavior:smooth;
-  padding-top:var(--headerH); /* evita que el header tape la primera viñeta */
+  padding-top:var(--headerH);          /* << quitamos el padding que creaba el hueco */
+  z-index:1;              /* << por encima de #comic-bg */
   /* Scrollbar (Firefox) */
   scrollbar-width:thin;
   scrollbar-color:#6c6c72 transparent;
@@ -122,31 +114,31 @@ body::before{
 /* ---------- Viñetas (más pequeñas y SIN recortes) ---------- */
 .vignette{
   position:relative;
-  height:74vh;          /* más pequeñas para “fuelle” */
-  margin-block:3vh;     /* respiro entre paneles */
+  height:74vh;        /* “fuelle” visible */
+  margin-block:3vh;   /* respiro entre paneles */
   overflow:hidden;
   perspective:1000px;
 }
-/* La PRIMERA viñeta llena el viewport sin margen arriba */
+/* La PRIMERA viñeta ocupa la pantalla completa (sin hueco arriba) */
 #comic-view .vignette:first-child{
   margin-top:0;
-  height:calc(100vh - var(--headerH));
+  height:100vh;       /* << ya no restamos el header */
 }
 
-/* Capas: imagen completa y SIN fondo opaco (¡clave para ver textura!) */
+/* Capas: imagen completa y SIN fondo opaco */
 .vignette .layer{
   --ty:0px;  --rx:0deg; --ry:0deg;
   position:absolute; inset:0;
   background-repeat:no-repeat;
   background-position:center center;
   background-size:contain;     /* muestra la imagen completa */
-  background-color:transparent;/* << antes estaba negro y tapaba la textura */
+  background-color:transparent;
   will-change:transform, opacity;
   transition:opacity .35s ease-out;
   transform:translate3d(0,var(--ty),0) rotateX(var(--rx)) rotateY(var(--ry));
 }
 
-/* Profundidad suave (sin agrandar demasiado para no cortar) */
+/* Profundidad suave (sin cortar) */
 .vignette .bg   { z-index:1; transform:translate3d(0,var(--ty),0) rotateX(var(--rx)) rotateY(var(--ry)) scale(1.01); }
 .vignette .mid  { z-index:2; transform:translate3d(0,var(--ty),0) rotateX(var(--rx)) rotateY(var(--ry)) scale(1.005); }
 .vignette .front{ z-index:3; }
@@ -158,9 +150,7 @@ body::before{
 
 /* ---------- Tira de decisiones (3 rutas) ---------- */
 .choice-strip{ position:relative; z-index:1; margin-top:2vh; }
-.choice-grid{
-  display:grid; grid-template-columns:1fr; gap:16px; padding:0 16px;
-}
+.choice-grid{ display:grid; grid-template-columns:1fr; gap:16px; padding:0 16px; }
 @media (min-width:720px){
   .choice-grid{ grid-template-columns:repeat(3,1fr); gap:18px; }
 }
