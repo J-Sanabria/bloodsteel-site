@@ -1,230 +1,228 @@
 /* ============================
-   COMIC — Estilo principal
+   BloodSteel — COMIC (Overrides)
    ============================ */
 
-/* ======= Fondo general ======= */
-body {
-  background: #0A0A0B url('../img/comic/paper_texture.jpg') center/cover fixed;
-  color: #F4F4F2;
-  font-family: "Quantico", system-ui, sans-serif;
-  overflow-x: hidden;
-  min-height: 100vh;
+:root{ --headerH: 64px; }
+
+/* ---------- Fondo + tipografía ---------- */
+body{
+  background:#0A0A0B;
+  color:var(--white-100);
+  font-family:"Quantico", system-ui, Segoe UI, Roboto, Ubuntu, Arial;
+  overflow-x:hidden;
+  min-height:100vh;
 }
 
-/* Suave iluminación central */
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  background: radial-gradient(ellipse at center, rgba(255,255,255,0.05) 0%, transparent 70%);
-  pointer-events: none;
-  z-index: 0;
+/* Texturas de fondo (colocadas DETRÁS de todo) */
+#comic-bg{
+  position:fixed; inset:0;
+  pointer-events:none;
+  z-index:-1; /* << importante: detrás de todo */
+  background-image:
+    url('../img/comic/textures/scratched_steel.jpg'),
+    url('../img/comic/noise_texture.png');
+  background-position:center,center;
+  background-size:cover,600px 600px;
+  background-repeat:no-repeat,repeat;
+  /* blend suave (o quítalo) */
+  mix-blend-mode:soft-light;
+  opacity:.35; /* antes .55: bajamos para que no “apague” */
 }
 
-/* ============================
-   HEADER TRANSPARENTE FIJO
-   ============================ */
-.comic-header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 64px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 18px;
-  background: transparent;
-  z-index: 100;
-  transition: background 0.3s ease, backdrop-filter 0.3s ease;
+/* Halo muy sutil (antes estaba muy oscuro el conjunto) */
+body::before{
+  content:""; position:fixed; inset:0; z-index:-1; pointer-events:none;
+  background:radial-gradient(ellipse at center, rgba(255,255,255,.03) 0%, transparent 70%);
 }
 
-/* Al hacer scroll, gana blur */
-.comic-header.scrolled {
-  background: rgba(10,10,11,0.85);
-  backdrop-filter: blur(6px) saturate(1.3);
+/* ---------- Header sin fondo ni blur ---------- */
+.main-header{
+  position:fixed; top:0; left:0; right:0;
+  height:var(--headerH);
+  display:flex; align-items:center; justify-content:space-between;
+  padding-inline:clamp(14px,5vw,32px);
+  padding-left:max(env(safe-area-inset-left),clamp(14px,5vw,32px));
+  padding-right:max(env(safe-area-inset-right),clamp(14px,5vw,32px));
+  background:none !important;
+  border-bottom:none !important;
+  backdrop-filter:none !important;
+  z-index:120;
 }
 
-/* Logo */
-.comic-logo {
-  font-weight: 700;
-  font-size: 1.2rem;
-  color: #F4F4F2;
-  text-decoration: none;
-  letter-spacing: 0.05em;
-  z-index: 150;
+.main-logo{
+  color:var(--white-100);
+  font-size:clamp(1rem,2.2vw,1.25rem);
+  text-decoration:none; letter-spacing:.04em;
 }
-.comic-logo .omega { color: #5F0101; }
+.main-logo .omega{ color:var(--red); }
 
 /* Botón hamburguesa */
-.button-menu {
-  width: 40px;
-  height: 40px;
-  border: none;
-  background: none;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  z-index: 150;
+.button-menu{ z-index:200; }
+.button-menu span{
+  width:34px; height:3px; margin-bottom:6px;
+  background:var(--white-100); border-radius:3px;
+  transform-origin:4px 0; transition:all .2s linear;
 }
-.button-menu span {
-  width: 32px;
-  height: 3px;
-  background: #F4F4F2;
-  margin: 4px 0;
-  border-radius: 2px;
-  transition: all .3s ease;
+.button-menu span:last-child{ margin-bottom:0; }
+.button-menu.close span{ opacity:1; transform:rotate(45deg) translate(0,0); }
+.button-menu.close span:nth-child(2){ transform:rotate(-45deg) translate(-8px,6px); }
+.button-menu.close span:nth-child(3){ display:none; }
+
+/* Overlay del menú */
+.main-nav{
+  position:fixed; inset:0; height:100vh; width:100%;
+  margin-left:-100%;
+  transition:margin .22s linear;
+  background-color:rgba(0,0,0,.82);
+  z-index:160;
 }
-.button-menu.close span:first-child {
-  transform: rotate(45deg) translate(4px, 4px);
+.main-nav.show{ margin-left:0; }
+.nav-links{
+  width:100%; max-width:720px; height:100%;
+  margin:0 auto; padding:clamp(16px,4vw,28px);
+  display:grid; grid-template-rows:1fr auto; gap:clamp(16px,3vw,28px);
+  align-items:center; justify-items:center; text-align:center;
+  background:transparent;
 }
-.button-menu.close span:nth-child(2) {
-  transform: rotate(-45deg) translate(3px, -3px);
+.nav-sublist{ display:flex; flex-wrap:wrap; gap:12px; justify-content:center; }
+.link-item{
+  color:var(--white-100); text-decoration:none; font-weight:700;
+  font-size:clamp(1.05rem,2.2vw,1.25rem);
+  letter-spacing:.02em; padding:.4rem .6rem; border-radius:10px; position:relative;
 }
-.button-menu.close span:last-child {
-  opacity: 0;
+.link-item::after{
+  content:""; position:absolute; left:0; bottom:-6px;
+  width:0%; height:2px; background:var(--gold); transition:width .25s ease;
+}
+.link-item:hover{ color:var(--gold); }
+.link-item:hover::after{ width:100%; }
+
+/* ---------- Lienzo del cómic ---------- */
+#comic-view{
+  position:relative;
+  overflow-x:hidden; overflow-y:auto;
+  height:100vh;
+  scroll-behavior:smooth;
+  padding-top:var(--headerH); /* evita que el header tape la primera viñeta */
+  /* Scrollbar (Firefox) */
+  scrollbar-width:thin;
+  scrollbar-color:#6c6c72 transparent;
+}
+/* Scrollbar (WebKit) */
+#comic-view::-webkit-scrollbar{ width:10px; }
+#comic-view::-webkit-scrollbar-track{ background:transparent; }
+#comic-view::-webkit-scrollbar-thumb{
+  background:linear-gradient(180deg,#3a3a42,#2b2b30);
+  border-radius:10px; border:2px solid transparent; background-clip:content-box;
+}
+#comic-view::-webkit-scrollbar-thumb:hover{
+  background:linear-gradient(180deg,#4a4a52,#3a3a42);
 }
 
-/* Menú overlay */
-.comic-nav {
-  position: fixed;
-  inset: 0;
-  background: rgba(10,10,11,0.96);
-  backdrop-filter: blur(6px);
-  display: none;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  z-index: 120;
-  transition: opacity 0.3s ease;
+/* ---------- Viñetas (más pequeñas y SIN recortes) ---------- */
+.vignette{
+  position:relative;
+  height:74vh;          /* más pequeñas para “fuelle” */
+  margin-block:3vh;     /* respiro entre paneles */
+  overflow:hidden;
+  perspective:1000px;
 }
-.comic-nav.show {
-  display: flex;
-}
-.comic-nav ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  text-align: center;
-}
-.comic-nav a {
-  display: inline-block;
-  color: #EAE9E5;
-  font-size: 1.3rem;
-  margin: 12px 0;
-  text-decoration: none;
-  font-weight: 700;
-  transition: color .2s ease;
-}
-.comic-nav a:hover {
-  color: #A08100;
+/* La PRIMERA viñeta llena el viewport sin margen arriba */
+#comic-view .vignette:first-child{
+  margin-top:0;
+  height:calc(100vh - var(--headerH));
 }
 
-/* ============================
-   COMIC VIEW / VIÑETAS
-   ============================ */
-#comic-view {
-  position: relative;
-  overflow-x: hidden;
-  overflow-y: auto;
-  height: 100vh;
-  scroll-behavior: smooth;
+/* Capas: imagen completa y SIN fondo opaco (¡clave para ver textura!) */
+.vignette .layer{
+  --ty:0px;  --rx:0deg; --ry:0deg;
+  position:absolute; inset:0;
+  background-repeat:no-repeat;
+  background-position:center center;
+  background-size:contain;     /* muestra la imagen completa */
+  background-color:transparent;/* << antes estaba negro y tapaba la textura */
+  will-change:transform, opacity;
+  transition:opacity .35s ease-out;
+  transform:translate3d(0,var(--ty),0) rotateX(var(--rx)) rotateY(var(--ry));
 }
 
-/* Fondo negro metálico con ruido */
-#comic-bg {
-  position: fixed;
-  inset: 0;
-  background:
-    radial-gradient(ellipse at 50% 50%, rgba(255,255,255,0.03), transparent 80%),
-    url('../img/comic/noise_texture.png');
-  background-size: cover;
-  mix-blend-mode: overlay;
-  opacity: 0.6;
-  pointer-events: none;
-  z-index: 0;
+/* Profundidad suave (sin agrandar demasiado para no cortar) */
+.vignette .bg   { z-index:1; transform:translate3d(0,var(--ty),0) rotateX(var(--rx)) rotateY(var(--ry)) scale(1.01); }
+.vignette .mid  { z-index:2; transform:translate3d(0,var(--ty),0) rotateX(var(--rx)) rotateY(var(--ry)) scale(1.005); }
+.vignette .front{ z-index:3; }
+.vignette .text { z-index:4; pointer-events:none; }
+
+/* Aparición */
+.vignette.is-active .layer{ opacity:1; }
+.vignette:not(.is-active) .layer{ opacity:0; }
+
+/* ---------- Tira de decisiones (3 rutas) ---------- */
+.choice-strip{ position:relative; z-index:1; margin-top:2vh; }
+.choice-grid{
+  display:grid; grid-template-columns:1fr; gap:16px; padding:0 16px;
+}
+@media (min-width:720px){
+  .choice-grid{ grid-template-columns:repeat(3,1fr); gap:18px; }
+}
+.vignette.is-tease{
+  height:62vh; margin:2vh 0; cursor:pointer;
+  border:1px solid #26262a; border-radius:12px; overflow:hidden;
+  transition:transform .25s ease, box-shadow .25s ease;
+}
+.vignette.is-tease.clickable:hover{
+  transform:translateY(-2px);
+  box-shadow:0 8px 30px rgba(0,0,0,.35);
+}
+.choice-label{
+  position:absolute; left:16px; bottom:16px;
+  padding:8px 12px;
+  border:1px solid var(--gold); border-radius:12px;
+  background:rgba(0,0,0,.55); color:var(--white-100); font-weight:700;
 }
 
-/* Cada viñeta */
-.vignette {
-  position: relative;
-  height: 100vh;
-  overflow: hidden;
-  perspective: 1000px;
+/* ---------- Botones de decisión dentro de una viñeta ---------- */
+.decision{
+  position:absolute; bottom:14%; left:50%; transform:translateX(-50%);
+  display:flex; gap:14px; z-index:10;
 }
-.vignette .layer {
-  position: absolute;
-  inset: 0;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-  transition: transform 0.3s ease-out, opacity 0.4s ease-out;
+.decision button{
+  background:rgba(0,0,0,.7);
+  border:1px solid var(--gold); border-radius:12px;
+  color:var(--white-100); font-weight:700; font-family:"Quantico";
+  padding:10px 16px; cursor:pointer;
+  transition:background .25s ease, transform .2s ease, border-color .2s ease;
 }
+.decision button:hover{
+  background:rgba(160,129,0,.2);
+  border-color:var(--purple);
+  transform:translateY(-1px) scale(1.03);
+}
+.decision button:focus-visible{ outline:2px solid var(--gold); outline-offset:2px; }
 
-/* Orden de capas */
-.vignette .bg { z-index: 1; transform: translateZ(-60px) scale(1.1); }
-.vignette .mid { z-index: 2; transform: translateZ(-20px) scale(1.05); }
-.vignette .front { z-index: 3; }
-.vignette .text { z-index: 4; }
+/* ---------- Footer ---------- */
+footer{
+  background:rgba(10,10,11,.95);
+  border-top:1px solid #1c1c1f;
+  color:var(--white-200);
+  padding:36px 0; text-align:center;
+}
+footer .logo-foot{ display:flex; flex-direction:column; align-items:center; gap:10px; }
+footer .logo-foot img{ width:56px; height:56px; object-fit:contain; }
+.foot-nav{ display:flex; justify-content:center; }
+.foot-nav ul{ display:flex; flex-wrap:wrap; gap:12px; margin-top:4px; }
+.foot-nav a{
+  color:var(--white-100);
+  padding:.35rem .6rem; border:1px solid #2f2f33; border-radius:10px;
+}
+.foot-nav a:hover{ border-color:var(--gold); color:var(--gold); }
 
-/* Parallax al mover */
-.vignette.is-active .bg { transform: translateY(0); opacity: 1; }
-.vignette.is-active .mid { transform: translateY(0); opacity: 1; }
-.vignette.is-active .front { transform: translateY(0); opacity: 1; }
-.vignette.is-active .text { opacity: 1; }
-
-/* Transiciones entre viñetas */
-.vignette:not(.is-active) .layer { opacity: 0; transform: translateY(20px); }
-
-/* ============================
-   DECISIONES / BOTONES DE CAMINO
-   ============================ */
-.decision {
-  position: absolute;
-  bottom: 10%;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  gap: 14px;
-  z-index: 10;
+/* ---------- Responsive ---------- */
+@media (max-width:768px){
+  .vignette{ height:72vh; margin-block:2.5vh; }
+  .vignette.is-tease{ height:58vh; }
+  .decision{ bottom:12%; gap:10px; }
+  .decision button{ padding:9px 14px; font-size:.95rem; }
 }
-.decision button {
-  background: rgba(0,0,0,0.7);
-  border: 1px solid #A08100;
-  border-radius: 12px;
-  color: #F4F4F2;
-  font-weight: 700;
-  font-family: "Quantico";
-  padding: 10px 16px;
-  cursor: pointer;
-  transition: background .25s ease, transform .2s ease;
-}
-.decision button:hover {
-  background: rgba(160,129,0,0.2);
-  transform: scale(1.05);
-}
-
-/* ============================
-   FOOTER
-   ============================ */
-footer {
-  background: rgba(10,10,11,0.95);
-  border-top: 1px solid #1c1c1f;
-  color: #EAE9E5;
-  padding: 36px 0;
-  text-align: center;
-}
-footer .logo-foot img {
-  width: 56px;
-  height: 56px;
-  object-fit: contain;
-  margin-bottom: 8px;
-}
-footer a {
-  color: #EAE9E5;
-}
-footer a:hover {
-  color: #A08100;
+@media (min-width:1400px){
+  .vignette{ height:70vh; }
 }

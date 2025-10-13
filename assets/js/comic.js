@@ -1,285 +1,243 @@
 /* ===============================
-   BloodSteel — COMIC ENGINE (JS)
+   BloodSteel — Comic Engine (fuelle + rutas)
    =============================== */
 
 (() => {
-  const $ = (s, r = document) => r.querySelector(s);
-  const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+  const $  = (s, r=document) => r.querySelector(s);
+  const $$ = (s, r=document) => [...r.querySelectorAll(s)];
 
-  /* --------------------------------
-     1) Header transparente + Menú
-  ----------------------------------*/
-  const header = document.querySelector('.comic-header');
-  const nav    = document.getElementById('nav');        // .comic-nav
-  const btn    = document.getElementById('button-menu');
+  // ---------- 1) Datos ----------
+  // Define tus escenas una vez (id → 4 capas)
+  const SCENES = {
+    // Intro (deja las tuyas reales)
+    intro: { bg:'../assets/img/comic/intro/DoomFondo.jpg',
+             mid:'../assets/img/comic/intro/DoomPrueba.png',
+             front:'../assets/img/comic/intro/DoomPrueba.png',
+             text:'../assets/img/comic/intro/texto.png' },
 
-  const openMenu = () => {
-    btn.classList.add('close');
-    nav.classList.add('show');
-    btn.setAttribute('aria-expanded', 'true');
-    document.body.style.overflow = 'hidden';
-  };
-  const closeMenu = () => {
-    btn.classList.remove('close');
-    nav.classList.remove('show');
-    btn.setAttribute('aria-expanded', 'false');
-    document.body.style.overflow = '';
-  };
+    // Thumbs/teasers de las 3 rutas (mini-viñetas botón)
+    teaseA: { bg:'../assets/img/comic/intro/DoomFondo.jpg',
+              mid:'../assets/img/comic/intro/DoomPrueba.png',
+              front:'../assets/img/comic/intro/DoomPrueba.png',
+              text:'../assets/img/comic/intro/texto.png' },
+    teaseB: { bg:'../assets/img/comic/pathB/bg.jpg',
+              mid:'../assets/img/comic/pathB/mid.png',
+              front:'../assets/img/comic/pathB/front.png',
+              text:'../assets/img/comic/pathB/text.png' },
+    teaseC: { bg:'../assets/img/comic/pathC/bg.jpg',
+              mid:'../assets/img/comic/pathC/mid.png',
+              front:'../assets/img/comic/pathC/front.png',
+              text:'../assets/img/comic/pathC/text.png' },
 
-  btn?.addEventListener('click', () => {
-    const willOpen = !btn.classList.contains('close');
-    willOpen ? openMenu() : closeMenu();
-  });
-  nav?.addEventListener('click', e => {
-    if (e.target === nav) closeMenu();
-  });
-  nav?.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
+    // Ejemplo de páginas de cada ruta (sustituye/expande a tus ~22 páginas)
+    a01:{bg:'../assets/img/comic/intro/DoomFondo.jpg',mid:'../assets/img/comic/intro/DoomPrueba.png',front:'../assets/img/comic/intro/DoomPrueba.png',text:'../assets/img/comic/intro/texto.png'},
+    a02:{bg:'../assets/img/comic/pathA/02_bg.jpg',mid:'../assets/img/comic/pathA/02_mid.png',front:'../assets/img/comic/pathA/02_front.png',text:'../assets/img/comic/pathA/02_text.png'},
+    a03:{bg:'../assets/img/comic/pathA/03_bg.jpg',mid:'../assets/img/comic/pathA/03_mid.png',front:'../assets/img/comic/pathA/03_front.png',text:'../assets/img/comic/pathA/03_text.png'},
 
-  const onScrollHeader = () => {
-    if (!header) return;
-    const sc = window.scrollY || document.documentElement.scrollTop;
-    header.classList.toggle('scrolled', sc > 8);
-  };
-  window.addEventListener('scroll', onScrollHeader, { passive: true });
-  onScrollHeader();
+    b01:{bg:'../assets/img/comic/pathB/01_bg.jpg',mid:'../assets/img/comic/pathB/01_mid.png',front:'../assets/img/comic/pathB/01_front.png',text:'../assets/img/comic/pathB/01_text.png'},
+    b02:{bg:'../assets/img/comic/pathB/02_bg.jpg',mid:'../assets/img/comic/pathB/02_mid.png',front:'../assets/img/comic/pathB/02_front.png',text:'../assets/img/comic/pathB/02_text.png'},
+    b03:{bg:'../assets/img/comic/pathB/03_bg.jpg',mid:'../assets/img/comic/pathB/03_mid.png',front:'../assets/img/comic/pathB/03_front.png',text:'../assets/img/comic/pathB/03_text.png'},
 
-  /* --------------------------------
-     2) Datos del cómic (escenas)
-     Estructura: id, layers, choices|next
-  ----------------------------------*/
-  const COMIC = {
-    intro: {
-      id: 'intro',
-      title: 'Introducción',
-      layers: {
-        bg:    '../assets/img/comic/intro/bg_intro.jpg',
-        mid:   '../assets/img/comic/intro/mid_intro.png',
-        front: '../assets/img/comic/intro/front_intro.png',
-        text:  '../assets/img/comic/intro/text_intro.png'
-      },
-      choices: [
-        { id: 'pathA', label: 'Camino A' },
-        { id: 'pathB', label: 'Camino B' },
-        { id: 'pathC', label: 'Camino C' }
-      ]
-    },
+    c01:{bg:'../assets/img/comic/pathC/01_bg.jpg',mid:'../assets/img/comic/pathC/01_mid.png',front:'../assets/img/comic/pathC/01_front.png',text:'../assets/img/comic/pathC/01_text.png'},
+    c02:{bg:'../assets/img/comic/pathC/02_bg.jpg',mid:'../assets/img/comic/pathC/02_mid.png',front:'../assets/img/comic/pathC/02_front.png',text:'../assets/img/comic/pathC/02_text.png'},
+    c03:{bg:'../assets/img/comic/pathC/03_bg.jpg',mid:'../assets/img/comic/pathC/03_mid.png',front:'../assets/img/comic/pathC/03_front.png',text:'../assets/img/comic/pathC/03_text.png'},
 
-    /* ---- Rama A ---- */
-    pathA: {
-      id: 'pathA',
-      title: 'Ruta A — Acería',
-      layers: {
-        bg:    '../assets/img/comic/pathA/bg.jpg',
-        mid:   '../assets/img/comic/pathA/mid.png',
-        front: '../assets/img/comic/pathA/front.png',
-        text:  '../assets/img/comic/pathA/text.png'
-      },
-      next: 'finale'
-    },
-
-    /* ---- Rama B ---- */
-    pathB: {
-      id: 'pathB',
-      title: 'Ruta B — Barrio Bajo',
-      layers: {
-        bg:    '../assets/img/comic/pathB/bg.jpg',
-        mid:   '../assets/img/comic/pathB/mid.png',
-        front: '../assets/img/comic/pathB/front.png',
-        text:  '../assets/img/comic/pathB/text.png'
-      },
-      next: 'finale'
-    },
-
-    /* ---- Rama C ---- */
-    pathC: {
-      id: 'pathC',
-      title: 'Ruta C — Torre NOUS',
-      layers: {
-        bg:    '../assets/img/comic/pathC/bg.jpg',
-        mid:   '../assets/img/comic/pathC/mid.png',
-        front: '../assets/img/comic/pathC/front.png',
-        text:  '../assets/img/comic/pathC/text.png'
-      },
-      next: 'finale'
-    },
-
-    /* ---- Convergencia ---- */
-    finale: {
-      id: 'finale',
-      title: 'Final',
-      layers: {
-        bg:    '../assets/img/comic/finale/bg.jpg',
-        mid:   '../assets/img/comic/finale/mid.png',
-        front: '../assets/img/comic/finale/front.png',
-        text:  '../assets/img/comic/finale/text.png'
-      },
-      next: null
-    }
+    // Convergencia / final
+    fin1:{bg:'../assets/img/comic/finale/01_bg.jpg',mid:'../assets/img/comic/finale/01_mid.png',front:'../assets/img/comic/finale/01_front.png',text:'../assets/img/comic/finale/01_text.png'},
+    fin2:{bg:'../assets/img/comic/finale/02_bg.jpg',mid:'../assets/img/comic/finale/02_mid.png',front:'../assets/img/comic/finale/02_front.png',text:'../assets/img/comic/finale/02_text.png'},
   };
 
-  /* --------------------------------
-     3) Motor de escenas
-  ----------------------------------*/
-  const view = document.getElementById('comic-view');
+  // Define rutas (orden de viñetas que se renderean tras elegir)
+  const ROUTES = {
+    A: ['a01','a02','a03','fin1','fin2'],
+    B: ['b01','b02','b03','fin1','fin2'],
+    C: ['c01','c02','c03','fin1','fin2'],
+  };
 
-  function preload(images = []) {
-    return Promise.all(images.map(src => new Promise(res => {
+  // ---------- 2) Utilidades ----------
+  function preload(list) {
+    return Promise.all((list||[]).map(src => new Promise(res => {
       if (!src) return res();
-      const img = new Image();
-      img.onload = () => res();
-      img.onerror = () => res(); // no bloquea si falla
-      img.src = src;
+      const im = new Image();
+      im.onload = im.onerror = () => res();
+      im.src = src;
     })));
   }
 
-  function buildVignette(scene) {
+  function sceneToVignette(id, data, options={size:'full'}) {
     const sec = document.createElement('section');
     sec.className = 'vignette';
-    sec.id = `v-${scene.id}`;
-    sec.dataset.id = scene.id;
+    sec.dataset.id = id;
+    if (options.size === 'tease') sec.classList.add('is-tease');
 
     // 4 capas
-    ['bg', 'mid', 'front', 'text'].forEach(k => {
+    ['bg','mid','front','text'].forEach(k=>{
       const d = document.createElement('div');
       d.className = `layer ${k}`;
-      d.style.backgroundImage = `url('${scene.layers[k]}')`;
+      d.style.backgroundImage = `url('${data[k]}')`;
       sec.appendChild(d);
     });
-
-    // Decisiones o avance
-    if (scene.choices && scene.choices.length) {
-      const box = document.createElement('div');
-      box.className = 'decision';
-      scene.choices.forEach(c => {
-        const b = document.createElement('button');
-        b.type = 'button';
-        b.textContent = c.label;
-        b.addEventListener('click', () => gotoScene(c.id));
-        box.appendChild(b);
-      });
-      sec.appendChild(box);
-    } else if (scene.next) {
-      const box = document.createElement('div');
-      box.className = 'decision';
-      const b = document.createElement('button');
-      b.type = 'button';
-      b.textContent = 'Continuar';
-      b.addEventListener('click', () => gotoScene(scene.next));
-      box.appendChild(b);
-      sec.appendChild(box);
-    }
-
     return sec;
   }
 
-  let currentId = 'intro';
-  const loaded = new Set();
+  // ---------- 3) Estructura base ----------
+  const view   = $('#comic-view');            // contenedor global (scroll)
+  const root   = document.createElement('div'); root.id='comic-root';
+  const choice = document.createElement('section'); choice.className='choice-strip';
 
-  async function gotoScene(id) {
-    const scene = COMIC[id];
-    if (!scene) return;
+  view.appendChild(root);
 
-    // Precarga
-    const imgs = ['bg', 'mid', 'front', 'text'].map(k => scene.layers[k]);
-    await preload(imgs);
-
-    // Construye y muestra
-    const sec = buildVignette(scene);
-    view.appendChild(sec);
-
-    // Activa transición
-    requestAnimationFrame(() => sec.classList.add('is-active'));
-
-    // Desactiva viñetas anteriores (y las remueve tras animar)
-    $$('.vignette').forEach(v => {
-      if (v !== sec) {
-        v.classList.remove('is-active');
-        setTimeout(() => v.remove(), 350);
-      }
-    });
-
-    currentId = id;
-    loaded.add(id);
-
-    // Scroll al inicio de la nueva viñeta
-    view.scrollTo({ top: 0, behavior: 'smooth' });
+  // Intro (pantalla completa)
+  async function renderIntro(){
+    const d = SCENES.intro;
+    await preload([d.bg,d.mid,d.front,d.text]);
+    const intro = sceneToVignette('intro', d, {size:'full'});
+    root.appendChild(intro);
+    requestAnimationFrame(()=> intro.classList.add('is-active'));
   }
 
-  /* --------------------------------
-     4) Parallax tipo fuelle
-  ----------------------------------*/
-  const speeds = { bg: 0.15, mid: 0.3, front: 0.55, text: 0.75 };
+  // Tira con 3 viñetas-botón (tipo fuelle: están debajo de la intro)
+  async function renderChoices(){
+    // Crea grilla 3 columnas responsive
+    choice.innerHTML = '';
+    const wrap = document.createElement('div');
+    wrap.className = 'choice-grid';
 
-  function applyParallax() {
-    const sec = $('.vignette.is-active') || $('.vignette:last-child');
-    if (!sec) return;
+    const items = [
+      {id:'A', s:SCENES.teaseA, label:'Camino A'},
+      {id:'B', s:SCENES.teaseB, label:'Camino B'},
+      {id:'C', s:SCENES.teaseC, label:'Camino C'},
+    ];
 
-    const rect = sec.getBoundingClientRect();
-    const vh = window.innerHeight || 1;
-    const progress = Math.min(1, Math.max(0, (vh - rect.top) / (vh + rect.height)));
+    // Precarga miniaturas
+    await preload(items.flatMap(it=>[it.s.bg,it.s.mid,it.s.front,it.s.text]));
 
-    // translateY proporcional a scroll dentro de la viñeta
-    const maxShift = 40; // px
-    $$('.layer', sec).forEach(layer => {
-      const k = layer.classList.contains('bg') ? 'bg'
-              : layer.classList.contains('mid') ? 'mid'
-              : layer.classList.contains('front') ? 'front' : 'text';
-      const ty = (progress - 0.5) * 2 * maxShift * speeds[k];
-      layer.style.transform = `translateY(${ty}px)`;
-      layer.style.opacity = 0.75 + progress * 0.25;
+    items.forEach(it=>{
+      const v = sceneToVignette(`tease-${it.id}`, it.s, {size:'tease'});
+      v.setAttribute('role','button');
+      v.setAttribute('tabindex','0');
+      v.classList.add('clickable');
+
+      const cap = document.createElement('div');
+      cap.className = 'choice-label';
+      cap.textContent = it.label;
+      v.appendChild(cap);
+
+      const go = () => startRoute(it.id);
+      v.addEventListener('click', go);
+      v.addEventListener('keydown', (e)=>{ if(e.key==='Enter'||e.key===' ') { e.preventDefault(); go(); } });
+
+      wrap.appendChild(v);
+    });
+
+    choice.appendChild(wrap);
+    root.appendChild(choice);
+
+    // anima entrada
+    requestAnimationFrame(()=>{
+      $$('.vignette', choice).forEach(v=>v.classList.add('is-active'));
     });
   }
 
-  // micro parallax con el mouse
-  let mx = 0, my = 0;
-  window.addEventListener('mousemove', (e) => {
-    const cx = window.innerWidth / 2;
-    const cy = window.innerHeight / 2;
-    mx = (e.clientX - cx) / cx;   // -1 .. 1
-    my = (e.clientY - cy) / cy;
-  }, { passive: true });
+  // ---------- 4) Arranque de ruta ----------
+  async function startRoute(routeId){
+    // Limpia lo que hay debajo de la intro + choices
+    const existing = $('#route-root');
+    if (existing) existing.remove();
 
-  function tick() {
-    // leve inclinación/deriva por mouse
-    const sec = $('.vignette.is-active') || $('.vignette:last-child');
-    if (sec) {
-      $$('.layer', sec).forEach(layer => {
-        const base = layer.style.transform || 'translateY(0px)';
-        const tiltX = mx * 2; // grados sutiles
-        const tiltY = my * -2;
-        layer.style.transform = `${base} perspective(800px) rotateX(${tiltY}deg) rotateY(${tiltX}deg)`;
-      });
+    const rr = document.createElement('div');
+    rr.id = 'route-root';
+    root.appendChild(rr);
+
+    const order = ROUTES[routeId] || [];
+    // Renderiza TODAS (si son muchas y pesadas, podríamos virtualizar después)
+    for (const sid of order){
+      const d = SCENES[sid];
+      await preload([d.bg,d.mid,d.front,d.text]); // aseguras que se vea limpio al entrar
+      const v = sceneToVignette(sid, d, {size:'full'});
+      rr.appendChild(v);
+      requestAnimationFrame(()=> v.classList.add('is-active'));
     }
+
+    // Desplaza al primer panel de la ruta con un offset pequeño
+    setTimeout(()=>{
+      const first = rr.querySelector('.vignette');
+      if (first) first.scrollIntoView({behavior:'smooth', block:'start'});
+    }, 60);
+  }
+
+  // ---------- 5) Fuelle/parallax con CSS variables ----------
+  // (Se aplica a toda viñeta en viewport; cuanto más scrolleas, más se desplaza cada capa)
+  const speeds = { bg:0.18, mid:0.36, front:0.65, text:0.85 };
+  const MAX_SHIFT = 120;
+
+  function applyParallax(){
+    const vignettes = $$('.vignette');
+    const vh = window.innerHeight || 1;
+
+    vignettes.forEach(sec=>{
+      const rect = sec.getBoundingClientRect();
+      // progreso visible de -1 (arriba) a 1 (abajo). 0 = centro
+      const center = (rect.top + rect.height/2) - vh/2;
+      const norm = Math.max(-1, Math.min(1, -center / (vh/2))); // -1..1
+      const progress = (norm + 1)/2; // 0..1
+
+      sec.querySelectorAll('.layer').forEach(layer=>{
+        const k =
+          layer.classList.contains('bg')   ? 'bg'   :
+          layer.classList.contains('mid')  ? 'mid'  :
+          layer.classList.contains('front')? 'front': 'text';
+        const ty = norm * MAX_SHIFT * speeds[k];
+        layer.style.setProperty('--ty', `${ty}px`);
+        layer.style.opacity = 0.7 + progress * 0.3; // 0.7 → 1
+      });
+    });
+  }
+
+  // Tilt leve al mover el mouse (no pisa el translate, solo --rx/--ry)
+  let mx=0,my=0;
+  window.addEventListener('mousemove', (e)=>{
+    const cx = window.innerWidth/2, cy = window.innerHeight/2;
+    mx = (e.clientX - cx)/cx;  // -1..1
+    my = (e.clientY - cy)/cy;  // -1..1
+  }, {passive:true});
+
+  function tick(){
+    const rx = (my * -2).toFixed(3) + 'deg';
+    const ry = (mx *  2).toFixed(3) + 'deg';
+    $$('.vignette .layer').forEach(l=>{
+      l.style.setProperty('--rx', rx);
+      l.style.setProperty('--ry', ry);
+    });
+
     applyParallax();
     requestAnimationFrame(tick);
   }
 
-  /* --------------------------------
-     5) Observers y arranque
-  ----------------------------------*/
-  // Marca activa la última viñeta añadida
-  const io = new IntersectionObserver(entries => {
-    entries.forEach(en => {
-      if (en.isIntersecting) en.target.classList.add('is-active');
-      else en.target.classList.remove('is-active');
+  // ---------- 6) Intersection (activar “fuelle”) ----------
+  const io = new IntersectionObserver(entries=>{
+    entries.forEach(en=>{
+      en.target.classList.toggle('is-active', en.isIntersecting);
     });
-  }, { threshold: 0.35 });
+  }, {root: $('#comic-view'), threshold: 0.25});
 
-  // Observa nuevas secciones
-  const mo = new MutationObserver(muts => {
-    muts.forEach(m => {
-      m.addedNodes.forEach(n => {
+  const mo = new MutationObserver(muts=>{
+    muts.forEach(m=>{
+      m.addedNodes.forEach(n=>{
         if (n.classList?.contains('vignette')) io.observe(n);
+        // observa las viñetas teaser también
+        if (n.classList?.contains('choice-strip')){
+          $$('.vignette', n).forEach(v=> io.observe(v));
+        }
       });
     });
   });
-  mo.observe(view, { childList: true });
+  mo.observe($('#comic-view'), {childList:true, subtree:true});
 
-  // Primera escena
-  gotoScene('intro');
-  tick();
-
-  // Año en footer (si existe)
-  const y = document.getElementById('y');
-  if (y) y.textContent = new Date().getFullYear();
+  // ---------- 7) Boot ----------
+  (async function boot(){
+    await renderIntro();      // viñeta de introducción
+    await renderChoices();    // tira con 3 viñetas botón (A/B/C)
+    tick();                   // inicia loop del parallax tipo fuelle
+  })();
 })();

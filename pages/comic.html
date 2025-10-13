@@ -11,32 +11,39 @@
 </head>
 <body>
 
-  <!-- HEADER transparente -->
-  <header class="comic-header">
-    <a class="comic-logo" href="../index.html" aria-label="Inicio BloodSteel">
-      BLOODSTEEL <span class="omega">Ω</span>
-    </a>
+<!-- HEADER (pages/comic.html) -->
+<header class="main-header" role="banner">
+  <a class="main-logo" href="../index.html" aria-label="Inicio BloodSteel">
+    BLOODSTEEL <span class="omega">Ω</span>
+  </a>
 
-    <!-- Botón hamburguesa -->
-    <button id="button-menu" class="button-menu" aria-expanded="false" aria-controls="nav" aria-label="Abrir menú">
-      <span></span><span></span><span></span>
-    </button>
+  <!-- Botón hamburguesa siempre visible -->
+  <button
+    id="button-menu"
+    class="button-menu"
+    aria-expanded="false"
+    aria-controls="nav"
+    aria-label="Abrir menú">
+    <span></span><span></span><span></span>
+  </button>
 
-    <!-- Menú Overlay -->
-    <nav id="nav" class="comic-nav" aria-label="Navegación principal">
-      <ul role="list" class="nav-links">
-        <li><a href="../index.html">Inicio</a></li>
-        <li><a href="./historia.html">Historia</a></li>
-        <li><a href="./personajes.html">Personajes</a></li>
-      </ul>
-    </nav>
-  </header>
+  <!-- Menú overlay a pantalla completa -->
+  <nav id="nav" class="main-nav" aria-label="Navegación principal">
+    <div class="nav-links">
+      <!-- Solo páginas internas (3) para el cómic -->
+      <nav class="ext-links" aria-label="Páginas internas">
+        <ul role="list" class="nav-sublist">
+          <li><a class="link-item" href="../index.html">Inicio</a></li>
+          <li><a class="link-item" href="./historia.html">Historia</a></li>
+          <li><a class="link-item" href="./personajes.html">Personajes</a></li>
+        </ul>
+      </nav>
+    </div>
+  </nav>
+</header>
 
   <!-- CONTENEDOR PRINCIPAL DEL CÓMIC -->
   <main id="comic-view" role="main">
-
-    <!-- Fondo general -->
-    <div id="comic-bg"></div>
 
     <!-- Viñeta activa -->
     <section class="vignette" id="v-intro" data-id="intro">
