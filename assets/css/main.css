@@ -318,3 +318,72 @@ html::-webkit-scrollbar-thumb:hover {
 .track::-webkit-scrollbar-thumb:hover {
   background: linear-gradient(90deg, #A08100, #5145AC);
 }
+
+/* ===== BLOODSTEEL PRELOADER ===== */
+#preloader {
+  position: fixed;
+  inset: 0;
+  background: #0A0A0B;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  overflow: hidden;
+}
+
+/* Logo centrado */
+.loader-logo {
+  position: relative;
+  width: clamp(140px, 25vw, 260px);
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Imagen base (blanco y negro) */
+.loader-logo img {
+  width: 100%;
+  height: auto;
+  filter: grayscale(1) brightness(0.9);
+  opacity: 0.85;
+  z-index: 2;
+  position: relative;
+  transition: filter 1s ease, opacity 1s ease;
+}
+
+/* Brillo cobre que se expande desde el centro */
+.copper-glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, #A08100 0%, transparent 70%);
+  opacity: 0;
+  transform: scale(0.2);
+  filter: blur(10px);
+  transition: opacity 1.4s ease, transform 1.6s ease;
+  z-index: 1;
+}
+
+/* Estado activo (animación encendida) */
+#preloader.active .copper-glow {
+  opacity: 0.75;
+  transform: scale(2.8);
+  filter: blur(50px);
+}
+
+#preloader.active img {
+  filter: grayscale(0) brightness(1);
+  opacity: 1;
+}
+
+/* Desaparición total cuando termina */
+#preloader.fade-out {
+  animation: preloaderFade 0.8s ease forwards;
+}
+
+@keyframes preloaderFade {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}

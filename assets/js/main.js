@@ -1,4 +1,18 @@
 
+// ===== BLOODSTEEL PRELOADER =====
+window.addEventListener('load', () => {
+  const preloader = document.getElementById('preloader');
+  if (!preloader) return;
+
+  // Activa la animación del cobre después de un instante
+  setTimeout(() => preloader.classList.add('active'), 300);
+
+  // Espera que la animación ocurra y luego oculta todo
+  setTimeout(() => {
+    preloader.classList.add('fade-out');
+    setTimeout(() => preloader.remove(), 900); // remueve del DOM
+  }, 2600);
+});
 
 // ===== Menú hamburguesa overlay (siempre) =====
 (() => {
@@ -118,44 +132,6 @@ document.querySelectorAll('a[href^="#"]').forEach(a=>{
   // Click en flechas
   left?.addEventListener('click', ()=>scrollByStep(-1));
   right?.addEventListener('click', ()=>scrollByStep(1));
-
-  // Drag con Pointer Events (sirve para mouse y touch)
-  track.addEventListener('pointerdown', (e)=>{
-    isDown = true;
-    moved = false;
-    startX = e.clientX;
-    startScroll = track.scrollLeft;
-    track.setPointerCapture?.(e.pointerId);
-    track.classList.add('dragging');
-  });
-
-  track.addEventListener('pointermove', (e)=>{
-    if(!isDown) return;
-    const dx = e.clientX - startX;
-    if (Math.abs(dx) > 3) moved = true;
-    track.scrollLeft = startScroll - dx;
-    // Evita seleccionar texto/arrastres accidentales
-    e.preventDefault();
-  });
-
-  function endDrag(e){
-    if(!isDown) return;
-    isDown = false;
-    track.classList.remove('dragging');
-    try{ track.releasePointerCapture?.(e.pointerId); }catch(_){}
-  }
-
-  track.addEventListener('pointerup', endDrag);
-  track.addEventListener('pointercancel', endDrag);
-  track.addEventListener('pointerleave', endDrag);
-
-  // Evitar que un click sobre un enlace se dispare tras arrastrar
-  track.addEventListener('click', (e)=>{
-    if(moved){
-      e.preventDefault();
-      e.stopPropagation();
-    }
-  }, true);
 
   // Rueda del mouse: convertir scroll vertical en horizontal
   track.addEventListener('wheel', (e)=>{
