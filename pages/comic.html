@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>BloodSteel — Cómic Interactivo</title>
+  <meta name="description" content="Cómic interactivo Génesis de Hierro — Universo BloodSteel">
+  <link href="https://fonts.googleapis.com/css2?family=Quantico:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/main.css">
+  <link rel="stylesheet" href="../assets/css/comic.css">
+</head>
+<body>
+
+  <!-- HEADER transparente -->
+  <header class="comic-header">
+    <a class="comic-logo" href="../index.html" aria-label="Inicio BloodSteel">
+      BLOODSTEEL <span class="omega">Ω</span>
+    </a>
+
+    <!-- Botón hamburguesa -->
+    <button id="button-menu" class="button-menu" aria-expanded="false" aria-controls="nav" aria-label="Abrir menú">
+      <span></span><span></span><span></span>
+    </button>
+
+    <!-- Menú Overlay -->
+    <nav id="nav" class="comic-nav" aria-label="Navegación principal">
+      <ul role="list" class="nav-links">
+        <li><a href="../index.html">Inicio</a></li>
+        <li><a href="./historia.html">Historia</a></li>
+        <li><a href="./personajes.html">Personajes</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- CONTENEDOR PRINCIPAL DEL CÓMIC -->
+  <main id="comic-view" role="main">
+
+    <!-- Fondo general -->
+    <div id="comic-bg"></div>
+
+    <!-- Viñeta activa -->
+    <section class="vignette" id="v-intro" data-id="intro">
+      <div class="layer bg"   style="background-image:url('../assets/img/comic/intro/bg_intro.jpg')"></div>
+      <div class="layer mid"  style="background-image:url('../assets/img/comic/intro/mid_intro.png')"></div>
+      <div class="layer front"style="background-image:url('../assets/img/comic/intro/front_intro.png')"></div>
+      <div class="layer text" style="background-image:url('../assets/img/comic/intro/text_intro.png')"></div>
+    </section>
+
+    <!-- Aquí se insertarán dinámicamente las demás viñetas -->
+  </main>
+
+  <!-- FOOTER (igual que en el sitio principal) -->
+  <footer role="contentinfo">
+    <div class="container foot-grid">
+      <div class="logo-foot">
+        <img src="../assets/img/logo-empresa.png" alt="Logo empresa">
+        <small>© <span id="y"></span> Studio Niceleep / BloodSteel</small>
+      </div>
+
+      <nav class="foot-nav" aria-label="Menú del sitio (footer)">
+        <ul role="list">
+          <li><a href="../index.html">Inicio</a></li>
+          <li><a href="./historia.html">Historia</a></li>
+          <li><a href="./personajes.html">Personajes</a></li>
+          <li><a href="./comic.html">Cómic</a></li>
+        </ul>
+      </nav>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/comic.js"></script>
+</body>
+</html>
