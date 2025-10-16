@@ -244,17 +244,203 @@
   .track{ cursor: grab; }
   .track.dragging{ cursor: grabbing; user-select: none; }
 
-  /* ======= Empresa ======= */
-  .flex-logo{display:flex;gap:16px;align-items:center;flex-wrap:wrap}
-  .flex-logo img{width:72px;height:72px;object-fit:contain}
-  .team{display:grid;gap:var(--gap)}
-  @media (min-width:900px){.team{grid-template-columns:repeat(3,1fr)}}
-  .member{border:1px solid #26262a;border-radius:var(--radius);overflow:hidden;background:#0E0F12}
-  .member .txt{padding:12px}
-  .socials{display:flex;gap:10px;margin-top:6px}
-  .socials li a{border:1px solid #2f2f33;padding:6px 10px;border-radius:999px;color:var(--white-100);display:inline-flex}
-  .skills{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
-  .skills .badge{border-color:#34343a;color:var(--white-200)}
+/* ======= Empresa ======= */
+
+/* Bloque principal: logo + descripción */
+.empresa-info {
+  text-align: center;
+  background: linear-gradient(180deg, var(--black-800) 0, var(--black-900) 100%);
+  padding: 32px 20px;
+  border-radius: var(--radius);
+  border: 1px solid #26262a;
+}
+
+.flex-logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+
+.flex-logo img {
+  width: 120px;
+  height: 120px;
+  object-fit: contain;
+  filter: drop-shadow(0 0 6px rgba(160,129,0,0.25));
+}
+
+.flex-logo .info h3 {
+  color: var(--gold);
+  font-size: 1.4rem;
+  margin: 0.2rem 0;
+}
+
+.flex-logo .info p {
+  color: var(--white-200);
+  max-width: 60ch;
+  margin: 0 auto;
+  font-size: 1rem;
+}
+
+/* ======= Equipo ======= */
+.team {
+  display: grid;
+  gap: var(--gap);
+  margin-top: 24px;
+}
+
+@media (min-width: 900px) {
+  .team {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.member {
+  border: 1px solid #26262a;
+  border-radius: var(--radius);
+  background: #0E0F12;
+  overflow: hidden;
+  text-align: center;
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.member:hover {
+  transform: translateY(-4px);
+  border-color: var(--purple);
+}
+
+.member img {
+  width: 100%;
+  aspect-ratio: 1 / 1;               /* mantiene proporción cuadrada */
+  height: auto;
+  object-fit: cover;                 /* recorta manteniendo el centro */
+  background: #121214;
+  border-bottom: 1px solid #26262a;  /* sutil separación con el texto */
+  transition: transform 0.35s ease, filter 0.35s ease;
+}
+
+.member:hover img {
+  transform: scale(1.05);
+  filter: brightness(1.1) saturate(1.1);
+}
+
+.member .txt {
+  padding: 16px 14px;
+}
+
+.member h4 {
+  color: var(--gold);
+  margin: 0.2rem 0;
+  font-size: 1.05rem;
+}
+
+.member p {
+  color: var(--white-200);
+  font-size: 0.95rem;
+  min-height: 60px;
+}
+
+/* ======= Redes sociales (íconos circulares personalizados) ======= */
+.socials {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 14px;
+}
+
+.socials a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;   /* ligeramente más grandes */
+  height: 46px;
+  border-radius: 50%;
+  transition: transform 0.25s ease, filter 0.3s ease;
+}
+
+.socials a:hover {
+  transform: scale(1.1);
+  filter: drop-shadow(0 0 6px rgba(160,129,0,0.55));
+}
+
+/* Íconos (ya circulares, sin borde adicional) */
+.icon {
+  width: 90%;
+  height: 90%;
+  display: block;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  border-radius: 50%;
+  transition: filter 0.3s ease;
+}
+
+.icon.ig { background-image: url("../img/Empresa/Iconos/Instagram.png"); }
+.icon.in { background-image: url("../img/Empresa/Iconos/Linkedin.png"); }
+.icon.be { background-image: url("../img/Empresa/Iconos/Behance.png"); }
+
+/* Brillo dorado en hover */
+.socials a:hover .icon {
+  filter: brightness(1.2) saturate(1.4);
+}
+
+/* ======= Habilidades (mini carrusel scrollable) ======= */
+.skills-carousel {
+  display: flex;
+  gap: 12px;
+  padding: 10px 6px 20px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  justify-content: flex-start;
+  align-items: center;
+  border-top: 1px solid #1c1c1f;
+  border-bottom: 1px solid #1c1c1f;
+}
+
+/* Ocultar scrollbar visualmente pero permitir el scroll */
+.skills-carousel::-webkit-scrollbar {
+  height: 6px;
+}
+.skills-carousel::-webkit-scrollbar-thumb {
+  background: linear-gradient(90deg, var(--purple), var(--gold));
+  border-radius: 4px;
+}
+
+/* Cada habilidad (badge) */
+.skills-carousel .badge {
+  flex: 0 0 auto;
+  scroll-snap-align: center;
+  border: 1px solid #34343a;
+  color: var(--white-200);
+  background: rgba(18,18,20,0.6);
+  padding: 8px 16px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.03em;
+  transition: all 0.25s ease;
+}
+
+/* Hover o foco */
+.skills-carousel .badge:hover,
+.skills-carousel .badge:focus-visible {
+  background: rgba(160,129,0,0.18);
+  border-color: var(--gold);
+  color: var(--gold);
+  transform: scale(1.05);
+  cursor: pointer;
+}
+
+/* En pantallas grandes: centramos toda la tira */
+@media (min-width: 900px) {
+  .skills-carousel {
+    justify-content: center;
+    padding-inline: 20px;
+  }
+}
+
 
   /* ======= Footer (centrado en columna) ======= */
   footer{padding:40px 0;border-top:1px solid #1c1c1f;color:var(--white-200)}
