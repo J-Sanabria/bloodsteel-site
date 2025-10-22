@@ -18,8 +18,7 @@
 </div>
 
   <a class="visually-hidden" href="#inicio">Saltar al contenido</a>
-
-  <!-- HEADER -->
+  
 <!-- HEADER -->
 <header class="main-header" role="banner">
   <a class="main-logo" href="./index.html" aria-label="Inicio BloodSteel">
@@ -65,12 +64,13 @@
 
   <main id="contenido" role="main">
 
-    <!-- HERO con parallax -->
-<!-- HERO con parallax (3 capas tipo cómic) -->
+<!-- HERO con parallax -->
 <section id="hero-parallax" class="hero-parallax" aria-hidden="true">
-  <div class="layer bg"   style="background-image:url('./assets/img/hero/DoomFondo.jpg')"></div>
-  <div class="layer mid"  style="background-image:url('./assets/img/hero/DoomPrueba.png')"></div>
-  <div class="layer front"style="background-image:url('./assets/img/hero/texto.png')"></div>
+  <div class="hero-frame">
+    <div class="layer bg"   style="background-image:url('./assets/img/hero/DoomFondo.jpg')"></div>
+    <div class="layer mid"  style="background-image:url('./assets/img/hero/DoomPrueba.png')"></div>
+    <div class="layer front"style="background-image:url('./assets/img/hero/texto.png')"></div>
+  </div>
 </section>
 
 
@@ -103,14 +103,16 @@
         <h2 id="h-mundo">Mundo expandido</h2>
         <div class="grid2">
           <article class="card">
+            <img class="card-media" src="./assets/img/comic/intro/DoomFondo.jpg" alt="Arte de Historia">
             <h3>Historia</h3>
             <p>Relato completo del universo y línea de tiempo.</p>
-            <p><a class="btn" href="./pages/historia.html">Ir a Historia</a></p>
+            <p><a class="btn" href="./pages/historia.html">IR A HISTORIA</a></p>
           </article>
           <article class="card">
+            <img class="card-media" src="./assets/img/comic/intro/DoomFondo.jpg" alt="Arte de Personajes">
             <h3>Personajes</h3>
             <p>Fichas de protagonistas y secundarios, con galería.</p>
-            <p><a class="btn" href="./pages/personajes.html">Ir a Personajes</a></p>
+            <p><a class="btn" href="./pages/personajes.html">IR A PERSONAJES</a></p>
           </article>
         </div>
       </div>
@@ -126,34 +128,41 @@
         <ul class="track" role="list" tabindex="0" aria-label="Carrusel de productos">
           <li class="slide">
             <article class="card">
-              <h3>Cómic (parallax)</h3>
+              <img class="card-media" src="assets/img/comic/intro/DoomFondo.jpg" alt="Comic BloodSteel">
+              <h3>Cómic</h3>
+              <h3>BloodSteel: Génesis de Hierro</h3>
               <p>Lectura inmersiva por capas y desplazamiento.</p>
-              <p><a class="btn" href="./pages/comic.html">Abrir Cómic</a></p>
+              <p><a class="btn" href="./pages/comic.html">ABRIR COMIC</a></p>
             </article>
           </li>
           <li class="slide">
             <article class="card">
+               <img class="card-media" src="assets/img/comic/intro/DoomFondo.jpg" alt="Trailer BloodSteel">
               <h3>Trailer</h3>
-              <p>Ver en YouTube o dentro del sitio.</p>
+              <p>Ver en youtube o en el sitio.</p>
               <!-- TODO: reemplazar ID -->
-              <p><a class="btn" href="https://www.youtube.com/watch?v=n57LUikJnbg&list=RDn57LUikJnbg&start_radio=1" target="_blank" rel="noopener">Ver en YouTube</a></p>
+              <p><a class="btn" href="https://www.youtube.com/watch?v=n57LUikJnbg&list=RDn57LUikJnbg&start_radio=1" target="_blank" rel="noopener">VER EN YOUTUBE</a></p>
             </article>
           </li>
           <li class="slide">
             <article class="card">
-              <h3>Videojuego (Unreal)</h3>
-              <p>Descarga para Windows / Mac.</p>
+              <img class="card-media" src="assets/img/comic/intro/DoomFondo.jpg" alt="Videojuego BloodSteel">
+              <h3>Videojuego</h3>
+              <h3>BLoodsteel</h3>
+              <p>Descarga solo para windows.</p>
               <!-- TODO: enlazar a Release o almacenamiento externo -->
-              <p><a class="btn" href="https://github.com/TU-USUARIO/bloodsteel-site/releases/download/v1.0/BloodSteel_Unreal.zip" download>Descargar</a></p>
+              <p><a class="btn" href="https://github.com/TU-USUARIO/bloodsteel-site/releases/download/v1.0/BloodSteel_Unreal.zip" download>DESCARGAR</a></p>
             </article>
           </li>
           <li class="slide">
             <article class="card">
-              <h3>Museo Virtual (móvil)</h3>
+              <img class="card-media" src="assets/img/comic/intro/DoomFondo.jpg" alt="Videojuego BloodSteel">
+              <h3>Museo Virtual</h3>
+              <h3>Bloodsteel: El museo imperial</h3>
               <p>Experiencia pensada para smartphone.</p>
               <!-- TODO: enlazar a la app o página explicativa -->
-              <p><a class="btn" href="#" id="open-museum">Abrir en móvil</a></p>
-              <p class="badge" aria-label="Recomendado para Android o iOS">Recomendado: Android</p>
+              <p><a class="btn" href="" id="open-museum">ABRIR EN ANDROID</a></p>
+              <p class="badge" aria-label="Recomendado para Android"> Solo para celulares Android</p>
             </article>
           </li>
         </ul>
@@ -181,11 +190,11 @@
     <section aria-labelledby="h-equipo">
       <h3 id="h-equipo" class="visually-hidden">Equipo</h3>
       <div class="team">
-
+        
         <article class="member">
-          <img src="assets/img/Empresa/LogoPaula.png" alt="Paula Andrea Ortegon Lezama">
+          <img src="assets/img/Empresa/LogoPaula.jpg" alt="Paula Andrea Ortegon Lezama">
           <div class="txt">
-            <h4>Paula Andrea Ortegon Lezama</h4>
+            <h3>Paula Andrea Ortegon Lezama</h3>
             <p>Dirección de arte y desarrollo visual. Conceptualización de personajes, color y narrativa visual.</p>
             <ul class="socials" role="list">
               <li><a href="https://www.instagram.com/visualpauwer/" aria-label="Instagram"><i class="icon ig"></i></a></li>
@@ -196,9 +205,9 @@
         </article>
 
         <article class="member">
-          <img src="assets/img/Empresa/LogoJuan.png" alt="Juan Sebastian Sanabria Mendivelso">
+          <img src="assets/img/Empresa/LogoJuan.jpg" alt="Juan Sebastian Sanabria Mendivelso">
           <div class="txt">
-            <h4>Juan Sebastian Sanabria Mendivelso</h4>
+            <h3>Juan Sebastian Sanabria Mendivelso</h3>
             <p>Programación, diseño de interacción y desarrollo técnico. Integración en motores como Unity y Unreal.</p>
             <ul class="socials" role="list">
               <li><a href="https://www.instagram.com/jssanabriam/" aria-label="Instagram"><i class="icon ig"></i></a></li>
@@ -209,9 +218,9 @@
         </article>
 
         <article class="member">
-          <img src="assets/img/Empresa/LogoBrandon.png" alt="Brandon Andres Castiblanco Costilla">
+          <img src="assets/img/Empresa/LogoBrandon.jpg" alt="Brandon Andres Castiblanco Costilla">
           <div class="txt">
-            <h4>Brandon Andres Castiblanco Costilla</h4>
+            <h3>Brandon Andres Castiblanco Costilla</h3>
             <p>Producción, estrategia transmedia y comunicación visual. Supervisión de narrativa, redes y branding.</p>
             <ul class="socials" role="list">
               <li><a href="https://www.instagram.com/zyara_mkt/" aria-label="Instagram"><i class="icon ig"></i></a></li>
@@ -262,15 +271,7 @@
           <li><a href="#empresa">Empresa</a></li>
           <li><a href="./pages/historia.html">Historia</a></li>
           <li><a href="./pages/personajes.html">Personajes</a></li>
-          <li><a href="./pages/">Cómic</a></li>
-        </ul>
-      </nav>
-
-      <nav class="foot-socials" aria-label="Redes de la empresa">
-        <ul role="list">
-          <li><a href="#" aria-label="Instagram">IG</a></li>
-          <li><a href="#" aria-label="YouTube">YT</a></li>
-          <li><a href="#" aria-label="LinkedIn">IN</a></li>
+          <li><a href="./pages/comic.html">Cómic</a></li>
         </ul>
       </nav>
     </div>
