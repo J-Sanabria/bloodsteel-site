@@ -1,92 +1,226 @@
-/* Layout general de Historia (TOC + contenido) */
+/* ========== Historia / Blog ==========
+   - Grid responsive: TOC + contenido
+   - Tipografías fluidas (clamp)
+   - Secciones con espacio para imágenes (figure, gallery)
+   - Microperf: content-visibility, aspect-ratio, scroll-margin
+   =================================== */
+
+/* ----- Layout general ----- */
 .history-wrap{
-  display:grid;
+  display: grid;
   grid-template-columns: 1fr;
-  gap: 24px;
-  padding-block: clamp(24px, 5vw, 48px);
+  gap: clamp(20px, 4vw, 36px);
+  padding-block: clamp(20px, 4vw, 48px);
+  align-items: start;
 }
 
 /* Cabecera de página */
 .history-hero{
   grid-column: 1 / -1;
-  margin-bottom: 8px;
+  margin-bottom: 4px;
 }
 .history-hero h1{
-  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  /* grande pero adaptable */
+  font-size: clamp(1.8rem, 3.4vw, 2.6rem);
+  line-height: 1.15;
 }
 .history-hero .lead{
   color: var(--white-200);
   max-width: 70ch;
+  margin-top: .4rem;
+  font-size: clamp(1rem, 1.2vw, 1.125rem);
 }
 
-/* TOC lateral (sube a la derecha en desktop) */
+/* ----- TOC lateral (mobile arriba, desktop sticky) ----- */
 .toc{
   position: sticky;
-  top: 76px; /* header 56 + margen */
+  z-index: 1;
+  top: calc(56px + 20px); /* header (56) + respiro */
   align-self: start;
   border: 1px solid #2a2a2f;
   border-radius: var(--radius);
-  padding: 14px;
+  padding: 16px;
   background: linear-gradient(180deg, var(--black-800) 0, var(--black-900) 100%);
 }
-.toc-title{ margin: 0 0 8px; color: var(--gold); }
-.toc ul{ display:flex; gap: 10px; flex-wrap: wrap; }
+.toc-title{
+  margin: 0 0 8px;
+  color: var(--gold);
+  text-align: center;
+  font-size: clamp(1.05rem, 1.5vw, 1.25rem);
+}
+.toc ul{
+  display:flex; flex-direction:column; gap: 12px; align-items: stretch;
+}
 .toc a{
+  display: block;
   color: var(--white-100);
   border: 1px solid #3a3a42;
   border-radius: 10px;
-  padding: 6px 10px;
+  padding: 8px 12px;
+  font-size: clamp(.98rem, 1.1vw, 1.05rem);
   text-decoration: none;
+  text-align: center;
+  transition: border-color .2s ease, color .2s ease, background-color .2s ease;
 }
-.toc a:hover{ border-color: var(--gold); color: var(--gold); }
+.toc a:hover{
+  border-color: var(--gold);
+  color: var(--gold);
+  background-color: rgba(160,129,0,.06);
+}
 
-/* Contenido principal */
+/* Destacar ancla activa (CSS-only vía :target) */
+.hs-section{ scroll-margin-top: 82px; } /* que no quede bajo el header */
+.hs-section:target .hs-header h2{
+  color: var(--purple);
+}
+
+/* ----- Contenido principal ----- */
 .history-content{
-  display:grid;
-  gap: 28px;
+  display: grid;
+  gap: clamp(16px, 2.5vw, 24px);
 }
 
-/* Secciones por producto */
+/* Secciones (Videojuego / Cómic / Museo) */
 .hs-section{
   border: 1px solid #2a2a2f;
   border-radius: var(--radius);
-  overflow: hidden;
+  overflow: clip; /* evita overflow del media */
   background: linear-gradient(180deg, var(--black-800) 0, var(--black-900) 100%);
+  /* Perf: solo se pinta si entra al viewport */
+  content-visibility: auto;
+  contain-intrinsic-size: 600px; /* evita layout shift al virtualizar */
 }
 .hs-header{
-  padding: 18px 16px;
+  padding: clamp(14px, 1.8vw, 18px) clamp(12px, 1.8vw, 16px);
   border-bottom: 1px solid #2c2c31;
   background: rgba(10,10,11,.6);
 }
-.hs-header h2{ margin: 0; color: var(--gold); }
+.hs-header h2{
+  margin: 0 0 4px;
+  font-size: clamp(1.2rem, 2.2vw, 1.6rem);
+}
 .hs-kicker{ margin-top: 6px; }
 
-/* Artículos tipo blog */
+/* Artículos (posts) */
 .post{
-  padding: 16px;
+  display: grid;
+  gap: 12px;
+  padding: clamp(12px, 1.6vw, 16px);
   border-top: 1px solid #242428;
 }
 .post:first-of-type{ border-top: 0; }
-.post header h3{ margin: 0 0 6px; }
+
+.post header h3{
+  margin: 0 0 2px;
+  font-size: clamp(1.05rem, 2vw, 1.35rem);
+}
 .post .meta{
   margin: 0 0 10px;
-  font-size: .9rem; color: var(--white-200);
+  font-size: .95rem;
+  color: var(--white-200);
 }
-.post-body p{ max-width: 72ch; color: var(--white-200); }
 
-/* Grid responsivo: TOC a un lado en pantallas anchas */
+/* Prosa cómoda */
+.post .post-body{
+  display: grid;
+  gap: 10px;
+}
+.post .post-body p{
+  color: var(--white-200);
+  margin: .2rem 0 .8rem;
+  font-size: clamp(1rem, 1.15vw, 1.1rem);
+}
+
+/* ----- Espacios para imágenes dentro del post ----- */
+
+/* Hero de artículo (opcional) */
+.post-hero{
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 10px;
+  background: #0E0F12;
+  border: 1px solid #26262a;
+  overflow: hidden;
+}
+.post-hero > img{
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center;
+  display: block;
+}
+
+/* Figura simple dentro del texto */
+.post figure{
+  margin: .6rem 0 1rem;
+  border: 1px solid #2a2a2f;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #0E0F12;
+}
+.post figure img{
+  width: 100%; height: auto; display: block;
+}
+.post figure figcaption{
+
+  color: var(--white-200);
+  padding: 8px 10px;
+  border-top: 1px solid #26262a;
+  text-align: center;
+  opacity: .9;
+}
+
+/* Galería (grid auto-fit) */
+.post-gallery{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px,1fr));
+  gap: 10px;
+}
+.post-gallery .item{
+  border: 1px solid #2a2a2f;
+  border-radius: 10px;
+  background: #0E0F12;
+  overflow: hidden;
+  aspect-ratio: 1 / 1; /* cuadrada por defecto */
+}
+.post-gallery .item img{
+  width: 100%; height: 100%;
+  object-fit: cover;
+}
+
+/* Variedad de relaciones */
+.ratio-4x3{ aspect-ratio: 4/3 }
+.ratio-16x9{ aspect-ratio: 16/9 }
+.ratio-3x4{ aspect-ratio: 3/4 }
+
+/* ----- Distribución 2 columnas en pantallas anchas ----- */
 @media (min-width: 980px){
   .history-wrap{
-    grid-template-columns: 280px 1fr;
+    grid-template-columns: 300px minmax(0, 1fr);
     gap: 28px;
   }
-  .history-hero{
-    grid-column: 1 / -1;
+  .history-hero{ grid-column: 1 / -1; }
+  .toc{ grid-column: 1 / 2; }
+  .history-content{ grid-column: 2 / 3; }
+
+  /* Post con layout texto+media (opcional) */
+  .post.post-grid{
+    grid-template-columns: 1.1fr .9fr; /* texto / media */
+    align-items: start;
+    gap: clamp(12px, 2vw, 20px);
   }
-  .toc{
-    grid-column: 1 / 2;
-  }
-  .history-content{
-    grid-column: 2 / 3;
-  }
+  .post.post-grid .post-body{ order: 1; }
+  .post.post-grid .post-media{ order: 2; }
+}
+
+/* ----- Accesibilidad / Motion ----- */
+@media (prefers-reduced-motion: reduce){
+  .toc a,
+  .post-hero > img { transition: none !important; }
+}
+
+/* ----- Impresión (limpio) ----- */
+@media print{
+  .main-header, .button-menu, .toc, .foot-grid { display: none !important; }
+  .history-wrap{ grid-template-columns: 1fr !important; padding: 0; }
+  .hs-section, .post, .hs-header{ border: 0; background: #fff; color:#000; }
+  body{ background:#fff; color:#000; }
 }

@@ -19,21 +19,12 @@ body{
   pointer-events:none;
   z-index:0; /* << clave: ya no detrás del body */
   background-image:
-    url('../img/comic/textures/scratched_steel.jpg'),
-    url('../img/comic/noise_texture.png');
+    url('../img/comic/textures/scratched_steel.jpg');
   background-position:center,center;
   background-size:cover,600px 600px;
   background-repeat:no-repeat,repeat;
   mix-blend-mode:darken;
   opacity: 0.2; /* subimos un poco para que se note sin oscurecer */
-}
-
-/* Halo muy sutil y aún más al fondo (no apaga la textura) */
-body::before{
-  content:""; position:fixed; inset:0;
-  z-index:-2; /* << más atrás que el #comic-bg */
-  pointer-events:none;
-  background:radial-gradient(ellipse at center, rgba(255,255,255,.02) 0%, transparent 70%);
 }
 
 /* ---------- Header sin fondo ni blur (transparente) ---------- */
@@ -47,59 +38,17 @@ body::before{
   background:none !important; border-bottom:none !important; backdrop-filter:none !important;
   z-index:120;
 }
-.main-logo{ color:var(--white-100); font-size:clamp(1rem,2.2vw,1.25rem); text-decoration:none; letter-spacing:.04em; }
-.main-logo .omega{ color:var(--red); }
-.button-menu{ z-index:200; }
-.button-menu span{
-  width:34px; height:3px; margin-bottom:6px; background:var(--white-100);
-  border-radius:3px; transform-origin:4px 0; transition:all .2s linear;
-}
-.button-menu span:last-child{ margin-bottom:0; }
-.button-menu.close span{ opacity:1; transform:rotate(45deg) translate(0,0); }
-.button-menu.close span:nth-child(2){ transform:rotate(-45deg) translate(-8px,6px); }
-.button-menu.close span:nth-child(3){ display:none; }
-
-/* Overlay del menú */
-.main-nav{
-  position:fixed; inset:0; height:100vh; width:100%;
-  margin-left:-100%;
-  transition:margin .22s linear;
-  background-color:rgba(0,0,0,.82);
-  z-index:160;
-}
-.main-nav.show{ margin-left:0; }
-.nav-links{
-  width:100%; max-width:720px; height:100%;
-  margin:0 auto; padding:clamp(16px,4vw,28px);
-  display:grid; grid-template-rows:1fr auto; gap:clamp(16px,3vw,28px);
-  align-items:center; justify-items:center; text-align:center;
-  background:transparent;
-}
-.nav-sublist{ display:flex; flex-wrap:wrap; gap:12px; justify-content:center; }
-.link-item{
-  color:var(--white-100); text-decoration:none; font-weight:700;
-  font-size:clamp(1.05rem,2.2vw,1.25rem);
-  letter-spacing:.02em; padding:.4rem .6rem; border-radius:10px; position:relative;
-}
-.link-item::after{
-  content:""; position:absolute; left:0; bottom:-6px; width:0%; height:2px;
-  background:var(--gold); transition:width .25s ease;
-}
-.link-item:hover{ color:var(--gold); }
-.link-item:hover::after{ width:100%; }
 
 /* ---------- Lienzo del cómic ---------- */
 #comic-view{
   position:relative;
-  overflow-x:hidden; overflow-y:auto;
-  height:100vh;
+  overflow-x:hidden; 
+  overflow-y:auto;
   scroll-behavior:smooth;
   padding-top:var(--headerH);          /* << quitamos el padding que creaba el hueco */
   z-index:1;              /* << por encima de #comic-bg */
-  /* Scrollbar (Firefox) */
-  scrollbar-width:thin;
-  scrollbar-color:#6c6c72 transparent;
 }
+
 /* Scrollbar (WebKit) */
 #comic-view::-webkit-scrollbar{ width:10px; }
 #comic-view::-webkit-scrollbar-track{ background:transparent; }
@@ -113,21 +62,18 @@ body::before{
 
 /* ---------- Viñetas (más pequeñas y SIN recortes) ---------- */
 .vignette{
-  position:relative;
-  height:74vh;        /* “fuelle” visible */
-  margin-block:3vh;   /* respiro entre paneles */
-  overflow:hidden;
+  overflow: hidden;
+  position:relative;    /* “fuelle” visible */
   perspective:1000px;
 }
 /* La PRIMERA viñeta ocupa la pantalla completa (sin hueco arriba) */
 #comic-view .vignette:first-child{
   margin-top:0;
-  height:100vh;       /* << ya no restamos el header */
+  margin-bottom: 50px;
 }
 
 /* Capas: imagen completa y SIN fondo opaco */
 .vignette .layer{
-  --ty:0px;  --rx:0deg; --ry:0deg;
   position:absolute; inset:0;
   background-repeat:no-repeat;
   background-position:center center;
@@ -155,7 +101,6 @@ body::before{
   .choice-grid{ grid-template-columns:repeat(3,1fr); gap:18px; }
 }
 .vignette.is-tease{
-  height:62vh; margin:2vh 0; cursor:pointer;
   border:1px solid #26262a; border-radius:12px; overflow:hidden;
   transition:transform .25s ease, box-shadow .25s ease;
 }
@@ -165,7 +110,6 @@ body::before{
 }
 .choice-label{
   position:absolute; left:16px; bottom:16px;
-  padding:8px 12px;
   border:1px solid var(--gold); border-radius:12px;
   background:rgba(0,0,0,.55); color:var(--white-100); font-weight:700;
 }
@@ -188,23 +132,6 @@ body::before{
   transform:translateY(-1px) scale(1.03);
 }
 .decision button:focus-visible{ outline:2px solid var(--gold); outline-offset:2px; }
-
-/* ---------- Footer ---------- */
-footer{
-  background:rgba(10,10,11,.95);
-  border-top:1px solid #1c1c1f;
-  color:var(--white-200);
-  padding:36px 0; text-align:center;
-}
-footer .logo-foot{ display:flex; flex-direction:column; align-items:center; gap:10px; }
-footer .logo-foot img{ width:56px; height:56px; object-fit:contain; }
-.foot-nav{ display:flex; justify-content:center; }
-.foot-nav ul{ display:flex; flex-wrap:wrap; gap:12px; margin-top:4px; }
-.foot-nav a{
-  color:var(--white-100);
-  padding:.35rem .6rem; border:1px solid #2f2f33; border-radius:10px;
-}
-.foot-nav a:hover{ border-color:var(--gold); color:var(--gold); }
 
 /* ---------- Responsive ---------- */
 @media (max-width:768px){

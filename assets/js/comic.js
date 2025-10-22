@@ -104,9 +104,9 @@
     wrap.className = 'choice-grid';
 
     const items = [
-      {id:'A', s:SCENES.teaseA, label:'Camino A'},
-      {id:'B', s:SCENES.teaseB, label:'Camino B'},
-      {id:'C', s:SCENES.teaseC, label:'Camino C'},
+      {id:'A', s:SCENES.teaseA,},
+      {id:'B', s:SCENES.teaseB, },
+      {id:'C', s:SCENES.teaseC, },
     ];
 
     // Precarga miniaturas
