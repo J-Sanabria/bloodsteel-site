@@ -10,27 +10,27 @@
   // Define tus escenas una vez (id → 4 capas)
   const SCENES = {
     // Intro (deja las tuyas reales)
-    intro: { bg:'../assets/img/comic/intro/DoomFondo.jpg',
-             mid:'../assets/img/comic/intro/DoomPrueba.png',
-             front:'../assets/img/comic/intro/DoomPrueba.png',
-             text:'../assets/img/comic/intro/texto.png' },
+    intro: { bg:'../assets/img/comic/intro/InicioFondo.png',
+             mid:'../assets/img/comic/intro/InicioMitad.png',
+             front:'../assets/img/comic/intro/InicioFrente.png',
+             text:'' },
 
     // Thumbs/teasers de las 3 rutas (mini-viñetas botón)
-    teaseA: { bg:'../assets/img/comic/intro/DoomFondo.jpg',
-              mid:'../assets/img/comic/intro/DoomPrueba.png',
-              front:'../assets/img/comic/intro/DoomPrueba.png',
-              text:'../assets/img/comic/intro/texto.png' },
-    teaseB: { bg:'../assets/img/comic/pathB/bg.jpg',
-              mid:'../assets/img/comic/pathB/mid.png',
-              front:'../assets/img/comic/pathB/front.png',
-              text:'../assets/img/comic/pathB/text.png' },
-    teaseC: { bg:'../assets/img/comic/pathC/bg.jpg',
-              mid:'../assets/img/comic/pathC/mid.png',
-              front:'../assets/img/comic/pathC/front.png',
-              text:'../assets/img/comic/pathC/text.png' },
+    teaseA: { bg:'../assets/img/comic/RutaVictor/Viñeta 1/Vic_Viñeta01_Fondo.png',
+              mid:'../assets/img/comic/RutaVictor/Viñeta 1/Vic_Viñeta01_Mitad.png',
+              front:'../assets/img/comic/RutaVictor/Viñeta 1/Vic_Viñeta01_Frente.png',
+              text:'' },
+    teaseB: { bg:'../assets/img/comic/RutaArtiom/Viñeta1/Artiom_Viñeta01_Fondo.png',
+              mid:'../assets/img/comic/RutaArtiom/Viñeta1/Artiom_Viñeta01_Mitad.png',
+              front:'../assets/img/comic/RutaArtiom/Viñeta1/Artiom_Viñeta01_Frente.png',
+              text:'' },
+    teaseC: { bg:'../assets/img/comic/RutaFaraday/Viñeta01/Faraday_Viñeta01_Fondo.png',
+              mid:'',
+              front:'../assets/img/comic/RutaFaraday/Viñeta01/Faraday_Viñeta01_Frente.png',
+              text:'' },
 
     // Ejemplo de páginas de cada ruta (sustituye/expande a tus ~22 páginas)
-    a01:{bg:'../assets/img/comic/intro/DoomFondo.jpg',mid:'../assets/img/comic/intro/DoomPrueba.png',front:'../assets/img/comic/intro/DoomPrueba.png',text:'../assets/img/comic/intro/texto.png'},
+    a01:{bg:'../assets/img/comic/RutaVictor/Viñeta 1/Vic_Viñeta01_Fondo.png',mid:'../assets/img/comic/RutaVictor/Viñeta 1/Vic_Viñeta01_Mitad.png',front:'../assets/img/comic/RutaVictor/Viñeta 1/Vic_Viñeta01_Frente.png',text:''},
     a02:{bg:'../assets/img/comic/pathA/02_bg.jpg',mid:'../assets/img/comic/pathA/02_mid.png',front:'../assets/img/comic/pathA/02_front.png',text:'../assets/img/comic/pathA/02_text.png'},
     a03:{bg:'../assets/img/comic/pathA/03_bg.jpg',mid:'../assets/img/comic/pathA/03_mid.png',front:'../assets/img/comic/pathA/03_front.png',text:'../assets/img/comic/pathA/03_text.png'},
 
@@ -168,7 +168,7 @@
 
   // ---------- 5) Fuelle/parallax con CSS variables ----------
   // (Se aplica a toda viñeta en viewport; cuanto más scrolleas, más se desplaza cada capa)
-  const speeds = { bg:0.18, mid:0.36, front:0.65, text:0.85 };
+  const speeds = { bg:0.18, mid:0.36, front:0.64, text:0.86 };
   const MAX_SHIFT = 120;
 
   function applyParallax(){
@@ -189,7 +189,6 @@
           layer.classList.contains('front')? 'front': 'text';
         const ty = norm * MAX_SHIFT * speeds[k];
         layer.style.setProperty('--ty', `${ty}px`);
-        layer.style.opacity = 0.7 + progress * 0.3; // 0.7 → 1
       });
     });
   }

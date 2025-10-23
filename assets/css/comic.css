@@ -62,14 +62,13 @@ body{
 
 /* ---------- Viñetas (más pequeñas y SIN recortes) ---------- */
 .vignette{
-  overflow: hidden;
   position:relative;    /* “fuelle” visible */
   perspective:1000px;
 }
 /* La PRIMERA viñeta ocupa la pantalla completa (sin hueco arriba) */
 #comic-view .vignette:first-child{
   margin-top:0;
-  margin-bottom: 50px;
+  margin-bottom: 80px;
 }
 
 /* Capas: imagen completa y SIN fondo opaco */
@@ -85,7 +84,7 @@ body{
 }
 
 /* Profundidad suave (sin cortar) */
-.vignette .bg   { z-index:1; transform:translate3d(0,var(--ty),0) rotateX(var(--rx)) rotateY(var(--ry)) scale(1.01); }
+.vignette .bg   { z-index:1; transform:translate3d(0,var(--ty),0) rotateX(var(--rx)) rotateY(var(--ry)) scale(1.008);  }
 .vignette .mid  { z-index:2; transform:translate3d(0,var(--ty),0) rotateX(var(--rx)) rotateY(var(--ry)) scale(1.005); }
 .vignette .front{ z-index:3; }
 .vignette .text { z-index:4; pointer-events:none; }
@@ -140,6 +139,6 @@ body{
   .decision{ bottom:12%; gap:10px; }
   .decision button{ padding:9px 14px; font-size:.95rem; }
 }
-@media (min-width:1400px){
+@media (min-width:769px){
   .vignette{ height:70vh; }
 }
