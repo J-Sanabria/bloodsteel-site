@@ -1,18 +1,80 @@
 
-// ===== BLOODSTEEL PRELOADER =====
-window.addEventListener('load', () => {
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/sw.js');
+}
+
+// ===== BLOODSTEEL PRELOADER (espera a precache + imágenes) =====
+(function(){
   const preloader = document.getElementById('preloader');
   if (!preloader) return;
 
-  // Activa la animación del cobre después de un instante
-  setTimeout(() => preloader.classList.add('active'), 300);
+  const delay = (ms) => new Promise(r => setTimeout(r, ms));
+  const withTimeout = (p, ms=8000) =>
+    Promise.race([p, delay(ms).then(()=>{ throw new Error('timeout'); })]);
 
-  // Espera que la animación ocurra y luego oculta todo
-  setTimeout(() => {
+  // Lista de assets que quieres sí o sí cacheados al entrar
+  const CRITICAL = [
+    '../assets/css/main.css',
+    '../assets/css/comic.css',
+    '../assets/js/main.js',
+    '../assets/js/comic.js',
+    '../assets/img/Empresa/LogoEmpresa.png'
+  ];
+
+  // Preload de imágenes (Image()) para “calentar” decodificación
+  function preloadImages(urls=[]) {
+    return Promise.all(urls.map(src => new Promise(res => {
+      const im = new Image();
+      im.onload = im.onerror = res;
+      im.decoding = 'async';
+      im.loading  = 'eager';
+      im.src = src;
+    })));
+  }
+
+  async function warmCaches() {
+    // Espera a que el SW esté listo
+    if (!('serviceWorker' in navigator)) return;
+
+    const reg = await navigator.serviceWorker.ready;
+
+    // Enviar manifiesto al SW (crítico + cómic)
+    const comic = Array.isArray(window.__COMIC_URLS) ? window.__COMIC_URLS : [];
+    const urls  = [...new Set([...CRITICAL, ...comic])];
+
+    reg.active?.postMessage({ type:'WARM', urls });
+
+    // Además: “preload” con Image() para que rendericen instantáneo
+    await preloadImages(comic);
+  }
+
+  async function boot() {
+    // Encendemos el brillo cobre de entrada
+    preloader.classList.add('active');
+
+    try {
+      // Damos un pequeño respiro para que esté todo conectado
+      await delay(150);
+      // Espera (con tope) a que el SW caliente sus caches e imágenes
+      await withTimeout(warmCaches(), 9000);
+    } catch(e) {
+      // Si tarda demasiado, seguimos (fallback gracioso)
+      // console.warn('Precache tardó, seguimos…', e);
+    }
+
+    // Fade out y retiro del DOM
     preloader.classList.add('fade-out');
-    setTimeout(() => preloader.remove(), 900); // remueve del DOM
-  }, 2600);
-});
+    await delay(800);
+    preloader.remove();
+  }
+
+  // Arranca tan pronto haya DOM
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', boot, { once:true });
+  } else {
+    boot();
+  }
+})();
 
 // ===== Menú hamburguesa overlay (siempre) =====
 (() => {
@@ -161,7 +223,7 @@ document.querySelectorAll('a[href^="#"]').forEach(a=>{
 
 // Museo: alerta si no es móvil
 document.getElementById('open-museum')?.addEventListener('click', (e)=>{
-  const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+  const isMobile = /Android/i.test(navigator.userAgent);
   if(!isMobile){
     e.preventDefault();
     alert('El museo virtual está optimizado para verse en un dispositivo móvil.');

@@ -47,6 +47,10 @@
     fin2:{bg:'../assets/img/comic/finale/02_bg.jpg',mid:'../assets/img/comic/finale/02_mid.png',front:'../assets/img/comic/finale/02_front.png',text:'../assets/img/comic/finale/02_text.png'},
   };
 
+    window.__COMIC_URLS = Object.values(SCENES)
+    .flatMap(s => [s.bg, s.mid, s.front, s.text])
+    .filter(Boolean);
+    
   // Define rutas (orden de viñetas que se renderean tras elegir)
   const ROUTES = {
     A: ['a01','a02','a03','fin1','fin2'],
