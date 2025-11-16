@@ -50,7 +50,7 @@
     window.__COMIC_URLS = Object.values(SCENES)
     .flatMap(s => [s.bg, s.mid, s.front, s.text])
     .filter(Boolean);
-    
+
   // Define rutas (orden de viñetas que se renderean tras elegir)
   const ROUTES = {
     A: ['a01','a02','a03','fin1','fin2'],
@@ -172,7 +172,7 @@
 
   // ---------- 5) Fuelle/parallax con CSS variables ----------
   // (Se aplica a toda viñeta en viewport; cuanto más scrolleas, más se desplaza cada capa)
-  const speeds = { bg:0.18, mid:0.36, front:0.64, text:0.86 };
+  const speeds = { bg:0.1, mid:0.2, front:0.3, text:0.4 };
   const MAX_SHIFT = 120;
 
   function applyParallax(){

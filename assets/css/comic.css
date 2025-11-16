@@ -84,9 +84,9 @@ body{
 }
 
 /* Profundidad suave (sin cortar) */
-.vignette .bg   { z-index:1; transform:translate3d(0,var(--ty),0) rotateX(var(--rx)) rotateY(var(--ry)) scale(1.008);  }
-.vignette .mid  { z-index:2; transform:translate3d(0,var(--ty),0) rotateX(var(--rx)) rotateY(var(--ry)) scale(1.005); }
-.vignette .front{ z-index:3; }
+.vignette .bg   { z-index:1; transform:translate3d(0,var(--ty),0) rotateX(var(--rx)) rotateY(var(--ry)) scale(1.1);  }
+.vignette .mid  { z-index:2; transform:translate3d(0,var(--ty),0) rotateX(var(--rx)) rotateY(var(--ry)) scale(1.1 ); }
+.vignette .front{ z-index:3;transform:translate3d(0,var(--ty),0) rotateX(var(--rx)) rotateY(var(--ry)) scale(1.2); }
 .vignette .text { z-index:4; pointer-events:none; }
 
 /* Aparición */
