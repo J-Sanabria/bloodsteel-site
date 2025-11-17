@@ -1,6 +1,6 @@
 
 if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('./sw.js');
+  navigator.serviceWorker.register('/bloodsteel-site/sw.js', { scope: '/bloodsteel-site/' });
 }
 
 // ===== BLOODSTEEL PRELOADER (espera a precache + imágenes) =====
