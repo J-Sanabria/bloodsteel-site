@@ -4,9 +4,10 @@ const RUNTIME  = 'bloodsteel-runtime-v1';
 
 /* Manifiesto base (CSS/JS/logo/etc.). Agrega aquí lo crítico global. */
 const PRECACHE_URLS = [
-  '/',                         // tu index si sirve desde raíz
+  '/index.html',                         // tu index si sirve desde raíz
   '/pages/comic.html',
   '/pages/historia.html',
+  '/pages/personajes.html',
   '/assets/css/main.css',
   '/assets/css/comic.css',
   '/assets/js/main.js',
