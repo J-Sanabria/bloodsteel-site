@@ -45,23 +45,33 @@ self.addEventListener('fetch', (event) => {
   const req = event.request;
   if (req.method !== 'GET') return;
 
-  // HTML => network-first
-  if (req.headers.get('accept')?.includes('text/html')) {
-    event.respondWith(
-      fetch(req)
-        .then((res) => { caches.open(RUNTIME).then(c => c.put(req, res.clone())); return res; })
-        .catch(() => caches.match(req))
-    );
-    return;
-  }
-
-  // CSS/JS/IMG => cache-first
+// HTML => network-first
+if (req.headers.get('accept')?.includes('text/html')) {
   event.respondWith(
-    caches.match(req).then((hit) => hit || fetch(req).then((res) => {
-      caches.open(RUNTIME).then(c => c.put(req, res.clone()));
-      return res;
-    }).catch(() => hit))
+    fetch(req)
+      .then((res) => {
+        const copy = res.clone();   // clone ANTES de usar response
+        caches.open(RUNTIME).then(c => c.put(req, copy));
+        return res;                 // devolvemos el original
+      })
+      .catch(() => caches.match(req))
   );
+  return;
+}
+
+// CSS / JS / IMG => cache-first
+event.respondWith(
+  caches.match(req).then(hit => {
+    if (hit) return hit;
+
+    return fetch(req).then(res => {
+      const copy = res.clone();
+      caches.open(RUNTIME).then(c => c.put(req, copy));
+      return res;
+    });
+  })
+);
+
 });
 
 /* Warm-up (desde main.js) */
