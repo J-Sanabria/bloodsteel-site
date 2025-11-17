@@ -1,6 +1,6 @@
 
 if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('/sw.js');
+  navigator.serviceWorker.register('./sw.js');
 }
 
 // ===== BLOODSTEEL PRELOADER (espera a precache + imágenes) =====
