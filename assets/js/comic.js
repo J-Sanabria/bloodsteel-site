@@ -13,25 +13,25 @@
     intro: { bg:'../assets/img/comic/intro/InicioFondo.png',
              mid:'../assets/img/comic/intro/InicioMitad.png',
              front:'../assets/img/comic/intro/InicioFrente.png',
-             text:'' },
+             text:'../assets/img/comic/intro/InicioTexto.png' },
 
     // Thumbs/teasers de las 3 rutas (mini-viñetas botón)
-    teaseA: { bg:'../assets/img/comic/RutaVictor/Viñeta 1/Vic_Viñeta01_Fondo.png',
-              mid:'../assets/img/comic/RutaVictor/Viñeta 1/Vic_Viñeta01_Mitad.png',
-              front:'../assets/img/comic/RutaVictor/Viñeta 1/Vic_Viñeta01_Frente.png',
-              text:'' },
+    teaseA: { bg:'../assets/img/comic/RutaVictor/Pagina 2/Viñeta 1/Vic_Viñeta01_Fondo.png',
+              mid:'../assets/img/comic/RutaVictor/Pagina 2/Viñeta 1/Vic_Viñeta01_Mitad.png',
+              front:'../assets/img/comic/RutaVictor/Pagina 2/Viñeta 1/Vic_Viñeta01_Frente.png',
+              text:'../assets/img/comic/RutaVictor/Pagina 2/Viñeta 1/Vic_Viñeta01_Textos.png' },
     teaseB: { bg:'../assets/img/comic/RutaArtiom/Viñeta1/Artiom_Viñeta01_Fondo.png',
               mid:'../assets/img/comic/RutaArtiom/Viñeta1/Artiom_Viñeta01_Mitad.png',
               front:'../assets/img/comic/RutaArtiom/Viñeta1/Artiom_Viñeta01_Frente.png',
-              text:'' },
+              text:'../assets/img/comic/RutaArtiom/Viñeta1/Artiom_Viñeta01_Texto.png' },
     teaseC: { bg:'../assets/img/comic/RutaFaraday/Viñeta01/Faraday_Viñeta01_Fondo.png',
               mid:'',
               front:'../assets/img/comic/RutaFaraday/Viñeta01/Faraday_Viñeta01_Frente.png',
-              text:'' },
+              text:'../assets/img/comic/RutaFaraday/Viñeta01/Faraday_Viñeta01_Texto.png' },
 
     // Ejemplo de páginas de cada ruta (sustituye/expande a tus ~22 páginas)
-    a01:{bg:'../assets/img/comic/RutaVictor/Viñeta 1/Vic_Viñeta01_Fondo.png',mid:'../assets/img/comic/RutaVictor/Viñeta 1/Vic_Viñeta01_Mitad.png',front:'../assets/img/comic/RutaVictor/Viñeta 1/Vic_Viñeta01_Frente.png',text:''},
-    a02:{bg:'../assets/img/comic/pathA/02_bg.jpg',mid:'../assets/img/comic/pathA/02_mid.png',front:'../assets/img/comic/pathA/02_front.png',text:'../assets/img/comic/pathA/02_text.png'},
+    a01:{bg:'../assets/img/comic/RutaVictor/Pagina 2/Viñeta 1/Vic_Viñeta01_Fondo.png',mid:'../assets/img/comic/RutaVictor/Pagina 2/Viñeta 1/Vic_Viñeta01_Mitad.png',front:'../assets/img/comic/RutaVictor/Pagina 2/Viñeta 1/Vic_Viñeta01_Frente.png',text:'../assets/img/comic/RutaVictor/Pagina 2/Viñeta 1/Vic_Viñeta01_Texto02.png'},
+    a02:{bg:'../assets/img/comic/RutaVictor/Pagina 2/Viñeta 2/Fondo.png',mid:'',front:'../assets/img/comic/RutaVictor/Pagina 2/Viñeta 2/Frente.png',text:'../assets/img/comic/RutaVictor/Pagina 2/Viñeta 2/Texto.png'},
     a03:{bg:'../assets/img/comic/pathA/03_bg.jpg',mid:'../assets/img/comic/pathA/03_mid.png',front:'../assets/img/comic/pathA/03_front.png',text:'../assets/img/comic/pathA/03_text.png'},
 
     b01:{bg:'../assets/img/comic/pathB/01_bg.jpg',mid:'../assets/img/comic/pathB/01_mid.png',front:'../assets/img/comic/pathB/01_front.png',text:'../assets/img/comic/pathB/01_text.png'},
@@ -100,48 +100,57 @@
     requestAnimationFrame(()=> intro.classList.add('is-active'));
   }
 
-  // Tira con 3 viñetas-botón (tipo fuelle: están debajo de la intro)
-  async function renderChoices(){
-    // Crea grilla 3 columnas responsive
-    choice.innerHTML = '';
-    const wrap = document.createElement('div');
-    wrap.className = 'choice-grid';
+async function renderChoices(){
+  choice.innerHTML = '';
+  const wrap = document.createElement('div');
+  wrap.className = 'choice-grid';
 
-    const items = [
-      {id:'A', s:SCENES.teaseA,},
-      {id:'B', s:SCENES.teaseB, },
-      {id:'C', s:SCENES.teaseC, },
-    ];
+  const items = [
+    {id:'A', s:SCENES.teaseA},
+    {id:'B', s:SCENES.teaseB},
+    {id:'C', s:SCENES.teaseC},
+  ];
 
-    // Precarga miniaturas
-    await preload(items.flatMap(it=>[it.s.bg,it.s.mid,it.s.front,it.s.text]));
+  // Precarga miniaturas
+  await preload(items.flatMap(it => [it.s.bg,it.s.mid,it.s.front,it.s.text]));
 
-    items.forEach(it=>{
-      const v = sceneToVignette(`tease-${it.id}`, it.s, {size:'tease'});
-      v.setAttribute('role','button');
-      v.setAttribute('tabindex','0');
-      v.classList.add('clickable');
+  items.forEach(it=>{
+    const v = sceneToVignette(`tease-${it.id}`, it.s, {size:'tease'});
+    v.setAttribute('role','button');
+    v.setAttribute('tabindex','0');
+    v.classList.add('clickable');
 
-      const cap = document.createElement('div');
-      cap.className = 'choice-label';
-      cap.textContent = it.label;
-      v.appendChild(cap);
 
-      const go = () => startRoute(it.id);
-      v.addEventListener('click', go);
-      v.addEventListener('keydown', (e)=>{ if(e.key==='Enter'||e.key===' ') { e.preventDefault(); go(); } });
 
-      wrap.appendChild(v);
+    const go = () => startRoute(it.id);
+    v.addEventListener('click', go);
+    v.addEventListener('keydown', (e)=>{
+      if(e.key==='Enter'||e.key===' '){
+        e.preventDefault();
+        go();
+      }
     });
 
-    choice.appendChild(wrap);
-    root.appendChild(choice);
+    wrap.appendChild(v);
+  });
 
-    // anima entrada
-    requestAnimationFrame(()=>{
-      $$('.vignette', choice).forEach(v=>v.classList.add('is-active'));
-    });
-  }
+  choice.appendChild(wrap);
+  root.appendChild(choice);
+
+  // ---- Scroll vertical → horizontal en el carrusel ----
+  wrap.addEventListener('wheel', (e)=>{
+    if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+      wrap.scrollBy({ left: e.deltaY, behavior:'auto' });
+      e.preventDefault();
+    }
+  }, { passive:false });
+
+  // anima entrada
+  requestAnimationFrame(()=>{
+    $$('.vignette', choice).forEach(v=>v.classList.add('is-active'));
+  });
+}
+
 
   // ---------- 4) Arranque de ruta ----------
   async function startRoute(routeId){
@@ -172,7 +181,7 @@
 
   // ---------- 5) Fuelle/parallax con CSS variables ----------
   // (Se aplica a toda viñeta en viewport; cuanto más scrolleas, más se desplaza cada capa)
-  const speeds = { bg:0.1, mid:0.2, front:0.3, text:0.4 };
+  const speeds = { bg:0.2, mid:0.3, front:0.4, text:0.5 };
   const MAX_SHIFT = 120;
 
   function applyParallax(){

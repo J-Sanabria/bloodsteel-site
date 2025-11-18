@@ -17,14 +17,13 @@ body{
 #comic-bg{
   position:fixed; inset:0;
   pointer-events:none;
-  z-index:0; /* << clave: ya no detrás del body */
-  background-image:
-    url('../img/comic/textures/scratched_steel.jpg');
-  background-position:center,center;
+  z-index:0;
+  background-image: url('../img/comic/textures/scratched_steel.jpg');
+  background-position:center center;
   background-size:cover,600px 600px;
   background-repeat:no-repeat,repeat;
   mix-blend-mode:darken;
-  opacity: 0.2; /* subimos un poco para que se note sin oscurecer */
+  opacity:0.2;
 }
 
 /* ---------- Header sin fondo ni blur (transparente) ---------- */
@@ -42,11 +41,11 @@ body{
 /* ---------- Lienzo del cómic ---------- */
 #comic-view{
   position:relative;
-  overflow-x:hidden; 
+  overflow-x:hidden;
   overflow-y:auto;
   scroll-behavior:smooth;
-  padding-top:var(--headerH);          /* << quitamos el padding que creaba el hueco */
-  z-index:1;              /* << por encima de #comic-bg */
+  padding-top:var(--headerH);
+  z-index:1;
 }
 
 /* Scrollbar (WebKit) */
@@ -60,16 +59,25 @@ body{
   background:linear-gradient(180deg,#4a4a52,#3a3a42);
 }
 
-/* ---------- Viñetas (más pequeñas y SIN recortes) ---------- */
 .vignette{
-  position:relative;    /* “fuelle” visible */
+  position:relative;
   perspective:1000px;
+  /* Separación vertical normal (no 50vh) y centradas en X */
+  margin:30vh auto;
 }
-/* La PRIMERA viñeta ocupa la pantalla completa (sin hueco arriba) */
+
+/* Páginas normales del cómic (no las rutas) */
+.vignette:not(.is-tease){
+  max-width:min(1200px, 100%); /* opcional: un poco más estrechas */
+  /* sin bordes ni fondo extra */
+}
+
+/* La PRIMERA viñeta pegada al header, pero con espacio hacia abajo */
 #comic-view .vignette:first-child{
   margin-top:0;
-  margin-bottom: 80px;
+  margin-bottom:6vh;              /* separación clara con el carrusel */
 }
+
 
 /* Capas: imagen completa y SIN fondo opaco */
 .vignette .layer{
@@ -80,37 +88,101 @@ body{
   background-color:transparent;
   will-change:transform, opacity;
   transition:opacity .35s ease-out;
+  /* NO tocamos esta línea: mantiene el parallax */
   transform:translate3d(0,var(--ty),0) rotateX(var(--rx)) rotateY(var(--ry));
 }
 
 /* Profundidad suave (sin cortar) */
-.vignette .bg   { z-index:1; transform:translate3d(0,var(--ty),0) rotateX(var(--rx)) rotateY(var(--ry)) scale(1.1);  }
-.vignette .mid  { z-index:2; transform:translate3d(0,var(--ty),0) rotateX(var(--rx)) rotateY(var(--ry)) scale(1.1 ); }
-.vignette .front{ z-index:3;transform:translate3d(0,var(--ty),0) rotateX(var(--rx)) rotateY(var(--ry)) scale(1.2); }
-.vignette .text { z-index:4; pointer-events:none; }
+.vignette .bg{
+  z-index:1;
+  transform:translate3d(0,var(--ty),0) rotateX(var(--rx)) rotateY(var(--ry)) scale(1.1);
+}
+.vignette .mid{
+  z-index:2;
+  transform:translate3d(0,var(--ty),0) rotateX(var(--rx)) rotateY(var(--ry)) scale(1.1);
+}
+.vignette .front{
+  z-index:3;
+  transform:translate3d(0,var(--ty),0) rotateX(var(--rx)) rotateY(var(--ry)) scale(1.2);
+}
+.vignette .text{
+  z-index:4;
+  pointer-events:none;
+}
 
 /* Aparición */
 .vignette.is-active .layer{ opacity:1; }
 .vignette:not(.is-active) .layer{ opacity:0; }
 
-/* ---------- Tira de decisiones (3 rutas) ---------- */
-.choice-strip{ position:relative; z-index:1; margin-top:2vh; }
-.choice-grid{ display:grid; grid-template-columns:1fr; gap:16px; padding:0 16px; }
-@media (min-width:720px){
-  .choice-grid{ grid-template-columns:repeat(3,1fr); gap:18px; }
+/* ---------- CARRUSEL DE RUTAS (3 caminos) ---------- */
+
+.choice-strip{
+  position:relative;
+  z-index:1;
+  margin-top:30vh;
+  margin-bottom:30vh;
+  width:80%;
+  margin-left:auto;
+  margin-right:auto;    /* ← centra el carrusel */
 }
+
+/* Track horizontal con scroll */
+.choice-grid{
+  display:flex;
+  gap:24px;
+  padding:10px 16px 8px;   /* poco padding abajo -> la barra sube */
+  overflow-x:auto;
+  scroll-snap-type:x mandatory;
+  scroll-padding-left:16px;
+  -webkit-overflow-scrolling:touch;
+}
+
+/* Scrollbar del carrusel */
+.choice-grid::-webkit-scrollbar{ height:8px; }
+.choice-grid::-webkit-scrollbar-track{ background:transparent; }
+.choice-grid::-webkit-scrollbar-thumb{
+  background:linear-gradient(90deg,#5145AC,#A08100);
+  border-radius:8px;
+}
+
+
+/* Teasers: viñetas de ruta en carrusel */
 .vignette.is-tease{
-  border:1px solid #26262a; border-radius:12px; overflow:hidden;
+  flex:0 0 85vw;           /* un poco más estrechas */
+  height:60vh;             /* más bajas para que no se sientan gigantes */
+  scroll-snap-align:center;
   transition:transform .25s ease, box-shadow .25s ease;
+  margin-block:3vh;        /* respiro arriba y abajo */
 }
+
+/* Ajuste específico móvil: un pelín más altas */
+@media (max-width:768px){
+  .vignette.is-tease{
+    flex:0 0 88vw;
+    height:62vh;
+  }
+}
+
+
 .vignette.is-tease.clickable:hover{
   transform:translateY(-2px);
   box-shadow:0 8px 30px rgba(0,0,0,.35);
 }
+
+/* Las rutas muestran SIEMPRE la viñeta completa (sin recorte) */
+.vignette.is-tease .layer{
+  background-size:contain;        /* << misma lógica que las demás viñetas */
+  background-position:center;
+}
+/* Etiqueta (Camino A/B/C) centrada */
 .choice-label{
-  position:absolute; left:16px; bottom:16px;
+  position:absolute;
+  left:50%; bottom:16px;
+  transform:translateX(-50%);
   border:1px solid var(--gold); border-radius:12px;
-  background:rgba(0,0,0,.55); color:var(--white-100); font-weight:700;
+  padding:8px 16px;
+  background:rgba(0,0,0,.7);
+  color:var(--white-100); font-weight:700;
 }
 
 /* ---------- Botones de decisión dentro de una viñeta ---------- */
@@ -134,11 +206,17 @@ body{
 
 /* ---------- Responsive ---------- */
 @media (max-width:768px){
-  .vignette{ height:72vh; margin-block:2.5vh; }
-  .vignette.is-tease{ height:58vh; }
+  .vignette{
+    height:72vh;
+    margin-block:3vh;      /* separadas también en móvil */
+  }
+  .vignette.is-tease{
+    height:65vh;
+  }
   .decision{ bottom:12%; gap:10px; }
   .decision button{ padding:9px 14px; font-size:.95rem; }
 }
+
 @media (min-width:769px){
   .vignette{ height:70vh; }
 }
