@@ -10,6 +10,17 @@
   // Define tus escenas una vez (id → 4 capas)
   const SCENES = {
     // Intro (deja las tuyas reales)
+
+    Lectura1: { bg:'../assets/img/comic/Lectura1.jpg',
+             mid:'',
+             front:'',
+             text:'' },
+
+    Lectura2: { bg:'../assets/img/comic/Lectura2.jpg',
+             mid:'',
+             front:'',
+             text:'' },
+
     intro: { bg:'../assets/img/comic/intro/InicioFondo.png',
              mid:'../assets/img/comic/intro/InicioMitad.png',
              front:'../assets/img/comic/intro/InicioFrente.png',
@@ -162,14 +173,38 @@
 
   view.appendChild(root);
 
-  // Intro (pantalla completa)
-  async function renderIntro(){
-    const d = SCENES.intro;
-    await preload([d.bg,d.mid,d.front,d.text]);
-    const intro = sceneToVignette('intro', d, {size:'full'});
-    root.appendChild(intro);
-    requestAnimationFrame(()=> intro.classList.add('is-active'));
-  }
+
+ async function renderIntro() {
+
+  // ---- Lectura 1 ----
+  let d1 = SCENES.Lectura1;
+  await preload([d1.bg, d1.mid, d1.front, d1.text]);
+  let v1 = sceneToVignette('lectura1', d1, {size:'full'});
+  root.appendChild(v1);
+  await new Promise(res => requestAnimationFrame(()=>{ 
+    v1.classList.add('is-active'); 
+    setTimeout(res, 600); // pequeña pausa opcional
+  }));
+
+  // ---- Lectura 2 ----
+  let d2 = SCENES.Lectura2;
+  await preload([d2.bg, d2.mid, d2.front, d2.text]);
+  let v2 = sceneToVignette('lectura2', d2, {size:'full'});
+  root.appendChild(v2);
+  await new Promise(res => requestAnimationFrame(()=>{ 
+    v2.classList.add('is-active'); 
+    setTimeout(res, 600);
+  }));
+
+  // ---- Intro normal ----
+  let d3 = SCENES.intro;
+  await preload([d3.bg, d3.mid, d3.front, d3.text]);
+  let intro = sceneToVignette('intro', d3, {size:'full'});
+  root.appendChild(intro);
+  requestAnimationFrame(()=> intro.classList.add('is-active'));
+}
+
+  
 
 async function renderChoices(){
   choice.innerHTML = '';
