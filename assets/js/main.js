@@ -131,7 +131,7 @@ document.querySelectorAll('a[href^="#"]').forEach(a=>{
 
   const layers = hero.querySelectorAll('.layer');
   // Aumentamos el rango de desplazamiento (más notorio)
-  const speeds = { bg: 0.1, mid: 1, front: 2 };
+  const speeds = { bg: 0.1, back:-0.5,  mid: 0.5, front: -0.5, text: -0.5 };
 
   function applyParallax(){
     const scrollY = window.scrollY;
@@ -141,8 +141,10 @@ document.querySelectorAll('a[href^="#"]').forEach(a=>{
 
     layers.forEach(layer => {
       let speed = speeds.bg;
+      if(layer.classList.contains('back')) speed = speeds.back;
       if(layer.classList.contains('mid')) speed = speeds.mid;
       if(layer.classList.contains('front')) speed = speeds.front;
+      if(layer.classList.contains('text')) speed = speeds.text;
 
       // Movimiento más acentuado
       const ty = (progress - 0.5) * 2 * 100 * speed;
