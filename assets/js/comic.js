@@ -91,13 +91,29 @@
     b015:{bg:'../assets/img/comic/RutaArtiom/Pagina 9/Viñeta 6/Fondo.jpg',mid:'',front:'../assets/img/comic/RutaArtiom/Pagina 9/Viñeta 6/Frente.png',text:'../assets/img/comic/RutaArtiom/Pagina 9/Viñeta 6/Texto.png'},
     b016:{bg:'../assets/img/comic/RutaArtiom/Pagina 9/Viñeta 7/Fondo.png',mid:'',front:'../assets/img/comic/RutaArtiom/Pagina 9/Viñeta 7/Frente.png',text:'../assets/img/comic/RutaArtiom/Pagina 9/Viñeta 7/Texto.png'}, 
 
-    c01:{bg:'../assets/img/comic/pathC/01_bg.jpg',mid:'../assets/img/comic/pathC/01_mid.png',front:'../assets/img/comic/pathC/01_front.png',text:'../assets/img/comic/pathC/01_text.png'},
-    c02:{bg:'../assets/img/comic/pathC/02_bg.jpg',mid:'../assets/img/comic/pathC/02_mid.png',front:'../assets/img/comic/pathC/02_front.png',text:'../assets/img/comic/pathC/02_text.png'},
-    c03:{bg:'../assets/img/comic/pathC/03_bg.jpg',mid:'../assets/img/comic/pathC/03_mid.png',front:'../assets/img/comic/pathC/03_front.png',text:'../assets/img/comic/pathC/03_text.png'},
+    //Pagina 10//
+    b017:{bg:'../assets/img/comic/RutaArtiom/Pagina 10/Viñeta 1/Fondo.jpg',mid:'',front:'',text:'../assets/img/comic/RutaArtiom/Pagina 10/Viñeta 1/Texto.png'}, 
+    b018:{bg:'../assets/img/comic/RutaArtiom/Pagina 10/Viñeta 2/Fondo.jpg',mid:'',front:'../assets/img/comic/RutaArtiom/Pagina 10/Viñeta 2/Frente.png',text:'../assets/img/comic/RutaArtiom/Pagina 10/Viñeta 2/Texto.png'}, 
+    b019:{bg:'../assets/img/comic/RutaVictor/Pagina 5/Viñeta 2/Fondo.jpg',mid:'../assets/img/comic/RutaVictor/Pagina 5/Viñeta 2/mitad.png',front:'../assets/img/comic/RutaVictor/Pagina 5/Viñeta 2/Frente.png',text:'../assets/img/comic/RutaVictor/Pagina 5/Viñeta 2/Texto.png'},
+    b020:{bg:'../assets/img/comic/RutaVictor/Pagina 5/Viñeta 3/Fondo.jpg',mid:'',front:'../assets/img/comic/RutaVictor/Pagina 5/Viñeta 3/Frente.png',text:'../assets/img/comic/RutaArtiom/Pagina 10/Viñeta 4/Texto.png'},            
+    b021:{bg:'',mid:'',front:'../assets/img/comic/RutaArtiom/Pagina 10/Viñeta 5/Frente.png',text:'../assets/img/comic/RutaArtiom/Pagina 10/Viñeta 5/Texto.png'},
+    b022:{bg:'',mid:'',front:'../assets/img/comic/RutaArtiom/Pagina 10/Viñeta 6/Frente.png',text:'../assets/img/comic/RutaArtiom/Pagina 10/Viñeta 6/Texto.png'}, 
+    b023:{bg:'',mid:'',front:'../assets/img/comic/RutaArtiom/Pagina 10/Viñeta 7/Frente.png',text:'../assets/img/comic/RutaArtiom/Pagina 10/Viñeta 7/Texto.png'},  
+    b024:{bg:'../assets/img/comic/RutaArtiom/Pagina 10/Viñeta 8/Fondo.jpg',mid:'',front:'',text:'../assets/img/comic/RutaArtiom/Pagina 10/Viñeta 8/Texto.png'}, 
+    b025:{bg:'',mid:'',front:'../assets/img/comic/RutaArtiom/Pagina 10/Viñeta 9/Frente.png',text:'../assets/img/comic/RutaArtiom/Pagina 10/Viñeta 9/Texto.png'}, 
+
+    //Pagina 11//
+    b026:{bg:'../assets/img/comic/RutaArtiom/Pagina 11/Viñeta 1/Fondo.jpg',mid:'../assets/img/comic/RutaArtiom/Pagina 11/Viñeta 1/Mitad.png',front:'../assets/img/comic/RutaArtiom/Pagina 11/Viñeta 1/Frente.png',text:'../assets/img/comic/RutaArtiom/Pagina 11/Viñeta 1/Texto.png'},   
+    b027:{bg:'../assets/img/comic/RutaArtiom/Pagina 11/Viñeta 2/Fondo.jpg',mid:'',front:'../assets/img/comic/RutaArtiom/Pagina 11/Viñeta 2/Frente.png',text:'../assets/img/comic/RutaArtiom/Pagina 11/Viñeta 2/Texto.png'},
+    b028:{bg:'',mid:'',front:'../assets/img/comic/RutaVictor/Pagina 6/Viñeta 4/Frente.png',text:'../assets/img/comic/RutaArtiom/Pagina 11/Viñeta 3/Texto.png'},
+    b029:{bg:'',mid:'',front:'../assets/img/comic/RutaArtiom/Pagina 11/Viñeta 4/Frente.png',text:'../assets/img/comic/RutaArtiom/Pagina 11/Viñeta 4/Texto.png'},
+
+    c01:{bg:'',mid:'',front:'',text:'../assets/img/Desesperacion.png'},
+
 
     // Convergencia / final
-    fin1:{bg:'../assets/img/comic/finale/01_bg.jpg',mid:'../assets/img/comic/finale/01_mid.png',front:'../assets/img/comic/finale/01_front.png',text:'../assets/img/comic/finale/01_text.png'},
-    fin2:{bg:'../assets/img/comic/finale/02_bg.jpg',mid:'../assets/img/comic/finale/02_mid.png',front:'../assets/img/comic/finale/02_front.png',text:'../assets/img/comic/finale/02_text.png'},
+    fin1:{bg:'',mid:'',front:'',text:'../assets/img/Desesperacion.png'},
+    fin2:{bg:'',mid:'',front:'',text:'../assets/img/Desesperacion.png'},
   };
 
     window.__COMIC_URLS = Object.values(SCENES)
@@ -108,8 +124,9 @@
   const ROUTES = {
     A: ['a01','a02','a03', 'a04', 'a05', 'a06', 'a07', 'a08', 'a09', 'a010', 'a011', 'a012', 'a013', 'a014', 'a015', 'a016', 'a017',
         'a018','a019', 'a020', 'a021', 'a022', 'a023', 'a024', 'a025', 'a026', 'a027', 'a028','a029', 'fin1','fin2'],
-    B: ['b01','b02','b03', 'b04', 'b05', 'b06', 'b07', 'b08', 'b09', 'b010', 'b011', 'b012', 'b013', 'b014', 'b015', 'b016', 'fin1','fin2'],
-    C: ['c01','c02','c03','fin1','fin2'],
+    B: ['b01','b02','b03', 'b04', 'b05', 'b06', 'b07', 'b08', 'b09', 'b010', 'b011', 'b012', 'b013', 'b014', 'b015', 'b016',
+      'b017', 'b018', 'b019', 'b020', 'b021', 'b022', 'b023', 'b024', 'b025', 'b026', 'b027', 'b028', 'b029','fin1','fin2'],
+    C: ['c01',],
   };
 
   // ---------- 2) Utilidades ----------

@@ -17,9 +17,9 @@ const CHAR_DATA = {
       id: 'c-Victor',
       name: 'Victor ',
       role: 'el que perfecciona la carne',
-      bg: '/assets/img/chars/comic/Victor/Horizontal.jpg',
-      png: '/assets/img/chars/comic/Victor/Vertical.png',
-      thumb: '/assets/img/chars/comic/Victor/Icon.jpg',
+      bg: '../assets/img/chars/comic/Victor/Horizontal.jpg',
+      png: '../assets/img/chars/comic/Victor/Vertical.png',
+      thumb: '../assets/img/chars/comic/Victor/Icon.jpg',
       desc: 'Científico-cirujano brillante, físicamente imponente, indiferente al apellido Veyracor (lo considera un lastre). Su meta es superar los límites biológicos y negar a la muerte; no busca redención, busca resultados.',
       back: 'Victor creció en un entorno médico estricto, formado desde niño entre quirófanos, instrumentos y estudio implacable. La enfermedad de su madre y la frialdad de su padre lo llevaron a obsesionarse con entender —y superar— las limitaciones del cuerpo humano. Combinó conocimientos de anatomía, química y mecánica con un entrenamiento físico riguroso, convirtiéndose en alguien tan preciso como peligroso. Con los años, perfeccionó sus propios métodos y mejoras, guiado no por prestigio ni venganza, sino por una idea fija: alcanzar un rendimiento que la carne por sí sola nunca podría dar.'
     },
@@ -27,11 +27,11 @@ const CHAR_DATA = {
       id: 'c-Artiom',
       name: 'Artiom',
       role: 'Militar que abandono su antiguo nombre',
-      bg: '/assets/img/chars/comic/lyra_bg.jpg',
-      png: '/assets/img/chars/comic/lyra.png',
-      thumb: '/assets/img/chars/comic/lyra_thumb.jpg',
-      desc: 'asdasdasdasdasdasdasdasd',
-      back: 'asdasdasdasdasdasdasdasdasdasdasd'
+      bg: '../assets/img/chars/comic/Artiom/Horizontal.jpg',
+      png: '../assets/img/chars/comic/Artiom/Vertical.png',
+      thumb: '../assets/img/chars/comic/Artiom/Icon.jpg',
+      desc: 'Sereno, carismático, aura de muerte que silencia habitaciones. Su voluntad: reinstalar la supremacía humana sin máquinas.',
+      back: 'Artiom nació en un entorno acomodado donde los autómatas empezaron a reemplazar a las personas que conocía. En la academia militar descubrió disciplina, propósito y una idea que lo marcó: la voluntad humana debía prevalecer. La guerra lo endureció y al volver a casa encontró un mundo cómodo que celebraba la eficiencia de las máquinas mientras olvidaba a quienes habían caído. Decidió dejar atrás su apellido y construir una nueva identidad basada en convicción y fuerza. Reunió a quienes compartían su visión y se sometió a un riguroso proceso de perfeccionamiento físico y mental, convirtiéndose en un símbolo de liderazgo. Para él, la humanidad debe mantenerse en pie, y su lema lo resume todo: “El hierro obedece. La carne decide.”'
     }
     // … agrega más
   ]
