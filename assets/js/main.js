@@ -131,7 +131,7 @@ document.querySelectorAll('a[href^="#"]').forEach(a=>{
 
   const layers = hero.querySelectorAll('.layer');
   // Aumentamos el rango de desplazamiento (más notorio)
-  const speeds = { bg: 0.1, back:-0.5,  mid: 0.5, front: -0.5, text: -0.5 };
+  const speeds = { bg: 0.1, back:-0.1,  mid: 0.1, front: -0.1, text: -0.1 };
 
   function applyParallax(){
     const scrollY = window.scrollY;
