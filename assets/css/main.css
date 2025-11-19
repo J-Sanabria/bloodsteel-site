@@ -21,7 +21,8 @@
 /* ======= Base ======= */
 *{ box-sizing:border-box }
 html,body{
-  margin:0; padding:0;
+  margin:0;
+   padding:0;
   background:var(--black-900); color:var(--white-100);
   font-family:"Quantico",system-ui,Segoe UI,Roboto,Ubuntu,Arial;
   line-height:1.5;
@@ -169,8 +170,22 @@ nav ul, .track, .socials, .foot-nav ul, .foot-socials ul{ list-style:none; margi
 
 /* Desktop: mismo look, solo consolidamos estilos */
 @media (min-width:768px){
+  html{
+    margin: 4vh;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
   .main-nav{ background-color:rgba(0,0,0,.88); }
   .nav-links{ max-width:720px; }
+}
+
+@media (min-width:1080px){
+  html{
+    margin: 10vh;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+  .main-nav{ background-color:rgba(0,0,0,.88); }
 }
 
 /* Respeta usuarios con reduce motion */

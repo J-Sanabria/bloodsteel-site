@@ -186,14 +186,6 @@ body{
   margin-block:3vh;        /* respiro arriba y abajo */
 }
 
-/* Ajuste específico móvil: un pelín más altas */
-@media (max-width:768px){
-  .vignette.is-tease{
-    flex:0 0 88vw;
-    height:62vh;
-  }
-}
-
 
 .vignette.is-tease.clickable:hover{
   transform:translateY(-2px);
