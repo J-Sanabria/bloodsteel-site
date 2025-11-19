@@ -59,13 +59,26 @@ body{
   background:linear-gradient(180deg,#4a4a52,#3a3a42);
 }
 
+/* Base: móvil (márgenes pequeños) */
 .vignette{
   position:relative;
   perspective:1000px;
-  /* Separación vertical normal (no 50vh) y centradas en X */
-  margin:30vh auto;
+  margin:4vh auto;        /* poco espacio en móviles */
 }
 
+/* Tablet / pantallas medias */
+@media (min-width:768px){
+  .vignette{
+    margin:10vh auto;
+  }
+}
+
+/* Desktop grande (1920x1080, etc.) */
+@media (min-width:1200px){
+  .vignette{
+    margin:30vh auto;     /* aquí sí usamos el margen grande */
+  }
+}
 /* Páginas normales del cómic (no las rutas) */
 .vignette:not(.is-tease){
   max-width:min(1200px, 100%); /* opcional: un poco más estrechas */
@@ -108,6 +121,7 @@ body{
 .vignette .text{
   z-index:4;
   pointer-events:none;
+
 }
 
 /* Aparición */
@@ -116,14 +130,31 @@ body{
 
 /* ---------- CARRUSEL DE RUTAS (3 caminos) ---------- */
 
+/* Base: móvil */
 .choice-strip{
   position:relative;
   z-index:1;
-  margin-top:30vh;
-  margin-bottom:30vh;
+  margin-top:6vh;
+  margin-bottom:6vh;
   width:80%;
   margin-left:auto;
-  margin-right:auto;    /* ← centra el carrusel */
+  margin-right:auto;
+}
+
+/* Tablet / medias */
+@media (min-width:768px){
+  .choice-strip{
+    margin-top:12vh;
+    margin-bottom:12vh;
+  }
+}
+
+/* Desktop grande */
+@media (min-width:1200px){
+  .choice-strip{
+    margin-top:30vh;
+    margin-bottom:30vh;
+  }
 }
 
 /* Track horizontal con scroll */

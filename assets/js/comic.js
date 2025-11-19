@@ -32,7 +32,12 @@
     // Ejemplo de páginas de cada ruta (sustituye/expande a tus ~22 páginas)
     a01:{bg:'../assets/img/comic/RutaVictor/Pagina 2/Viñeta 1/Vic_Viñeta01_Fondo.png',mid:'../assets/img/comic/RutaVictor/Pagina 2/Viñeta 1/Vic_Viñeta01_Mitad.png',front:'../assets/img/comic/RutaVictor/Pagina 2/Viñeta 1/Vic_Viñeta01_Frente.png',text:'../assets/img/comic/RutaVictor/Pagina 2/Viñeta 1/Vic_Viñeta01_Texto02.png'},
     a02:{bg:'../assets/img/comic/RutaVictor/Pagina 2/Viñeta 2/Fondo.png',mid:'',front:'../assets/img/comic/RutaVictor/Pagina 2/Viñeta 2/Frente.png',text:'../assets/img/comic/RutaVictor/Pagina 2/Viñeta 2/Texto.png'},
-    a03:{bg:'../assets/img/comic/pathA/03_bg.jpg',mid:'../assets/img/comic/pathA/03_mid.png',front:'../assets/img/comic/pathA/03_front.png',text:'../assets/img/comic/pathA/03_text.png'},
+    a03:{bg:'../assets/img/comic/RutaVictor/Pagina 2/Viñeta 3/Fondo.png',mid:'',front:'../assets/img/comic/RutaVictor/Pagina 2/Viñeta 3/Frente.png',text:'../assets/img/comic/RutaVictor/Pagina 2/Viñeta 3/Texto.png'},
+    a04:{bg:'../assets/img/comic/RutaVictor/Pagina 2/Viñeta 4/Fondo.png',mid:'',front:'../assets/img/comic/RutaVictor/Pagina 2/Viñeta 4/Frente.png',text:'../assets/img/comic/RutaVictor/Pagina 2/Viñeta 4/Texto.png'},
+    a05:{bg:'../assets/img/comic/RutaVictor/Pagina 2/Viñeta 5/Fondo.png',mid:'',front:'../assets/img/comic/RutaVictor/Pagina 2/Viñeta 5/Frente.png',text:'../assets/img/comic/RutaVictor/Pagina 2/Viñeta 5/Texto.png'},
+    a06:{bg:'',mid:'',front:'../assets/img/comic/RutaVictor/Pagina 2/Viñeta 6/Frente.png',text:'../assets/img/comic/RutaVictor/Pagina 2/Viñeta 6/Texto.png'},
+    a07:{bg:'',mid:'',front:'../assets/img/comic/RutaVictor/Pagina 2/Viñeta 7/Frente.png',text:'../assets/img/comic/RutaVictor/Pagina 2/Viñeta 7/Texto.png'},
+    a08:{bg:'../assets/img/comic/RutaVictor/Pagina 2/Viñeta 8/Fondo.png',mid:'../assets/img/comic/RutaVictor/Pagina 2/Viñeta 8/Mitad.png',front:'../assets/img/comic/RutaVictor/Pagina 2/Viñeta 8/Frente.png',text:'../assets/img/comic/RutaVictor/Pagina 2/Viñeta 8/Texto.png'},      
 
     b01:{bg:'../assets/img/comic/pathB/01_bg.jpg',mid:'../assets/img/comic/pathB/01_mid.png',front:'../assets/img/comic/pathB/01_front.png',text:'../assets/img/comic/pathB/01_text.png'},
     b02:{bg:'../assets/img/comic/pathB/02_bg.jpg',mid:'../assets/img/comic/pathB/02_mid.png',front:'../assets/img/comic/pathB/02_front.png',text:'../assets/img/comic/pathB/02_text.png'},
@@ -53,7 +58,7 @@
 
   // Define rutas (orden de viñetas que se renderean tras elegir)
   const ROUTES = {
-    A: ['a01','a02','a03','fin1','fin2'],
+    A: ['a01','a02','a03', 'a04', 'a05', 'a06', 'a07', 'a08', 'a09', 'a10', 'fin1','fin2'],
     B: ['b01','b02','b03','fin1','fin2'],
     C: ['c01','c02','c03','fin1','fin2'],
   };
@@ -181,7 +186,7 @@ async function renderChoices(){
 
   // ---------- 5) Fuelle/parallax con CSS variables ----------
   // (Se aplica a toda viñeta en viewport; cuanto más scrolleas, más se desplaza cada capa)
-  const speeds = { bg:0.2, mid:0.3, front:0.4, text:0.5 };
+  const speeds = { bg:0.2, mid:0.3, front:0.4, text: -0.8 };
   const MAX_SHIFT = 120;
 
   function applyParallax(){
