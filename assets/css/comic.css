@@ -63,7 +63,7 @@ body{
 .vignette{
   position:relative;
   perspective:1000px;
-  margin:4vh auto;        /* poco espacio en móviles */
+  margin:2vh auto;        /* poco espacio en móviles */
 }
 
 /* Tablet / pantallas medias */
@@ -134,9 +134,9 @@ body{
 .choice-strip{
   position:relative;
   z-index:1;
-  margin-top:6vh;
-  margin-bottom:6vh;
-  width:80%;
+  margin-top:2vh;
+  margin-bottom:2vh;
+  width:100%;
   margin-left:auto;
   margin-right:auto;
 }
