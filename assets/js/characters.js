@@ -2,9 +2,9 @@
 const CHAR_DATA = {
   game: [
     {
-      id: 'g-fornax',
-      name: 'Fornax',
-      role: 'Verdugo — Tanque',
+      id: 'g-Mortem',
+      name: 'Mortem',
+      role: 'Verdugo',
       bg: '../assets/img/chars/game/Mortem_BG.png',
       png: '../assets/img/chars/game/Mortem_BG.png',
       thumb: '../assets/img/chars/game/Mortem_BG.png',
@@ -15,13 +15,13 @@ const CHAR_DATA = {
   comic: [
     {
       id: 'c-Victor',
-      name: 'Victor',
-      role: 'Creador de los verdugos',
-      bg: '/assets/img/chars/comic/victor_bg.jpg',
-      png: '/assets/img/chars/comic/noir.png',
-      thumb: '/assets/img/chars/comic/noir_thumb.jpg',
-      desc: 'asdasdasdasdasdasdasd',
-      back: 'asdasdasdasdasdasdasd'
+      name: 'Victor ',
+      role: 'el que perfecciona la carne',
+      bg: '/assets/img/chars/comic/Victor/Horizontal.jpg',
+      png: '/assets/img/chars/comic/Victor/Vertical.png',
+      thumb: '/assets/img/chars/comic/Victor/Icon.jpg',
+      desc: 'Científico-cirujano brillante, físicamente imponente, indiferente al apellido Veyracor (lo considera un lastre). Su meta es superar los límites biológicos y negar a la muerte; no busca redención, busca resultados.',
+      back: 'Victor creció en un entorno médico estricto, formado desde niño entre quirófanos, instrumentos y estudio implacable. La enfermedad de su madre y la frialdad de su padre lo llevaron a obsesionarse con entender —y superar— las limitaciones del cuerpo humano. Combinó conocimientos de anatomía, química y mecánica con un entrenamiento físico riguroso, convirtiéndose en alguien tan preciso como peligroso. Con los años, perfeccionó sus propios métodos y mejoras, guiado no por prestigio ni venganza, sino por una idea fija: alcanzar un rendimiento que la carne por sí sola nunca podría dar.'
     },
     {
       id: 'c-Artiom',

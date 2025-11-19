@@ -20,17 +20,17 @@
               mid:'../assets/img/comic/RutaVictor/Pagina 2/Viñeta 1/Vic_Viñeta01_Mitad.png',
               front:'../assets/img/comic/RutaVictor/Pagina 2/Viñeta 1/Vic_Viñeta01_Frente.png',
               text:'../assets/img/comic/RutaVictor/Pagina 2/Viñeta 1/Vic_Viñeta01_Textos.png' },
-    teaseB: { bg:'../assets/img/comic/RutaArtiom/Viñeta1/Artiom_Viñeta01_Fondo.png',
-              mid:'../assets/img/comic/RutaArtiom/Viñeta1/Artiom_Viñeta01_Mitad.png',
-              front:'../assets/img/comic/RutaArtiom/Viñeta1/Artiom_Viñeta01_Frente.png',
-              text:'../assets/img/comic/RutaArtiom/Viñeta1/Artiom_Viñeta01_Texto.png' },
+    teaseB: { bg:'../assets/img/comic/RutaArtiom/Pagina 7/Viñeta 1/Artiom_Viñeta01_Fondo.png',
+              mid:'../assets/img/comic/RutaArtiom/Pagina 7/Viñeta 1/Artiom_Viñeta01_Mitad.png',
+              front:'../assets/img/comic/RutaArtiom/Pagina 7/Viñeta 1/Artiom_Viñeta01_Frente.png',
+              text:'../assets/img/comic/RutaArtiom/Pagina 7/Viñeta 1/Artiom_Viñeta01_Texto.png' },
     teaseC: { bg:'../assets/img/comic/RutaFaraday/Viñeta01/Faraday_Viñeta01_Fondo.png',
               mid:'',
               front:'../assets/img/comic/RutaFaraday/Viñeta01/Faraday_Viñeta01_Frente.png',
               text:'../assets/img/comic/RutaFaraday/Viñeta01/Faraday_Viñeta01_Texto.png' },
 
     // Ejemplo de páginas de cada ruta (sustituye/expande a tus ~22 páginas)
-    //Pagina 2//
+    //Pagina 2// Victor
     a01:{bg:'../assets/img/comic/RutaVictor/Pagina 2/Viñeta 1/Fondo.jpg',mid:'../assets/img/comic/RutaVictor/Pagina 2/Viñeta 1/Vic_Viñeta01_Mitad.png',front:'../assets/img/comic/RutaVictor/Pagina 2/Viñeta 1/Vic_Viñeta01_Frente.png',text:'../assets/img/comic/RutaVictor/Pagina 2/Viñeta 1/Vic_Viñeta01_Texto02.png'},
     a02:{bg:'../assets/img/comic/RutaVictor/Pagina 2/Viñeta 2/Fondo.jpg',mid:'',front:'../assets/img/comic/RutaVictor/Pagina 2/Viñeta 2/Frente.png',text:'../assets/img/comic/RutaVictor/Pagina 2/Viñeta 2/Texto.png'},
     a03:{bg:'../assets/img/comic/RutaVictor/Pagina 2/Viñeta 3/Fondo.jpg',mid:'',front:'../assets/img/comic/RutaVictor/Pagina 2/Viñeta 3/Frente.png',text:'../assets/img/comic/RutaVictor/Pagina 2/Viñeta 3/Texto.png'},
@@ -53,10 +53,43 @@
     a016:{bg:'../assets/img/comic/RutaVictor/Pagina 4/Viñeta 4/Fondo.jpg',mid:'',front:'../assets/img/comic/RutaVictor/Pagina 4/Viñeta 4/Frente.png',text:'../assets/img/comic/RutaVictor/Pagina 4/Viñeta 4/Texto.png'},  
     a017:{bg:'',mid:'',front:'../assets/img/comic/RutaVictor/Pagina 4/Viñeta 5/Frente.jpg',text:'../assets/img/comic/RutaVictor/Pagina 4/Viñeta 5/Texto.png'},  
 
+    //Pagina 5//
+    a018:{bg:'',mid:'',front:'../assets/img/comic/RutaVictor/Pagina 5/Viñeta 1/Frente.jpg',text:'../assets/img/comic/RutaVictor/Pagina 5/Viñeta 1/Texto.png'},    
+    a019:{bg:'../assets/img/comic/RutaVictor/Pagina 5/Viñeta 2/Fondo.jpg',mid:'../assets/img/comic/RutaVictor/Pagina 5/Viñeta 2/mitad.png',front:'../assets/img/comic/RutaVictor/Pagina 5/Viñeta 2/Frente.png',text:'../assets/img/comic/RutaVictor/Pagina 5/Viñeta 2/Texto.png'},      
+    a020:{bg:'../assets/img/comic/RutaVictor/Pagina 5/Viñeta 3/Fondo.jpg',mid:'',front:'../assets/img/comic/RutaVictor/Pagina 5/Viñeta 3/Frente.png',text:'../assets/img/comic/RutaVictor/Pagina 5/Viñeta 3/Texto.png'},
+    a021:{bg:'',mid:'',front:'../assets/img/comic/RutaVictor/Pagina 5/Viñeta 4/Frente.png',text:'../assets/img/comic/RutaVictor/Pagina 5/Viñeta 4/Texto.png'},            
+    a022:{bg:'../assets/img/comic/RutaVictor/Pagina 5/Viñeta 5/Fondo.png',mid:'',front:'../assets/img/comic/RutaVictor/Pagina 5/Viñeta 5/Frente.png',text:'../assets/img/comic/RutaVictor/Pagina 5/Viñeta 5/Texto.png'},            
+    a023:{bg:'',mid:'',front:'../assets/img/comic/RutaVictor/Pagina 5/Viñeta 6/Frente.png',text:'../assets/img/comic/RutaVictor/Pagina 5/Viñeta 6/Texto.png'},              
+    a024:{bg:'',mid:'',front:'../assets/img/comic/RutaVictor/Pagina 5/Viñeta 7/Frente.png',text:'../assets/img/comic/RutaVictor/Pagina 5/Viñeta 7/Texto.png'},                
 
-    b01:{bg:'../assets/img/comic/pathB/01_bg.jpg',mid:'../assets/img/comic/pathB/01_mid.png',front:'../assets/img/comic/pathB/01_front.png',text:'../assets/img/comic/pathB/01_text.png'},
-    b02:{bg:'../assets/img/comic/pathB/02_bg.jpg',mid:'../assets/img/comic/pathB/02_mid.png',front:'../assets/img/comic/pathB/02_front.png',text:'../assets/img/comic/pathB/02_text.png'},
-    b03:{bg:'../assets/img/comic/pathB/03_bg.jpg',mid:'../assets/img/comic/pathB/03_mid.png',front:'../assets/img/comic/pathB/03_front.png',text:'../assets/img/comic/pathB/03_text.png'},
+    //Pagina 6//
+    a025:{bg:'../assets/img/comic/RutaVictor/Pagina 6/Viñeta 1/Fondo.png',mid:'',front:'../assets/img/comic/RutaVictor/Pagina 6/Viñeta 1/Frente.png',text:'../assets/img/comic/RutaVictor/Pagina 6/Viñeta 1/Texto.png'},                
+    a026:{bg:'',mid:'',front:'../assets/img/comic/RutaVictor/Pagina 6/Viñeta 2/Frente.png',text:'../assets/img/comic/RutaVictor/Pagina 6/Viñeta 2/Texto.png'},
+    a027:{bg:'',mid:'',front:'../assets/img/comic/RutaVictor/Pagina 6/Viñeta 3/Frente.png',text:'../assets/img/comic/RutaVictor/Pagina 6/Viñeta 3/Texto.png'},                                    
+    a028:{bg:'',mid:'',front:'../assets/img/comic/RutaVictor/Pagina 6/Viñeta 4/Frente.png',text:'../assets/img/comic/RutaVictor/Pagina 6/Viñeta 4/Texto.png'},                
+    a029:{bg:'../assets/img/comic/RutaVictor/Pagina 6/Viñeta 5/Fondo.jpg',mid:'../assets/img/comic/RutaVictor/Pagina 6/Viñeta 5/Mitad.png',front:'../assets/img/comic/RutaVictor/Pagina 6/Viñeta 5/Frente.png',text:'../assets/img/comic/RutaVictor/Pagina 6/Viñeta 5/Texto.png'},                    
+    
+    //Pagina 7// Artiom
+    b01:{bg:'../assets/img/comic/RutaArtiom/Pagina 7/Viñeta 1/Artiom_Viñeta01_Fondo.png',mid:'../assets/img/comic/RutaArtiom/Pagina 7/Viñeta 1/Artiom_Viñeta01_Mitad.png',front:'../assets/img/comic/RutaArtiom/Pagina 7/Viñeta 1/Artiom_Viñeta01_Frente.png',text:'../assets/img/comic/RutaArtiom/Pagina 7/Viñeta 1/Texto02.png'},
+    b02:{bg:'../assets/img/comic/RutaArtiom/Pagina 7/Viñeta 2/Fondo.jpg',mid:'',front:'../assets/img/comic/RutaArtiom/Pagina 7/Viñeta 2/Frente.png',text:'../assets/img/comic/RutaArtiom/Pagina 7/Viñeta 2/Texto.png'},
+    b03:{bg:'../assets/img/comic/RutaArtiom/Pagina 7/Viñeta 3/Fondo.jpg',mid:'../assets/img/comic/RutaArtiom/Pagina 7/Viñeta 3/Mitad.png',front:'../assets/img/comic/RutaArtiom/Pagina 7/Viñeta 3/Frente.png',text:'../assets/img/comic/RutaArtiom/Pagina 7/Viñeta 3/Texto.png'},
+    b04:{bg:'../assets/img/comic/RutaArtiom/Pagina 7/Viñeta 4/Fondo.png',mid:'',front:'../assets/img/comic/RutaArtiom/Pagina 7/Viñeta 4/Frente.png',text:'../assets/img/comic/RutaArtiom/Pagina 7/Viñeta 4/Texto.png'},
+    b05:{bg:'../assets/img/comic/RutaArtiom/Pagina 7/Viñeta 5/Fondo.jpg',mid:'',front:'../assets/img/comic/RutaArtiom/Pagina 7/Viñeta 5/Frente.png',text:'../assets/img/comic/RutaArtiom/Pagina 7/Viñeta 5/Texto.png'},
+    
+    //Pagina 8//
+    b06:{bg:'../assets/img/comic/RutaVictor/Pagina 3/Viñeta 1/Fondo.jpg',mid:'',front:'../assets/img/comic/RutaArtiom/Pagina 8/Viñeta 1/Frente.png',text:'../assets/img/comic/RutaArtiom/Pagina 8/Viñeta 1/Texto.png'},
+    b07:{bg:'../assets/img/comic/RutaArtiom/Pagina 8/Viñeta 2/Fondo.jpg',mid:'../assets/img/comic/RutaArtiom/Pagina 8/Viñeta 2/Mitad.png',front:'../assets/img/comic/RutaArtiom/Pagina 8/Viñeta 2/Frente.png',text:'../assets/img/comic/RutaArtiom/Pagina 8/Viñeta 2/Texto.png'},
+    b08:{bg:'../assets/img/comic/RutaArtiom/Pagina 8/Viñeta 2/Fondo.jpg',mid:'../assets/img/comic/RutaArtiom/Pagina 8/Viñeta 3/Mitad.png',front:'../assets/img/comic/RutaArtiom/Pagina 8/Viñeta 2/Frente.png',text:'../assets/img/comic/RutaArtiom/Pagina 8/Viñeta 3/Texto.png'},  
+    b09:{bg:'',mid:'',front:'../assets/img/comic/RutaVictor/Pagina 3/Viñeta 4/Frente.png',text:'../assets/img/comic/RutaArtiom/Pagina 8/Viñeta 4/Texto.png'},  
+
+    //Pagina 9//
+    b010:{bg:'../assets/img/comic/RutaArtiom/Pagina 9/Viñeta 1/Fondo.jpg',mid:'',front:'',text:'../assets/img/comic/RutaArtiom/Pagina 9/Viñeta 1/Texto.png'}, 
+    b011:{bg:'',mid:'',front:'../assets/img/comic/RutaArtiom/Pagina 9/Viñeta 2/Frente.png',text:'../assets/img/comic/RutaArtiom/Pagina 9/Viñeta 2/Texto.png'},  
+    b012:{bg:'../assets/img/comic/RutaArtiom/Pagina 9/Viñeta 3/Fondo.jpg',mid:'../assets/img/comic/RutaArtiom/Pagina 9/Viñeta 3/Mitad.png',front:'../assets/img/comic/RutaArtiom/Pagina 9/Viñeta 3/Frente.png',text:'../assets/img/comic/RutaArtiom/Pagina 9/Viñeta 3/Texto.png'},   
+    b013:{bg:'../assets/img/comic/RutaArtiom/Pagina 9/Viñeta 4/Fondo.jpg',mid:'',front:'../assets/img/comic/RutaArtiom/Pagina 9/Viñeta 4/Frente.png',text:'../assets/img/comic/RutaArtiom/Pagina 9/Viñeta 4/Texto.png'},  
+    b014:{bg:'../assets/img/comic/RutaArtiom/Pagina 9/Viñeta 5/Fondo.jpg',mid:'../assets/img/comic/RutaArtiom/Pagina 9/Viñeta 5/Mitad.png',front:'../assets/img/comic/RutaArtiom/Pagina 9/Viñeta 5/Frente.png',text:'../assets/img/comic/RutaArtiom/Pagina 9/Viñeta 5/Texto.png'},  
+    b015:{bg:'../assets/img/comic/RutaArtiom/Pagina 9/Viñeta 6/Fondo.jpg',mid:'',front:'../assets/img/comic/RutaArtiom/Pagina 9/Viñeta 6/Frente.png',text:'../assets/img/comic/RutaArtiom/Pagina 9/Viñeta 6/Texto.png'},
+    b016:{bg:'../assets/img/comic/RutaArtiom/Pagina 9/Viñeta 7/Fondo.png',mid:'',front:'../assets/img/comic/RutaArtiom/Pagina 9/Viñeta 7/Frente.png',text:'../assets/img/comic/RutaArtiom/Pagina 9/Viñeta 7/Texto.png'}, 
 
     c01:{bg:'../assets/img/comic/pathC/01_bg.jpg',mid:'../assets/img/comic/pathC/01_mid.png',front:'../assets/img/comic/pathC/01_front.png',text:'../assets/img/comic/pathC/01_text.png'},
     c02:{bg:'../assets/img/comic/pathC/02_bg.jpg',mid:'../assets/img/comic/pathC/02_mid.png',front:'../assets/img/comic/pathC/02_front.png',text:'../assets/img/comic/pathC/02_text.png'},
@@ -73,8 +106,9 @@
 
   // Define rutas (orden de viñetas que se renderean tras elegir)
   const ROUTES = {
-    A: ['a01','a02','a03', 'a04', 'a05', 'a06', 'a07', 'a08', 'a09', 'a010', 'a011', 'a012', 'a013', 'a014', 'a015', 'a016', 'a017', 'fin1','fin2'],
-    B: ['b01','b02','b03','fin1','fin2'],
+    A: ['a01','a02','a03', 'a04', 'a05', 'a06', 'a07', 'a08', 'a09', 'a010', 'a011', 'a012', 'a013', 'a014', 'a015', 'a016', 'a017',
+        'a018','a019', 'a020', 'a021', 'a022', 'a023', 'a024', 'a025', 'a026', 'a027', 'a028','a029', 'fin1','fin2'],
+    B: ['b01','b02','b03', 'b04', 'b05', 'b06', 'b07', 'b08', 'b09', 'b010', 'b011', 'b012', 'b013', 'b014', 'b015', 'b016', 'fin1','fin2'],
     C: ['c01','c02','c03','fin1','fin2'],
   };
 
