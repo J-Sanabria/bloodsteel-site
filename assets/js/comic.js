@@ -2,6 +2,7 @@
   const $  = (s, r=document) => r.querySelector(s);
   const $$ = (s, r=document) => [...r.querySelectorAll(s)];
 
+
   // ---------- 1) Datos ----------
   // Define tus escenas una vez (id → 4 capas)
   const SCENES = {
@@ -31,7 +32,7 @@
               mid:'../assets/img/comic/RutaArtiom/Pagina 7/Viñeta 1/Artiom_Viñeta01_Mitad.png',
               front:'../assets/img/comic/RutaArtiom/Pagina 7/Viñeta 1/Artiom_Viñeta01_Frente.png',
               text:'../assets/img/comic/RutaArtiom/Pagina 7/Viñeta 1/Artiom_Viñeta01_Texto.png' },
-    teaseC: { bg:'../assets/img/comic/RutaFaraday/Viñeta01/Faraday_Viñeta01_Fondo.png',
+    teaseC: { bg:'../assets/img/comic/RutaFaraday/Viñeta01/Faraday_Viñeta01_Fondo.jpg',
               mid:'',
               front:'../assets/img/comic/RutaFaraday/Viñeta01/Faraday_Viñeta01_Frente.png',
               text:'../assets/img/comic/RutaFaraday/Viñeta01/Faraday_Viñeta01_Texto.png' },
@@ -77,7 +78,7 @@
     a029:{bg:'../assets/img/comic/RutaVictor/Pagina 6/Viñeta 5/Fondo.jpg',mid:'../assets/img/comic/RutaVictor/Pagina 6/Viñeta 5/Mitad.png',front:'../assets/img/comic/RutaVictor/Pagina 6/Viñeta 5/Frente.png',text:'../assets/img/comic/RutaVictor/Pagina 6/Viñeta 5/Texto.png'},                    
     
     //Pagina 7// Artiom
-    b01:{bg:'../assets/img/comic/RutaArtiom/Pagina 7/Viñeta 1/Artiom_Viñeta01_Fondo.png',mid:'../assets/img/comic/RutaArtiom/Pagina 7/Viñeta 1/Artiom_Viñeta01_Mitad.png',front:'../assets/img/comic/RutaArtiom/Pagina 7/Viñeta 1/Artiom_Viñeta01_Frente.png',text:'../assets/img/comic/RutaArtiom/Pagina 7/Viñeta 1/Texto02.png'},
+    b01:{bg:'../assets/img/comic/RutaArtiom/Pagina 7/Viñeta 1/Artiom_Viñeta01_Fondo.jpg',mid:'../assets/img/comic/RutaArtiom/Pagina 7/Viñeta 1/Artiom_Viñeta01_Mitad.png',front:'../assets/img/comic/RutaArtiom/Pagina 7/Viñeta 1/Artiom_Viñeta01_Frente.png',text:'../assets/img/comic/RutaArtiom/Pagina 7/Viñeta 1/Texto02.png'},
     b02:{bg:'../assets/img/comic/RutaArtiom/Pagina 7/Viñeta 2/Fondo.jpg',mid:'',front:'../assets/img/comic/RutaArtiom/Pagina 7/Viñeta 2/Frente.png',text:'../assets/img/comic/RutaArtiom/Pagina 7/Viñeta 2/Texto.png'},
     b03:{bg:'../assets/img/comic/RutaArtiom/Pagina 7/Viñeta 3/Fondo.jpg',mid:'../assets/img/comic/RutaArtiom/Pagina 7/Viñeta 3/Mitad.png',front:'../assets/img/comic/RutaArtiom/Pagina 7/Viñeta 3/Frente.png',text:'../assets/img/comic/RutaArtiom/Pagina 7/Viñeta 3/Texto.png'},
     b04:{bg:'../assets/img/comic/RutaArtiom/Pagina 7/Viñeta 4/Fondo.png',mid:'',front:'../assets/img/comic/RutaArtiom/Pagina 7/Viñeta 4/Frente.png',text:'../assets/img/comic/RutaArtiom/Pagina 7/Viñeta 4/Texto.png'},
@@ -174,7 +175,7 @@ const routesTopBtn = document.createElement('button');
 routesTopBtn.type = 'button';
 routesTopBtn.className = 'routes-top-btn';
 routesTopBtn.setAttribute('aria-label', 'Volver al inicio de las rutas');
-routesTopBtn.textContent = '↑ Rutas';
+routesTopBtn.textContent = '↑ Ir a Rutas';
 
 view.appendChild(routesTopBtn);
 
@@ -287,71 +288,63 @@ async function renderChoices(){
 
     card.appendChild(v);
     wrap.appendChild(card);
-
-const cards = $$('.choice-item', wrap);
-
-function updateCurrentSlide(){
-  if (!cards.length) return;
-
-  const viewportCenter = window.innerWidth / 2;
-  let best = null;
-  let bestDist = Infinity;
-
-  cards.forEach(card => {
-    const rect = card.getBoundingClientRect();
-    const cardCenter = rect.left + rect.width / 2;
-    const dist = Math.abs(cardCenter - viewportCenter);
-    if (dist < bestDist) {
-      bestDist = dist;
-      best = card;
-    }
-  });
-
-  cards.forEach(c => {
-    const isCurr = c === best;
-    c.classList.toggle('is-current', isCurr);
-    c.classList.toggle('is-not-current', !isCurr);
-  });
-}
-
-// scroll suave horizontal
-wrap.addEventListener('wheel', (e) => {
-  if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
-    wrap.scrollBy({
-      left: e.deltaY * 0.7,
-      behavior: 'smooth'
-    });
-    e.preventDefault();
-  }
-}, { passive:false });
-
-wrap.addEventListener('scroll', () => {
-  requestAnimationFrame(updateCurrentSlide);
-}, { passive:true });
-
-updateCurrentSlide();
-
-
   });
 
   choice.appendChild(wrap);
   root.appendChild(choice);
 
-// Scroll vertical → horizontal en el carrusel (suave)
-wrap.addEventListener('wheel', (e) => {
-  if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
-    wrap.scrollBy({
-      left: e.deltaY * 0.7,   // desplazamiento más suave
-      behavior: 'smooth'      // transición suave
+  // ===== Transición suave entre rutas (slide centrado) =====
+  const cards = $$('.choice-item', wrap);
+
+  function updateCurrentSlide(){
+    if (!cards.length) return;
+
+    const viewportCenter = window.innerWidth / 2;
+    let best = null;
+    let bestDist = Infinity;
+
+    cards.forEach(card => {
+      const rect = card.getBoundingClientRect();
+      const cardCenter = rect.left + rect.width / 2;
+      const dist = Math.abs(cardCenter - viewportCenter);
+      if (dist < bestDist) {
+        bestDist = dist;
+        best = card;
+      }
     });
-    e.preventDefault();
+
+    cards.forEach(c => {
+      const isCurr = (c === best);
+      c.classList.toggle('is-current', isCurr);
+      c.classList.toggle('is-not-current', !isCurr);
+    });
   }
-}, { passive:false });
+
+  // Actualiza al hacer scroll horizontal del carrusel
+  wrap.addEventListener('scroll', () => {
+    requestAnimationFrame(updateCurrentSlide);
+  }, { passive:true });
+
+  // Scroll vertical → horizontal SOLO para rueda (desktop)
+  wrap.addEventListener('wheel', (e) => {
+    if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+      wrap.scrollBy({
+        left: e.deltaY * 0.7,
+        behavior: 'smooth'
+      });
+      e.preventDefault();
+    }
+  }, { passive:false });
+
+  // Estado inicial
+  updateCurrentSlide();
+
   // Animación de entrada
   requestAnimationFrame(() => {
     $$('.vignette', choice).forEach(v => v.classList.add('is-active'));
   });
 }
+
 
 
 
@@ -374,67 +367,98 @@ wrap.addEventListener('wheel', (e) => {
       rr.appendChild(v);
       requestAnimationFrame(()=> v.classList.add('is-active'));
     }
+    
+  // Desplaza al primer panel de la ruta (suave para todos)
+  setTimeout(()=> {
+    const first = rr.querySelector('.vignette');
+    if (!first) return;
 
-    // Desplaza al primer panel de la ruta con un offset pequeño
-    setTimeout(()=>{
-      const first = rr.querySelector('.vignette');
-      if (first) first.scrollIntoView({behavior:'smooth', block:'start'});
-    }, 60);
-  }
+    // Posición absoluta de la viñeta en la página
+    const rect   = first.getBoundingClientRect();
+    const offset = window.pageYOffset || document.documentElement.scrollTop || 0;
+    const targetY = rect.top + offset - 16; // pequeño margen bajo el header
 
-  // ---------- 5) Fuelle/parallax con CSS variables ----------
-  // (Se aplica a toda viñeta en viewport; cuanto más scrolleas, más se desplaza cada capa)
-  const speeds = { bg:0.2, mid:0.3, front:0.4, text: -0.5 };
-  const MAX_SHIFT = 120;
+    const prefersReducedMotion =
+      window.matchMedia &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  function applyParallax(){
-    const vignettes = $$('.vignette');
-    const vh = window.innerHeight || 1;
-
-    vignettes.forEach(sec=>{
-      const rect = sec.getBoundingClientRect();
-      // progreso visible de -1 (arriba) a 1 (abajo). 0 = centro
-      const center = (rect.top + rect.height/2) - vh/2;
-      const norm = Math.max(-1, Math.min(1, -center / (vh/2))); // -1..1
-      const progress = (norm + 1)/2; // 0..1
-
-      sec.querySelectorAll('.layer').forEach(layer=>{
-        const k =
-          layer.classList.contains('bg')   ? 'bg'   :
-          layer.classList.contains('mid')  ? 'mid'  :
-          layer.classList.contains('front')? 'front': 'text';
-        const ty = norm * MAX_SHIFT * speeds[k];
-        layer.style.setProperty('--ty', `${ty}px`);
+    if (prefersReducedMotion) {
+      // Sin animación si el usuario lo pide en el SO
+      window.scrollTo(0, targetY);
+    } else {
+      // Scroll suave en todos los dispositivos (desktop y móvil)
+      window.scrollTo({
+        top: targetY,
+        behavior: 'smooth'
       });
+    }
+  }, 80);
+}
+
+// ---------- 5) Fuelle/parallax con CSS variables ----------
+const speeds = { bg:0.2, mid:0.3, front:0.4, text: -0.5 };
+const MAX_SHIFT = 120;
+
+function applyParallax(){
+  const vignettes = $$('.vignette');
+  const vh = window.innerHeight || 1;
+
+  vignettes.forEach(sec=>{
+    const rect = sec.getBoundingClientRect();
+    const center = (rect.top + rect.height/2) - vh/2;
+    const norm = Math.max(-1, Math.min(1, -center / (vh/2))); // -1..1
+
+    sec.querySelectorAll('.layer').forEach(layer=>{
+      const k =
+        layer.classList.contains('bg')   ? 'bg'   :
+        layer.classList.contains('mid')  ? 'mid'  :
+        layer.classList.contains('front')? 'front': 'text';
+      const ty = norm * MAX_SHIFT * speeds[k];
+      layer.style.setProperty('--ty', `${ty}px`);
     });
-  }
+  });
+}
 
-  // Tilt leve al mover el mouse (no pisa el translate, solo --rx/--ry)
-  let mx=0,my=0;
-  window.addEventListener('mousemove', (e)=>{
-    const cx = window.innerWidth/2, cy = window.innerHeight/2;
-    mx = (e.clientX - cx)/cx;  // -1..1
-    my = (e.clientY - cy)/cy;  // -1..1
-  }, {passive:true});
-
-  function tick(){
-    const rx = (my * -2).toFixed(3) + 'deg';
-    const ry = (mx *  2).toFixed(3) + 'deg';
-    $$('.vignette .layer').forEach(l=>{
-      l.style.setProperty('--rx', rx);
-      l.style.setProperty('--ry', ry);
-    });
-
+// Throttle para no recalcular mil veces por frame
+let parallaxScheduled = false;
+function scheduleParallax(){
+  if (parallaxScheduled) return;
+  parallaxScheduled = true;
+  requestAnimationFrame(() => {
     applyParallax();
-    requestAnimationFrame(tick);
-  }
+    parallaxScheduled = false;
+  });
+}
+
+// Scroll de la ventana (no del contenedor)
+window.addEventListener('scroll', scheduleParallax, { passive:true });
+window.addEventListener('resize', scheduleParallax, { passive:true });
+
+
+// Tilt leve con el mouse (solo PC, en móvil prácticamente no afecta)
+window.addEventListener('mousemove', (e)=>{
+  const cx = window.innerWidth/2, cy = window.innerHeight/2;
+  const mx = (e.clientX - cx)/cx;  // -1..1
+  const my = (e.clientY - cy)/cy;  // -1..1
+  const rx = (my * -2).toFixed(3) + 'deg';
+  const ry = (mx *  2).toFixed(3) + 'deg';
+
+  $$('.vignette .layer').forEach(l=>{
+    l.style.setProperty('--rx', rx);
+    l.style.setProperty('--ry', ry);
+  });
+}, {passive:true});
 
   // ---------- 6) Intersection (activar “fuelle”) ----------
-  const io = new IntersectionObserver(entries=>{
-    entries.forEach(en=>{
-      en.target.classList.toggle('is-active', en.isIntersecting);
-    });
-  }, {root: $('#comic-view'), threshold: 0.25});
+const io = new IntersectionObserver(entries => {
+  entries.forEach(en => {
+    en.target.classList.toggle('is-active', en.isIntersecting);
+  });
+}, {
+  root: null,          // << usamos el viewport, no #comic-view
+  threshold: 0.25
+});
+
 
   const mo = new MutationObserver(muts=>{
     muts.forEach(m=>{
@@ -450,9 +474,9 @@ wrap.addEventListener('wheel', (e) => {
   mo.observe($('#comic-view'), {childList:true, subtree:true});
 
   // ---------- 7) Boot ----------
-  (async function boot(){
-    await renderIntro();      // viñeta de introducción
-    await renderChoices();    // tira con 3 viñetas botón (A/B/C)
-    tick();                   // inicia loop del parallax tipo fuelle
-  })();
+(async function boot(){
+  await renderIntro();      // viñeta de introducción
+  await renderChoices();    // tira con 3 viñetas botón (A/B/C)
+  applyParallax();          // primer cálculo inicial
+})();
 })();

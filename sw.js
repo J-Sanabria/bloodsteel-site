@@ -1,7 +1,4 @@
-/* sw.js — BloodSteel precache + runtime cache */
-
-// ⚡ Subir este VERSION cuando hagas un update grande del sitio
-const VERSION  = 'v3-2025-11-22';
+const VERSION  = 'v4-2025-11-23';
 
 const PRECACHE = `bloodsteel-precache-${VERSION}`;
 const RUNTIME  = `bloodsteel-runtime-${VERSION}`;

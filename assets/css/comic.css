@@ -34,15 +34,14 @@ body{
   z-index:120;
 }
 
-/* ---------- Lienzo del cómic ---------- */
 #comic-view{
   position:relative;
-  overflow-x:hidden;
-  overflow-y:auto;
-  scroll-behavior:smooth;
+  overflow-x:hidden;     
   padding-top:var(--headerH);
   z-index:1;
+  min-height:100vh;     
 }
+
 
 /* Scrollbar (WebKit) */
 #comic-view::-webkit-scrollbar{ width:10px; }
@@ -96,8 +95,6 @@ body{
   background-position:center center;
   background-size:contain;
   background-color:transparent;
-  will-change:transform, opacity;
-  transition:opacity .35s ease-out;
   transform:translate3d(0,var(--ty),0) rotateX(var(--rx)) rotateY(var(--ry));
 }
 
@@ -119,9 +116,6 @@ body{
   pointer-events:none;
 }
 
-/* Aparición */
-.vignette.is-active .layer{ opacity:1; }
-.vignette:not(.is-active) .layer{ opacity:0; }
 
 /* ---------- CARRUSEL DE RUTAS (3 caminos) ---------- */
 
