@@ -1,7 +1,3 @@
-/* ============================
-   BloodSteel — COMIC (Overrides)
-   ============================ */
-
 :root{ --headerH: 64px; }
 
 /* ---------- Fondo + tipografía ---------- */
@@ -59,49 +55,49 @@ body{
   background:linear-gradient(180deg,#4a4a52,#3a3a42);
 }
 
+/* ---------- VIÑETAS PRINCIPALES ---------- */
+
 /* Base: móvil (márgenes pequeños) */
 .vignette{
   position:relative;
   perspective:1000px;
-  margin:2vh auto;        /* poco espacio en móviles */
+  margin:4vh auto;
 }
 
 /* Tablet / pantallas medias */
 @media (min-width:768px){
   .vignette{
-    margin:10vh auto;
+    margin:8vh auto;
   }
 }
 
 /* Desktop grande (1920x1080, etc.) */
 @media (min-width:1200px){
   .vignette{
-    margin:30vh auto;     /* aquí sí usamos el margen grande */
+    margin:14vh auto;   /* ya no 30vh, queda más compacto */
   }
 }
+
 /* Páginas normales del cómic (no las rutas) */
 .vignette:not(.is-tease){
-  max-width:min(1200px, 100%); /* opcional: un poco más estrechas */
-  /* sin bordes ni fondo extra */
+  max-width:min(1200px, 100%);
 }
 
 /* La PRIMERA viñeta pegada al header, pero con espacio hacia abajo */
 #comic-view .vignette:first-child{
   margin-top:0;
-  margin-bottom:6vh;              /* separación clara con el carrusel */
+  margin-bottom:6vh;
 }
-
 
 /* Capas: imagen completa y SIN fondo opaco */
 .vignette .layer{
   position:absolute; inset:0;
   background-repeat:no-repeat;
   background-position:center center;
-  background-size:contain;     /* muestra la imagen completa */
+  background-size:contain;
   background-color:transparent;
   will-change:transform, opacity;
   transition:opacity .35s ease-out;
-  /* NO tocamos esta línea: mantiene el parallax */
   transform:translate3d(0,var(--ty),0) rotateX(var(--rx)) rotateY(var(--ry));
 }
 
@@ -121,7 +117,6 @@ body{
 .vignette .text{
   z-index:4;
   pointer-events:none;
-
 }
 
 /* Aparición */
@@ -130,42 +125,41 @@ body{
 
 /* ---------- CARRUSEL DE RUTAS (3 caminos) ---------- */
 
-/* Base: móvil */
+/* Contenedor del bloque de rutas */
 .choice-strip{
   position:relative;
   z-index:1;
-  margin-top:2vh;
-  margin-bottom:2vh;
   width:100%;
-  margin-left:auto;
-  margin-right:auto;
+  max-width:1280px;
+  margin:8vh auto 10vh;   /* menos separación que antes */
+  padding:0 16px;
 }
 
-/* Tablet / medias */
-@media (min-width:768px){
-  .choice-strip{
-    margin-top:12vh;
-    margin-bottom:12vh;
-  }
+/* Encabezado del bloque de rutas */
+.choice-head{
+  text-align:center;
+  margin-bottom:24px;
 }
 
-/* Desktop grande */
-@media (min-width:1200px){
-  .choice-strip{
-    margin-top:30vh;
-    margin-bottom:30vh;
-  }
+.choice-heading{
+  font-size:clamp(1.3rem, 2.6vw, 1.8rem); /* un poco más grande en PC */
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--white-200);
 }
 
-/* Track horizontal con scroll */
+/* Track horizontal con scroll (carrusel) */
 .choice-grid{
   display:flex;
-  gap:24px;
-  padding:10px 16px 8px;   /* poco padding abajo -> la barra sube */
+  gap:clamp(24px,4vw,48px);
+  padding:10px 0 12px;
   overflow-x:auto;
+  overflow-y:hidden;              /* << evita slider vertical interno  */
   scroll-snap-type:x mandatory;
-  scroll-padding-left:16px;
+  scroll-padding-left:0;
   -webkit-overflow-scrolling:touch;
+  justify-content:flex-start;
+  align-items:flex-start;
 }
 
 /* Scrollbar del carrusel */
@@ -176,36 +170,68 @@ body{
   border-radius:8px;
 }
 
-
-/* Teasers: viñetas de ruta en carrusel */
-.vignette.is-tease{
-  flex:0 0 85vw;           /* un poco más estrechas */
-  height:60vh;             /* más bajas para que no se sientan gigantes */
-  scroll-snap-align:center;
-  transition:transform .25s ease, box-shadow .25s ease;
-  margin-block:3vh;        /* respiro arriba y abajo */
+/* Cada opción de ruta (“slide”) */
+.choice-item{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:8px;
+  flex:0 0 85vw;                 /* ancho grande en móvil/desktop */
+  max-width:1200px;
 }
 
 
-.vignette.is-tease.clickable:hover{
-  transform:translateY(-2px);
-  box-shadow:0 8px 30px rgba(0,0,0,.35);
+.choice-item .vignette.is-tease{
+  width:100%;
+  height:70vh;
+  margin-top:0;
+  scroll-snap-align:center;
+  transition:
+    transform .35s ease,
+    box-shadow .35s ease,
+    opacity .35s ease;
+}
+
+@media (max-width:768px){
+  .choice-item .vignette.is-tease{
+    height:64vh;          /* un poco menos alta en móvil */
+  }
+}
+
+/* Ruta centrada: leve zoom, sombra y 100% opacidad */
+.choice-item.is-current .vignette.is-tease{
+  transform:scale(1.03);
+  opacity:1;
+  box-shadow:0 18px 45px rgba(0,0,0,.55);
+}
+
+/* Rutas laterales: un pelín más pequeñas y algo apagadas */
+.choice-item.is-not-current .vignette.is-tease{
+  transform:scale(0.96);
+  opacity:.0;
+  box-shadow:none;
+}
+
+
+/* MUY IMPORTANTE:
+   Las rutas deben verse siempre, sin depender de is-active */
+.choice-strip .vignette.is-tease .layer{
+  opacity:1 !important;
 }
 
 /* Las rutas muestran SIEMPRE la viñeta completa (sin recorte) */
 .vignette.is-tease .layer{
-  background-size:contain;        /* << misma lógica que las demás viñetas */
+  background-size:contain;
   background-position:center;
 }
-/* Etiqueta (Camino A/B/C) centrada */
-.choice-label{
-  position:absolute;
-  left:50%; bottom:16px;
-  transform:translateX(-50%);
-  border:1px solid var(--gold); border-radius:12px;
-  padding:8px 16px;
-  background:rgba(0,0,0,.7);
-  color:var(--white-100); font-weight:700;
+
+/* Título arriba de cada teaser: Ruta Victor / Artiom / Faraday */
+.route-name{
+  font-size:clamp(1rem, 1.4vw, 1.2rem);  /* un poco más grande en PC */
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:.12em;
+  color:var(--gold);
 }
 
 /* ---------- Botones de decisión dentro de una viñeta ---------- */
@@ -227,11 +253,10 @@ body{
 }
 .decision button:focus-visible{ outline:2px solid var(--gold); outline-offset:2px; }
 
-/* ---------- Responsive ---------- */
+/* ---------- Responsive extra ---------- */
 @media (max-width:768px){
   .vignette{
     height:72vh;
-    margin-block:3vh;      /* separadas también en móvil */
   }
   .vignette.is-tease{
     height:65vh;
@@ -242,4 +267,49 @@ body{
 
 @media (min-width:769px){
   .vignette{ height:70vh; }
+}
+
+.routes-top-btn{
+  position:fixed;
+  right:24px;
+  bottom:28px;
+  z-index:250;
+  border-radius:999px;
+  border:2px solid #3a3a42;  /* borde más grueso */
+  background:rgba(0,0,0,.9);
+  padding:10px 20px;         /* más grande */
+  font-family:"Quantico", system-ui;
+  font-size:.95rem;          /* un pelín más grande */
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:var(--white-100);
+  cursor:pointer;
+  box-shadow:0 10px 30px rgba(0,0,0,.6);
+  backdrop-filter:blur(8px);
+  transition:
+    background .2s ease,
+    transform .2s ease,
+    border-color .2s ease,
+    box-shadow .2s ease,
+    opacity .2s ease;
+}
+
+.routes-top-btn:hover{
+  background:rgba(160,129,0,.25);
+  border-color:var(--gold);
+  transform:translateY(-2px) scale(1.03);
+  box-shadow:0 14px 40px rgba(0,0,0,.7);
+}
+
+.routes-top-btn:active{
+  transform:translateY(0) scale(1.0);
+}
+
+@media (min-width:1200px){
+  .routes-top-btn{
+    right:20px;
+    bottom:40px;
+    padding:16px 32px;
+    font-size:50px;
+  }
 }

@@ -1,22 +1,25 @@
 /* sw.js — BloodSteel precache + runtime cache */
-const PRECACHE = 'bloodsteel-precache-v1';
-const RUNTIME  = 'bloodsteel-runtime-v1';
 
-const SCOPE = self.registration.scope; // e.g. http://127.0.0.1:5500/
+// ⚡ Subir este VERSION cuando hagas un update grande del sitio
+const VERSION  = 'v3-2025-11-22';
+
+const PRECACHE = `bloodsteel-precache-${VERSION}`;
+const RUNTIME  = `bloodsteel-runtime-${VERSION}`;
+
+const SCOPE = self.registration.scope; // e.g. https://tuuser.github.io/bloodsteel-site/
 const U = (p) => new URL(p, SCOPE).toString();
 
 /* Manifiesto base */
 const PRECACHE_URLS = [
-  '/bloodsteel-site/index.html',
-  '/bloodsteel-site/pages/comic.html',
-  '/bloodsteel-site/pages/historia.html',
-  '/bloodsteel-site/pages/personajes.html',
-  '/bloodsteel-site/assets/css/main.css',
-  '/bloodsteel-site/assets/css/comic.css',
-  '/bloodsteel-site/assets/js/main.js',
-  '/bloodsteel-site/assets/js/comic.js',
-  '/bloodsteel-site/assets/img/Empresa/LogoEmpresa.png',
-  // Fuentes externas (se almacenan como opaque, está bien para dev)
+  U('/bloodsteel-site/index.html'),
+  U('/bloodsteel-site/pages/comic.html'),
+  U('/bloodsteel-site/pages/historia.html'),
+  U('/bloodsteel-site/pages/personajes.html'),
+  U('/bloodsteel-site/assets/css/main.css'),
+  U('/bloodsteel-site/assets/css/comic.css'),
+  U('/bloodsteel-site/assets/js/main.js'),
+  U('/bloodsteel-site/assets/js/comic.js'),
+  U('/bloodsteel-site/assets/img/Empresa/LogoEmpresa.png'),
   'https://fonts.googleapis.com/css2?family=Quantico:wght@400;700&display=swap'
 ];
 
@@ -33,9 +36,11 @@ self.addEventListener('install', (event) => {
 self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys().then((keys) =>
-      Promise.all(keys
-        .filter((k) => ![PRECACHE, RUNTIME].includes(k))
-        .map((k) => caches.delete(k)))
+      Promise.all(
+        keys
+          .filter((k) => ![PRECACHE, RUNTIME].includes(k))
+          .map((k) => caches.delete(k))
+      )
     ).then(() => self.clients.claim())
   );
 });
@@ -45,33 +50,35 @@ self.addEventListener('fetch', (event) => {
   const req = event.request;
   if (req.method !== 'GET') return;
 
-// HTML => network-first
-if (req.headers.get('accept')?.includes('text/html')) {
+  const accept = req.headers.get('accept') || '';
+  const isHTML = accept.includes('text/html');
+
+  // HTML => network-first
+  if (isHTML) {
+    event.respondWith(
+      fetch(req)
+        .then((res) => {
+          const copy = res.clone();
+          caches.open(RUNTIME).then(c => c.put(req, copy));
+          return res;
+        })
+        .catch(() => caches.match(req))
+    );
+    return;
+  }
+
+  // CSS / JS / IMG => stale-while-revalidate
   event.respondWith(
-    fetch(req)
-      .then((res) => {
-        const copy = res.clone();   // clone ANTES de usar response
+    caches.match(req).then(cached => {
+      const fetchPromise = fetch(req).then(res => {
+        const copy = res.clone();
         caches.open(RUNTIME).then(c => c.put(req, copy));
-        return res;                 // devolvemos el original
-      })
-      .catch(() => caches.match(req))
+        return res;
+      }).catch(() => cached);
+
+      return cached || fetchPromise;
+    })
   );
-  return;
-}
-
-// CSS / JS / IMG => cache-first
-event.respondWith(
-  caches.match(req).then(hit => {
-    if (hit) return hit;
-
-    return fetch(req).then(res => {
-      const copy = res.clone();
-      caches.open(RUNTIME).then(c => c.put(req, copy));
-      return res;
-    });
-  })
-);
-
 });
 
 /* Warm-up (desde main.js) */
@@ -80,9 +87,11 @@ self.addEventListener('message', (event) => {
   if (data.type === 'WARM' && Array.isArray(data.urls)) {
     event.waitUntil(
       caches.open(RUNTIME).then((cache) =>
-        Promise.all([...new Set(data.urls)].map((u) =>
-          cache.match(u).then((m) => m || cache.add(u).catch(()=>null))
-        ))
+        Promise.all(
+          [...new Set(data.urls)].map((u) =>
+            cache.match(u).then((m) => m || cache.add(u).catch(()=>null))
+          )
+        )
       )
     );
   }

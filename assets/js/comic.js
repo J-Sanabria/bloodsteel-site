@@ -1,7 +1,3 @@
-/* ===============================
-   BloodSteel — Comic Engine (fuelle + rutas)
-   =============================== */
-
 (() => {
   const $  = (s, r=document) => r.querySelector(s);
   const $$ = (s, r=document) => [...r.querySelectorAll(s)];
@@ -31,7 +27,7 @@
               mid:'../assets/img/comic/RutaVictor/Pagina 2/Viñeta 1/Vic_Viñeta01_Mitad.png',
               front:'../assets/img/comic/RutaVictor/Pagina 2/Viñeta 1/Vic_Viñeta01_Frente.png',
               text:'../assets/img/comic/RutaVictor/Pagina 2/Viñeta 1/Vic_Viñeta01_Textos.png' },
-    teaseB: { bg:'../assets/img/comic/RutaArtiom/Pagina 7/Viñeta 1/Artiom_Viñeta01_Fondo.png',
+    teaseB: { bg:'../assets/img/comic/RutaArtiom/Pagina 7/Viñeta 1/Artiom_Viñeta01_Fondo.jpg',
               mid:'../assets/img/comic/RutaArtiom/Pagina 7/Viñeta 1/Artiom_Viñeta01_Mitad.png',
               front:'../assets/img/comic/RutaArtiom/Pagina 7/Viñeta 1/Artiom_Viñeta01_Frente.png',
               text:'../assets/img/comic/RutaArtiom/Pagina 7/Viñeta 1/Artiom_Viñeta01_Texto.png' },
@@ -166,12 +162,42 @@
     return sec;
   }
 
-  // ---------- 3) Estructura base ----------
-  const view   = $('#comic-view');            // contenedor global (scroll)
-  const root   = document.createElement('div'); root.id='comic-root';
-  const choice = document.createElement('section'); choice.className='choice-strip';
+ // ---------- 3) Estructura base ----------
+const view   = $('#comic-view');            // contenedor global (scroll)
+const root   = document.createElement('div'); root.id='comic-root';
+const choice = document.createElement('section'); choice.className='choice-strip';
 
-  view.appendChild(root);
+view.appendChild(root);
+
+// ---- Botón flotante para volver al inicio de las rutas ----
+const routesTopBtn = document.createElement('button');
+routesTopBtn.type = 'button';
+routesTopBtn.className = 'routes-top-btn';
+routesTopBtn.setAttribute('aria-label', 'Volver al inicio de las rutas');
+routesTopBtn.textContent = '↑ Rutas';
+
+view.appendChild(routesTopBtn);
+
+// Al hacer clic, desplazamos hasta el bloque de rutas
+routesTopBtn.addEventListener('click', () => {
+  if (choice && choice.isConnected) {
+    // Hace scroll hasta el bloque de rutas dentro de su contenedor scrollable
+    choice.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+    // pequeño ajuste por el header, opcional
+    if (view && typeof view.scrollBy === 'function') {
+      view.scrollBy({ top: -24, behavior: 'smooth' });
+    }
+  } else {
+    // Fallback: subir arriba del todo
+    if (view && typeof view.scrollTo === 'function') {
+      view.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }
+});
+
 
 
  async function renderIntro() {
@@ -208,54 +234,125 @@
 
 async function renderChoices(){
   choice.innerHTML = '';
+
+  // ---- Encabezado del bloque de rutas ----
+  const head = document.createElement('div');
+  head.className = 'choice-head';
+
+  const title = document.createElement('h2');
+  title.className = 'choice-heading';
+  title.textContent = 'Selecciona la ruta que quieres seguir';
+  head.appendChild(title);
+
+  choice.appendChild(head);
+
+  // ---- Carrusel horizontal ----
   const wrap = document.createElement('div');
   wrap.className = 'choice-grid';
 
   const items = [
-    {id:'A', s:SCENES.teaseA},
-    {id:'B', s:SCENES.teaseB},
-    {id:'C', s:SCENES.teaseC},
+    { id:'A', s:SCENES.teaseA, label:'Ruta Victor' },
+    { id:'B', s:SCENES.teaseB, label:'Ruta Artiom' },
+    { id:'C', s:SCENES.teaseC, label:'Ruta Faraday' },
   ];
 
-  // Precarga miniaturas
-  await preload(items.flatMap(it => [it.s.bg,it.s.mid,it.s.front,it.s.text]));
+  // Precargar miniaturas
+  await preload(items.flatMap(it => [it.s.bg, it.s.mid, it.s.front, it.s.text]));
 
-  items.forEach(it=>{
+  items.forEach(it => {
+    // Contenedor de cada opción
+    const card = document.createElement('article');
+    card.className = 'choice-item';
+
+    // Título de la ruta arriba
+    const rTitle = document.createElement('h3');
+    rTitle.className = 'route-name';
+    rTitle.textContent = it.label;
+    card.appendChild(rTitle);
+
+    // Viñeta teaser clicable
     const v = sceneToVignette(`tease-${it.id}`, it.s, {size:'tease'});
     v.setAttribute('role','button');
     v.setAttribute('tabindex','0');
     v.classList.add('clickable');
 
-
-
     const go = () => startRoute(it.id);
     v.addEventListener('click', go);
-    v.addEventListener('keydown', (e)=>{
-      if(e.key==='Enter'||e.key===' '){
+    v.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
         e.preventDefault();
         go();
       }
     });
 
-    wrap.appendChild(v);
+    card.appendChild(v);
+    wrap.appendChild(card);
+
+const cards = $$('.choice-item', wrap);
+
+function updateCurrentSlide(){
+  if (!cards.length) return;
+
+  const viewportCenter = window.innerWidth / 2;
+  let best = null;
+  let bestDist = Infinity;
+
+  cards.forEach(card => {
+    const rect = card.getBoundingClientRect();
+    const cardCenter = rect.left + rect.width / 2;
+    const dist = Math.abs(cardCenter - viewportCenter);
+    if (dist < bestDist) {
+      bestDist = dist;
+      best = card;
+    }
+  });
+
+  cards.forEach(c => {
+    const isCurr = c === best;
+    c.classList.toggle('is-current', isCurr);
+    c.classList.toggle('is-not-current', !isCurr);
+  });
+}
+
+// scroll suave horizontal
+wrap.addEventListener('wheel', (e) => {
+  if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+    wrap.scrollBy({
+      left: e.deltaY * 0.7,
+      behavior: 'smooth'
+    });
+    e.preventDefault();
+  }
+}, { passive:false });
+
+wrap.addEventListener('scroll', () => {
+  requestAnimationFrame(updateCurrentSlide);
+}, { passive:true });
+
+updateCurrentSlide();
+
+
   });
 
   choice.appendChild(wrap);
   root.appendChild(choice);
 
-  // ---- Scroll vertical → horizontal en el carrusel ----
-  wrap.addEventListener('wheel', (e)=>{
-    if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
-      wrap.scrollBy({ left: e.deltaY, behavior:'auto' });
-      e.preventDefault();
-    }
-  }, { passive:false });
-
-  // anima entrada
-  requestAnimationFrame(()=>{
-    $$('.vignette', choice).forEach(v=>v.classList.add('is-active'));
+// Scroll vertical → horizontal en el carrusel (suave)
+wrap.addEventListener('wheel', (e) => {
+  if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+    wrap.scrollBy({
+      left: e.deltaY * 0.7,   // desplazamiento más suave
+      behavior: 'smooth'      // transición suave
+    });
+    e.preventDefault();
+  }
+}, { passive:false });
+  // Animación de entrada
+  requestAnimationFrame(() => {
+    $$('.vignette', choice).forEach(v => v.classList.add('is-active'));
   });
 }
+
 
 
   // ---------- 4) Arranque de ruta ----------
