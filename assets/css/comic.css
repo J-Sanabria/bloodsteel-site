@@ -1,4 +1,9 @@
-:root{ --headerH: 64px; }
+:root{
+  --headerH: 64px;
+  --ty: 0px;
+  --rx: 0deg;
+  --ry: 0deg;
+}
 
 /* ---------- Fondo + tipografía ---------- */
 body{
@@ -66,14 +71,14 @@ body{
 /* Tablet / pantallas medias */
 @media (min-width:768px){
   .vignette{
-    margin:8vh auto;
+    margin:14vh auto;
   }
 }
 
 /* Desktop grande (1920x1080, etc.) */
 @media (min-width:1200px){
   .vignette{
-    margin:14vh auto;   /* ya no 30vh, queda más compacto */
+    margin:30vh auto;   /* ya no 30vh, queda más compacto */
   }
 }
 
@@ -95,22 +100,38 @@ body{
   background-position:center center;
   background-size:contain;
   background-color:transparent;
-  transform:translate3d(0,var(--ty),0) rotateX(var(--rx)) rotateY(var(--ry));
+  transform:
+    translate3d(0, var(--ty, 0px), 0)
+    rotateX(var(--rx, 0deg))
+    rotateY(var(--ry, 0deg));
 }
 
 /* Profundidad suave (sin cortar) */
 .vignette .bg{
   z-index:1;
-  transform:translate3d(0,var(--ty),0) rotateX(var(--rx)) rotateY(var(--ry)) scale(1.1);
+  transform:
+    translate3d(0, var(--ty, 0px), 0)
+    rotateX(var(--rx, 0deg))
+    rotateY(var(--ry, 0deg))
+    scale(1.1);
 }
 .vignette .mid{
   z-index:2;
-  transform:translate3d(0,var(--ty),0) rotateX(var(--rx)) rotateY(var(--ry)) scale(1.1);
+  transform:
+    translate3d(0, var(--ty, 0px), 0)
+    rotateX(var(--rx, 0deg))
+    rotateY(var(--ry, 0deg))
+    scale(1.1);
 }
 .vignette .front{
   z-index:3;
-  transform:translate3d(0,var(--ty),0) rotateX(var(--rx)) rotateY(var(--ry)) scale(1.2);
+  transform:
+    translate3d(0, var(--ty, 0px), 0)
+    rotateX(var(--rx, 0deg))
+    rotateY(var(--ry, 0deg))
+    scale(1.2);
 }
+
 .vignette .text{
   z-index:4;
   pointer-events:none;
@@ -179,6 +200,7 @@ body{
   width:100%;
   height:70vh;
   margin-top:0;
+    transform-origin:center bottom;
   scroll-snap-align:center;
   transition:
     transform .35s ease,
@@ -226,6 +248,17 @@ body{
   text-transform:uppercase;
   letter-spacing:.12em;
   color:var(--gold);
+    margin-bottom:60px;
+  position:relative;
+  z-index:5;
+
+}
+
+@media (max-width:768px){
+  .route-name{
+        margin-bottom:0px;
+
+  }
 }
 
 /* ---------- Botones de decisión dentro de una viñeta ---------- */

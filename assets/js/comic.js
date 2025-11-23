@@ -435,6 +435,8 @@ window.addEventListener('scroll', scheduleParallax, { passive:true });
 window.addEventListener('resize', scheduleParallax, { passive:true });
 
 
+
+
 // Tilt leve con el mouse (solo PC, en móvil prácticamente no afecta)
 window.addEventListener('mousemove', (e)=>{
   const cx = window.innerWidth/2, cy = window.innerHeight/2;
