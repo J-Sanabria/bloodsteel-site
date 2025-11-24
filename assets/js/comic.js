@@ -356,8 +356,11 @@ async function renderChoices(){
   // ---------- 4) Arranque de ruta ----------
 async function startRoute(routeId){
   const loader = $('#route-loading');
+    const html = document.documentElement;
+  const body = document.body;
+  
   if (loader) loader.classList.add('is-visible'); 
-    if (html)  html.classList.add('route-loading-active');
+  if (html)  html.classList.add('route-loading-active');
   if (body)  body.classList.add('route-loading-active'); // ← mostrar loader
 
   // Limpia lo que hay debajo de la intro + choices
