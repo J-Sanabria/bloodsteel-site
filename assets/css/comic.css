@@ -340,3 +340,30 @@ body{
     font-size:50px;
   }
 }
+
+#route-loading{
+  position:fixed;
+  inset:0;
+  display:none;                 /* se activa con .is-visible */
+  align-items:center;
+  justify-content:center;
+  background:rgba(0,0,0,.75);
+  z-index:220;                  /* por encima de viñetas, por debajo del header si quieres */
+}
+
+#route-loading.is-visible{
+  display:flex;
+}
+
+#route-loading .spinner{
+  width:64px;
+  height:64px;
+  border-radius:50%;
+  border:4px solid rgba(255,255,255,.15);
+  border-top-color:var(--gold);
+  animation:route-spin .8s linear infinite;
+}
+
+@keyframes route-spin{
+  to{ transform:rotate(360deg); }
+}

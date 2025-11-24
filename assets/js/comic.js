@@ -170,6 +170,11 @@ const choice = document.createElement('section'); choice.className='choice-strip
 
 view.appendChild(root);
 
+const routeLoader = document.createElement('div');
+routeLoader.id = 'route-loading';
+routeLoader.innerHTML = '<div class="spinner"></div>';
+view.appendChild(routeLoader);
+
 // ---- Botón flotante para volver al inicio de las rutas ----
 const routesTopBtn = document.createElement('button');
 routesTopBtn.type = 'button';
@@ -349,16 +354,21 @@ async function renderChoices(){
 
 
   // ---------- 4) Arranque de ruta ----------
-  async function startRoute(routeId){
-    // Limpia lo que hay debajo de la intro + choices
-    const existing = $('#route-root');
-    if (existing) existing.remove();
+async function startRoute(routeId){
+  const loader = $('#route-loading');
+  if (loader) loader.classList.add('is-visible');  // ← mostrar loader
 
-    const rr = document.createElement('div');
-    rr.id = 'route-root';
-    root.appendChild(rr);
+  // Limpia lo que hay debajo de la intro + choices
+  const existing = $('#route-root');
+  if (existing) existing.remove();
 
-    const order = ROUTES[routeId] || [];
+  const rr = document.createElement('div');
+  rr.id = 'route-root';
+  root.appendChild(rr);
+
+  const order = ROUTES[routeId] || [];
+
+  try {
     // Renderiza TODAS (si son muchas y pesadas, podríamos virtualizar después)
     for (const sid of order){
       const d = SCENES[sid];
@@ -367,32 +377,36 @@ async function renderChoices(){
       rr.appendChild(v);
       requestAnimationFrame(()=> v.classList.add('is-active'));
     }
-    
-  // Desplaza al primer panel de la ruta (suave para todos)
-  setTimeout(()=> {
-    const first = rr.querySelector('.vignette');
-    if (!first) return;
 
-    // Posición absoluta de la viñeta en la página
-    const rect   = first.getBoundingClientRect();
-    const offset = window.pageYOffset || document.documentElement.scrollTop || 0;
-    const targetY = rect.top + offset - 16; // pequeño margen bajo el header
+    // Recalcular parallax una vez montadas
+    applyParallax();
 
-    const prefersReducedMotion =
-      window.matchMedia &&
-      window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    // Desplaza al primer panel de la ruta (suave para todos)
+    setTimeout(()=> {
+      const first = rr.querySelector('.vignette');
+      if (!first) return;
 
-    if (prefersReducedMotion) {
-      // Sin animación si el usuario lo pide en el SO
-      window.scrollTo(0, targetY);
-    } else {
-      // Scroll suave en todos los dispositivos (desktop y móvil)
-      window.scrollTo({
-        top: targetY,
-        behavior: 'smooth'
-      });
-    }
-  }, 80);
+      const rect   = first.getBoundingClientRect();
+      const offset = window.pageYOffset || document.documentElement.scrollTop || 0;
+      const targetY = rect.top + offset - 16; // pequeño margen bajo el header
+
+      const prefersReducedMotion =
+        window.matchMedia &&
+        window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      if (prefersReducedMotion) {
+        window.scrollTo(0, targetY);
+      } else {
+        window.scrollTo({
+          top: targetY,
+          behavior: 'smooth'
+        });
+      }
+    }, 80);
+  } finally {
+    // Siempre ocultar loader aunque falle algo
+    if (loader) loader.classList.remove('is-visible');
+  }
 }
 
 // ---------- 5) Fuelle/parallax con CSS variables ----------
@@ -433,8 +447,6 @@ function scheduleParallax(){
 // Scroll de la ventana (no del contenedor)
 window.addEventListener('scroll', scheduleParallax, { passive:true });
 window.addEventListener('resize', scheduleParallax, { passive:true });
-
-
 
 
 // Tilt leve con el mouse (solo PC, en móvil prácticamente no afecta)
