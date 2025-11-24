@@ -1,4 +1,4 @@
-const VERSION  = 'v6-2025-11-23';
+const VERSION  = 'v7-2025-11-23';
 
 const PRECACHE = `bloodsteel-precache-${VERSION}`;
 const RUNTIME  = `bloodsteel-runtime-${VERSION}`;

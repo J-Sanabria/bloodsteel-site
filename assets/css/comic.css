@@ -5,6 +5,13 @@
   --ry: 0deg;
 }
 
+html.route-loading-active,
+body.route-loading-active{
+  overflow: hidden;
+  overscroll-behavior: none;
+  height: 100%;
+}
+
 /* ---------- Fondo + tipografía ---------- */
 body{
   background:#0A0A0B;

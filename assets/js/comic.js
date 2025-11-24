@@ -356,7 +356,9 @@ async function renderChoices(){
   // ---------- 4) Arranque de ruta ----------
 async function startRoute(routeId){
   const loader = $('#route-loading');
-  if (loader) loader.classList.add('is-visible');  // ← mostrar loader
+  if (loader) loader.classList.add('is-visible'); 
+    if (html)  html.classList.add('route-loading-active');
+  if (body)  body.classList.add('route-loading-active'); // ← mostrar loader
 
   // Limpia lo que hay debajo de la intro + choices
   const existing = $('#route-root');
@@ -406,6 +408,8 @@ async function startRoute(routeId){
   } finally {
     // Siempre ocultar loader aunque falle algo
     if (loader) loader.classList.remove('is-visible');
+        if (html)  html.classList.remove('route-loading-active');
+    if (body)  body.classList.remove('route-loading-active');
   }
 }
 
