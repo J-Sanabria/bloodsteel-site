@@ -32,10 +32,10 @@
               mid:'../assets/img/comic/RutaArtiom/Pagina 7/Viñeta 1/Artiom_Viñeta01_Mitad.png',
               front:'../assets/img/comic/RutaArtiom/Pagina 7/Viñeta 1/Artiom_Viñeta01_Frente.png',
               text:'../assets/img/comic/RutaArtiom/Pagina 7/Viñeta 1/Artiom_Viñeta01_Texto.png' },
-    teaseC: { bg:'../assets/img/comic/RutaFaraday/Viñeta01/Faraday_Viñeta01_Fondo.jpg',
+    teaseC: { bg:'../assets/img/comic/RutaFaraday/Pagina 12/Viñeta 1/Faraday_Viñeta01_Fondo.jpg',
               mid:'',
-              front:'../assets/img/comic/RutaFaraday/Viñeta01/Faraday_Viñeta01_Frente.png',
-              text:'../assets/img/comic/RutaFaraday/Viñeta01/Faraday_Viñeta01_Texto.png' },
+              front:'../assets/img/comic/RutaFaraday/Pagina 12/Viñeta 1/Faraday_Viñeta01_Frente.png',
+              text:'../assets/img/comic/RutaFaraday/Pagina 12/Viñeta 1/Faraday_Viñeta01_Texto.png' },
 
     // Ejemplo de páginas de cada ruta (sustituye/expande a tus ~22 páginas)
     //Pagina 2// Victor
@@ -116,7 +116,45 @@
     b028:{bg:'',mid:'',front:'../assets/img/comic/RutaVictor/Pagina 6/Viñeta 4/Frente.png',text:'../assets/img/comic/RutaArtiom/Pagina 11/Viñeta 3/Texto.png'},
     b029:{bg:'',mid:'',front:'../assets/img/comic/RutaArtiom/Pagina 11/Viñeta 4/Frente.png',text:'../assets/img/comic/RutaArtiom/Pagina 11/Viñeta 4/Texto.png'},
 
-    c01:{bg:'',mid:'',front:'',text:'../assets/img/Desesperacion.png'},
+    //Pagina 12//
+    c01:{bg:'../assets/img/comic/RutaFaraday/Pagina 12/Viñeta 1/Faraday_Viñeta01_Fondo.jpg',mid:'',front:'../assets/img/comic/RutaFaraday/Pagina 12/Viñeta 1/Faraday_Viñeta01_Frente.png',text:'../assets/img/comic/RutaFaraday/Pagina 12/Viñeta 1/Texto02.png'},
+    c02:{bg:'../assets/img/comic/RutaFaraday/Pagina 12/Viñeta 2/Fondo.jpg',mid:'',front:'../assets/img/comic/RutaFaraday/Pagina 12/Viñeta 2/Frente.png',text:'../assets/img/comic/RutaFaraday/Pagina 12/Viñeta 2/Texto.png'}, 
+    c03:{bg:'../assets/img/comic/RutaFaraday/Pagina 12/Viñeta 3/Fondo.jpg',mid:'',front:'../assets/img/comic/RutaFaraday/Pagina 12/Viñeta 3/Frente.png',text:'../assets/img/comic/RutaFaraday/Pagina 12/Viñeta 3/Texto.png'},   
+    c04:{bg:'../assets/img/comic/RutaFaraday/Pagina 12/Viñeta 1/Faraday_Viñeta01_Fondo.jpg',mid:'',front:'../assets/img/comic/RutaFaraday/Pagina 12/Viñeta 4/Frente.png',text:'../assets/img/comic/RutaFaraday/Pagina 12/Viñeta 4/Texto.png'},   
+    c05:{bg:'../assets/img/comic/RutaFaraday/Pagina 12/Viñeta 5/Fondo.jpg',mid:'',front:'',text:'../assets/img/comic/RutaFaraday/Pagina 12/Viñeta 5/Texto.png'},   
+    c06:{bg:'../assets/img/comic/RutaFaraday/Pagina 12/Viñeta 1/Faraday_Viñeta01_Fondo.jpg',mid:'',front:'../assets/img/comic/RutaFaraday/Pagina 12/Viñeta 6/Frente.png',text:'../assets/img/comic/RutaFaraday/Pagina 12/Viñeta 6/Texto.png'},   
+
+    //Pagina 13//
+    c07:{bg:'../assets/img/comic/RutaFaraday/Pagina 13/Viñeta 1/Fondo.jpg',mid:'',front:'../assets/img/comic/RutaFaraday/Pagina 13/Viñeta 1/Frente.png',text:'../assets/img/comic/RutaFaraday/Pagina 13/Viñeta 1/Texto.png'},   
+    c08:{bg:'',mid:'',front:'../assets/img/comic/RutaVictor/Pagina 4/Viñeta 1/Frente.png',text:'../assets/img/comic/RutaFaraday/Pagina 13/Viñeta 2/Texto.png'},   
+    c09:{bg:'../assets/img/comic/RutaFaraday/Pagina 13/Viñeta 3/Fondo.jpg',mid:'',front:'../assets/img/comic/RutaFaraday/Pagina 13/Viñeta 3/Frente.png',text:'../assets/img/comic/RutaFaraday/Pagina 13/Viñeta 3/Texto.png'},   
+    c010:{bg:'',mid:'',front:'../assets/img/comic/RutaFaraday/Pagina 13/Viñeta 4/Frente.png',text:'../assets/img/comic/RutaFaraday/Pagina 13/Viñeta 4/Texto.png'},
+    c011:{bg:'../assets/img/comic/RutaFaraday/Pagina 13/Viñeta 5/Fondo.jpg',mid:'',front:'',text:'../assets/img/comic/RutaFaraday/Pagina 13/Viñeta 5/Texto.png'},
+    c012:{bg:'../assets/img/comic/RutaFaraday/Pagina 13/Viñeta 6/Fondo.jpg',mid:'',front:'../assets/img/comic/RutaFaraday/Pagina 13/Viñeta 6/Frente.png',text:'../assets/img/comic/RutaFaraday/Pagina 13/Viñeta 6/Texto.png'},
+
+    //Pagina 14//
+    c012:{bg:'../assets/img/comic/RutaFaraday/Pagina 14/Viñeta 1/Fondo.jpg',mid:'../assets/img/comic/RutaFaraday/Pagina 14/Viñeta 1/Mitad.png',front:'../assets/img/comic/RutaFaraday/Pagina 14/Viñeta 1/Frente.png',text:'../assets/img/comic/RutaFaraday/Pagina 14/Viñeta 1/Texto.png'},
+    c013:{bg:'../assets/img/comic/RutaFaraday/Pagina 14/Viñeta 2/Fondo.jpg',mid:'../assets/img/comic/RutaFaraday/Pagina 14/Viñeta 2/Mitad.png',front:'../assets/img/comic/RutaFaraday/Pagina 14/Viñeta 2/Frente.png',text:'../assets/img/comic/RutaFaraday/Pagina 14/Viñeta 2/Texto.png'},
+    c014:{bg:'',mid:'',front:'../assets/img/comic/RutaFaraday/Pagina 14/Viñeta 3/Frente.png',text:'../assets/img/comic/RutaFaraday/Pagina 14/Viñeta 3/Texto.png'},
+    c015:{bg:'',mid:'',front:'../assets/img/comic/RutaFaraday/Pagina 14/Viñeta 4/Frente.png',text:'../assets/img/comic/RutaFaraday/Pagina 14/Viñeta 4/Texto.png'},
+    c016:{bg:'../assets/img/comic/RutaFaraday/Pagina 14/Viñeta 5/Fondo.jpg',mid:'../assets/img/comic/RutaFaraday/Pagina 14/Viñeta 5/Mitad.png',front:'../assets/img/comic/RutaFaraday/Pagina 14/Viñeta 5/Frente.png',text:'../assets/img/comic/RutaFaraday/Pagina 14/Viñeta 5/Texto.png'},
+    c017:{bg:'../assets/img/comic/RutaArtiom/Pagina 9/Viñeta 1/Fondo.jpg',mid:'',front:'',text:'../assets/img/comic/RutaFaraday/Pagina 14/Viñeta 6/Texto.png'},
+    c018:{bg:'',mid:'',front:'../assets/img/comic/RutaArtiom/Pagina 9/Viñeta 2/Frente.png',text:'../assets/img/comic/RutaFaraday/Pagina 14/Viñeta 7/Texto.png'},
+    c019:{bg:'../assets/img/comic/RutaArtiom/Pagina 9/Viñeta 5/Fondo.jpg',mid:'../assets/img/comic/RutaArtiom/Pagina 9/Viñeta 5/Mitad.png',front:'../assets/img/comic/RutaArtiom/Pagina 9/Viñeta 5/Frente.png',text:'../assets/img/comic/RutaFaraday/Pagina 14/Viñeta 8/Texto.png'},
+    c020:{bg:'../assets/img/comic/RutaFaraday/Pagina 12/Viñeta 1/Faraday_Viñeta01_Fondo.jpg',mid:'../assets/img/comic/RutaFaraday/Pagina 14/Viñeta 9/Mitad.png',front:'../assets/img/comic/RutaFaraday/Pagina 14/Viñeta 9/Frente.png',text:'../assets/img/comic/RutaFaraday/Pagina 14/Viñeta 9/Texto.png'},
+    c021:{bg:'',mid:'',front:'../assets/img/comic/RutaFaraday/Pagina 14/Viñeta 10/Frente.png',text:'../assets/img/comic/RutaFaraday/Pagina 14/Viñeta 10/Texto.png'},
+    c022:{bg:'../assets/img/comic/RutaFaraday/Pagina 14/Viñeta 11/Fondo.jpg',mid:'',front:'../assets/img/comic/RutaFaraday/Pagina 14/Viñeta 11/Frente.png',text:'../assets/img/comic/RutaFaraday/Pagina 14/Viñeta 11/Texto.png'},
+
+    //Pagina 15//
+    c023:{bg:'../assets/img/comic/RutaFaraday/Pagina 15/Viñeta 1/Fondo.jpg',mid:'',front:'',text:'../assets/img/comic/RutaFaraday/Pagina 15/Viñeta 1/Texto.png'},
+    c024:{bg:'../assets/img/comic/RutaFaraday/Pagina 15/Viñeta 2/Fondo.jpg',mid:'',front:'../assets/img/comic/RutaFaraday/Pagina 15/Viñeta 2/Frente.png',text:'../assets/img/comic/RutaFaraday/Pagina 15/Viñeta 2/Texto.png'},
+    c025:{bg:'',mid:'',front:'../assets/img/comic/RutaFaraday/Pagina 15/Viñeta 3/Frente.png',text:'../assets/img/comic/RutaFaraday/Pagina 15/Viñeta 3/Texto.png'},
+    c026:{bg:'../assets/img/comic/RutaFaraday/Pagina 15/Viñeta 4/Fondo.jpg',mid:'',front:'../assets/img/comic/RutaFaraday/Pagina 15/Viñeta 4/Frente.png',text:'../assets/img/comic/RutaFaraday/Pagina 15/Viñeta 4/Texto.png'},
+    c027:{bg:'../assets/img/comic/RutaFaraday/Pagina 15/Viñeta 6/Fondo.jpg',mid:'',front:'../assets/img/comic/RutaFaraday/Pagina 15/Viñeta 6/Frente.png',text:'../assets/img/comic/RutaFaraday/Pagina 15/Viñeta 6/Texto.png'},
+    c028:{bg:'',mid:'',front:'../assets/img/comic/RutaFaraday/Pagina 15/Viñeta 7/Frente.png',text:'../assets/img/comic/RutaFaraday/Pagina 15/Viñeta 7/Texto.png'},
+    c029:{bg:'../assets/img/comic/RutaFaraday/Pagina 15/Viñeta 8/Fondo.jpg',mid:'',front:'',text:'../assets/img/comic/RutaFaraday/Pagina 15/Viñeta 8/Texto.png'},
+    c030:{bg:'',mid:'../assets/img/comic/RutaFaraday/Pagina 15/Viñeta 9/Mitad.png',front:'../assets/img/comic/RutaFaraday/Pagina 15/Viñeta 9/Frente.png',text:'../assets/img/comic/RutaFaraday/Pagina 15/Viñeta 9/Texto.png'},
+
 
 
     // Convergencia / final
@@ -134,7 +172,9 @@
         'a018','a019', 'a020', 'a021', 'a022', 'a023', 'a024', 'a025', 'a026', 'a027', 'a028','a029', 'fin1','fin2'],
     B: ['b01','b02','b03', 'b04', 'b05', 'b06', 'b07', 'b08', 'b09', 'b010', 'b011', 'b012', 'b013', 'b014', 'b015', 'b016',
       'b017', 'b018', 'b019', 'b020', 'b021', 'b022', 'b023', 'b024', 'b025', 'b026', 'b027', 'b028', 'b029','fin1','fin2'],
-    C: ['c01',],
+    C: ['c01', 'c02', 'c03', 'c04', 'c05', 'c06', 'c07', 'c08', 'c09', 'c010', 'c011', 'c012', 'c013', 'c014', 'c015', 'c016', 'c017',
+      'c018', 'c019', 'c020', 'c021', 'c022', 'c023', 'c024', 'c025', 'c026', 'c027', 'c028', 'c029', 'c030'
+    ],
   };
 
   // ---------- 2) Utilidades ----------
