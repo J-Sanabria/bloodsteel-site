@@ -36,13 +36,13 @@ const CHAR_DATA = {
 
      {
       id: 'c-Artiom',
-      name: 'Faraday',
-      role: 'Militar que abandono su antiguo nombre',
+      name: 'Faraday Nous',
+      role: 'Creador del alma mecánica',
       bg: '../assets/img/chars/comic/Faraday/horizontal.png',
       png: '../assets/img/chars/comic/Faraday/Vertical.png',
       thumb: '../assets/img/chars/comic/Faraday/Icon.png',
-      desc: 'Sereno, carismático, aura de muerte que silencia habitaciones. Su voluntad: reinstalar la supremacía humana sin máquinas.',
-      back: 'Artiom nació en un entorno acomodado donde los autómatas empezaron a reemplazar a las personas que conocía. En la academia militar descubrió disciplina, propósito y una idea que lo marcó: la voluntad humana debía prevalecer. La guerra lo endureció y al volver a casa encontró un mundo cómodo que celebraba la eficiencia de las máquinas mientras olvidaba a quienes habían caído. Decidió dejar atrás su apellido y construir una nueva identidad basada en convicción y fuerza. Reunió a quienes compartían su visión y se sometió a un riguroso proceso de perfeccionamiento físico y mental, convirtiéndose en un símbolo de liderazgo. Para él, la humanidad debe mantenerse en pie, y su lema lo resume todo: “El hierro obedece. La carne decide.”'
+      desc: 'De mente brillante pero cuerpo frágil, Faraday dedicó su vida al estudio de la lógica cognitiva y la ingeniería de sistemas autónomos.',
+      back: 'fue el genio aristócrata responsable del mayor avance —y del mayor desastre— de la humanidad. De mente brillante pero cuerpo frágil, Faraday dedicó su vida al estudio de la lógica cognitiva y la ingeniería de sistemas autónomos. Su obra maestra, el Nous, fue el primer código capaz de otorgar conciencia a las máquinas, un logro que abrió una nueva era para la ciencia… y una tragedia para la humanidad.Aunque su intención original era la evolución, no la rebelión, su creación terminó encendiendo la chispa que llevaría al levantamiento autómata. Hoy su figura es recordada como la del visionario que regaló alma a lo inerte, y al mismo tiempo como uno de los responsables involuntarios del colapso del orden imperial. En el museo, su versión tridimensional se exhibe como símbolo del talento que cambió el destino de un mundo entero—para bien y para mal.”'
     }
     // … agrega más
   ]
