@@ -32,6 +32,17 @@ const CHAR_DATA = {
       thumb: '../assets/img/chars/comic/Artiom/Icon.jpg',
       desc: 'Sereno, carismático, aura de muerte que silencia habitaciones. Su voluntad: reinstalar la supremacía humana sin máquinas.',
       back: 'Artiom nació en un entorno acomodado donde los autómatas empezaron a reemplazar a las personas que conocía. En la academia militar descubrió disciplina, propósito y una idea que lo marcó: la voluntad humana debía prevalecer. La guerra lo endureció y al volver a casa encontró un mundo cómodo que celebraba la eficiencia de las máquinas mientras olvidaba a quienes habían caído. Decidió dejar atrás su apellido y construir una nueva identidad basada en convicción y fuerza. Reunió a quienes compartían su visión y se sometió a un riguroso proceso de perfeccionamiento físico y mental, convirtiéndose en un símbolo de liderazgo. Para él, la humanidad debe mantenerse en pie, y su lema lo resume todo: “El hierro obedece. La carne decide.”'
+    },
+
+     {
+      id: 'c-Artiom',
+      name: 'Faraday',
+      role: 'Militar que abandono su antiguo nombre',
+      bg: '../assets/img/chars/comic/Faraday/horizontal.png',
+      png: '../assets/img/chars/comic/Faraday/Vertical.png',
+      thumb: '../assets/img/chars/comic/Faraday/Icon.png',
+      desc: 'Sereno, carismático, aura de muerte que silencia habitaciones. Su voluntad: reinstalar la supremacía humana sin máquinas.',
+      back: 'Artiom nació en un entorno acomodado donde los autómatas empezaron a reemplazar a las personas que conocía. En la academia militar descubrió disciplina, propósito y una idea que lo marcó: la voluntad humana debía prevalecer. La guerra lo endureció y al volver a casa encontró un mundo cómodo que celebraba la eficiencia de las máquinas mientras olvidaba a quienes habían caído. Decidió dejar atrás su apellido y construir una nueva identidad basada en convicción y fuerza. Reunió a quienes compartían su visión y se sometió a un riguroso proceso de perfeccionamiento físico y mental, convirtiéndose en un símbolo de liderazgo. Para él, la humanidad debe mantenerse en pie, y su lema lo resume todo: “El hierro obedece. La carne decide.”'
     }
     // … agrega más
   ]
